@@ -29,7 +29,7 @@ tests:
         unittest: true
         configurations.otelUrl: "otelCollector.svc.monitoring:4317"
         clusterName: kind-kind
-        excludeNamespaces: ""
-        includeNamespaces: ""
-        kubescapeScheduler.scanSchedule: "1 2 3 4 5"
-        kubevulnScheduler.scanSchedule: "1 2 3 4 5"
+        kubescapeScheduler:
+          scanSchedule: "1 2 3 4 5"
+        kubevulnScheduler:
+          scanSchedule: "1 2 3 4 5"

@@ -1,12 +1,25 @@
 kubescape-operator:
-  server: api.armosec.io
+  alertCRD:
+    installDefault: true
+  capabilities:
+    manageWorkloads: enable
+    nodeProfileService: enable
+    runtimeDetection: enable
+  imagePullSecret:
+    server: quay.io
+    username: armosec+armosec_ro
+  imagePullSecrets: armosec-readonly
   nodeAgent:
     config:
       hostMalwareSensor: disabled
       hostNetworkSensor: disabled
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.122
+      tag: v0.0.168
     resources:
       limits:
         memory: 1000Mi
+  operator:
+    rulesUpdateConfig:
+      enabled: true
+      interval: 5m
