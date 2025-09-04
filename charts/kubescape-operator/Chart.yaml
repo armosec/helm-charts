@@ -26,5 +26,5 @@ appVersion: 1.29.6-private.1
 
 dependencies:
   - name: kubescape-operator
-    version: 1.29.6
+    version: 0.29.6
     repository: "https://kubescape.github.io/helm-charts/"
