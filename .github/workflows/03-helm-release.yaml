@@ -53,6 +53,7 @@ jobs:
 
   helm-chart-release:
     needs: e2e-test
+    if: ${{ !cancelled() && (needs.e2e-test.result == 'success' || needs.e2e-test.result == 'skipped') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
