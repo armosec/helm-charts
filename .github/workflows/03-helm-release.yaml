@@ -86,5 +86,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          chart_name=$(grep '^name:' charts/${{ inputs.CHARTS_NAME }}/Chart.yaml | awk '{print $2}')
           version=$(grep '^version:' charts/${{ inputs.CHARTS_NAME }}/Chart.yaml | awk '{print $2}')
-          gh release edit ${{ inputs.CHARTS_NAME }}-$version --prerelease
+          gh release edit $chart_name-$version --prerelease
