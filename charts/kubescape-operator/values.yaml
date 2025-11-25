@@ -13,6 +13,9 @@ kubescape-operator:
     config:
       hostMalwareSensor: disabled
       hostNetworkSensor: disabled
+    env:
+      - name: IGNORERULEBINDINGS
+        value: true
     image:
       repository: quay.io/armosec/node-agent
       tag: image-based-rc5
