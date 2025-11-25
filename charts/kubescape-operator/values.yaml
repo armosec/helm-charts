@@ -15,7 +15,7 @@ kubescape-operator:
       hostNetworkSensor: disabled
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.168
+      tag: image-based-rc5
     resources:
       limits:
         memory: 1000Mi
