@@ -1,6 +1,6 @@
 kubescape-operator:
   alertCRD:
-    installDefault: true
+    installDefault: false
   capabilities:
     manageWorkloads: enable
     nodeProfileService: enable
