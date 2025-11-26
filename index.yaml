@@ -2,6 +2,20 @@ apiVersion: v1
 entries:
   armosec-kubescape-operator:
   - apiVersion: v2
+    appVersion: 1.30.0-private.rc6
+    created: "2025-11-26T11:09:52.789497975Z"
+    dependencies:
+    - name: kubescape-operator
+      repository: https://kubescape.github.io/helm-charts/
+      version: 1.30.0-rc6
+    description: Kubescape is an E2E Kubernetes cluster security platform
+    digest: 6a1de48c48521c7dcee51181a0a40d1e99c22ad48ca25aaa810d17b29935c73a
+    name: armosec-kubescape-operator
+    type: application
+    urls:
+    - https://github.com/armosec/helm-charts/releases/download/armosec-kubescape-operator-1.30.0-private.rc6/armosec-kubescape-operator-1.30.0-private.rc6.tgz
+    version: 1.30.0-private.rc6
+  - apiVersion: v2
     appVersion: 1.30.0-private.rc5
     created: "2025-11-25T07:02:14.849945485Z"
     dependencies:
@@ -43,4 +57,4 @@ entries:
     urls:
     - https://github.com/armosec/helm-charts/releases/download/armosec-kubescape-operator-1.29.12%2Bprivate.1/armosec-kubescape-operator-1.29.12%2Bprivate.1.tgz
     version: 1.29.12+private.1
-generated: "2025-11-25T15:37:05.134715707Z"
+generated: "2025-11-26T11:09:52.789527581Z"
