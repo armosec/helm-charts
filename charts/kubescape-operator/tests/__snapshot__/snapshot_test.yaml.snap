@@ -1,7 +1,7 @@
 minimal capabilities:
   1: |+
     raw: |+
-      Thank you for installing kubescape-operator version 1.30.0-rc6.
+      Thank you for installing kubescape-operator version 1.30.0-rc8.
       View your cluster's configuration scanning schedule:
       > kubectl -n kubescape get cj kubescape-scheduler -o=jsonpath='{.metadata.name}{"\t"}{.spec.schedule}{"\n"}'
 
@@ -37,8 +37,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/infra: credentials
         tier: ks-control-plane
@@ -83,8 +83,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/infra: config
         kubescape.io/tier: core
@@ -111,8 +111,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -142,8 +142,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -163,8 +163,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-critical
@@ -183,8 +183,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -202,9 +202,9 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
         armo.tier: kubescape-scan
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -224,9 +224,9 @@ minimal capabilities:
                 app.kubernetes.io/managed-by: Helm
                 app.kubernetes.io/name: kubescape-operator
                 app.kubernetes.io/part-of: kubescape
-                app.kubernetes.io/version: 1.30.0-rc6
+                app.kubernetes.io/version: 1.30.0-rc8
                 armo.tier: kubescape-scan
-                helm.sh/chart: kubescape-operator-1.30.0-rc6
+                helm.sh/chart: kubescape-operator-1.30.0-rc8
                 kubescape.io/ignore: "true"
                 kubescape.io/tier: core
                 tier: ks-control-plane
@@ -289,8 +289,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -541,8 +541,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -566,8 +566,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -599,8 +599,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.30.0-rc6
-            helm.sh/chart: kubescape-operator-1.30.0-rc6
+            app.kubernetes.io/version: 1.30.0-rc8
+            helm.sh/chart: kubescape-operator-1.30.0-rc8
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -730,7 +730,7 @@ minimal capabilities:
   13: |
     apiVersion: v1
     data:
-      host-scanner-yaml: "apiVersion: apps/v1\nkind: DaemonSet\nmetadata:\n  name: host-scanner\n  namespace: kubescape\n  annotations:\n    \n  labels:\n    helm.sh/chart: kubescape-operator-1.30.0-rc6\n    app.kubernetes.io/name: kubescape-operator\n    app.kubernetes.io/instance: RELEASE-NAME\n    app.kubernetes.io/component: host-scanner\n    app.kubernetes.io/version: \"1.30.0-rc6\"\n    app.kubernetes.io/managed-by: Helm\n    app.kubernetes.io/part-of: kubescape\n    app: host-scanner\n    tier: ks-control-plane\n    kubescape.io/ignore: \"true\"\nspec:\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: kubescape-operator\n      app.kubernetes.io/instance: RELEASE-NAME\n      app.kubernetes.io/component: host-scanner\n  template:\n    metadata:\n      annotations:\n        \n      labels:\n        helm.sh/chart: kubescape-operator-1.30.0-rc6\n        app.kubernetes.io/name: kubescape-operator\n        app.kubernetes.io/instance: RELEASE-NAME\n        app.kubernetes.io/component: host-scanner\n        app.kubernetes.io/version: \"1.30.0-rc6\"\n        app.kubernetes.io/managed-by: Helm\n        app.kubernetes.io/part-of: kubescape\n        app: host-scanner\n        tier: ks-control-plane\n        kubescape.io/ignore: \"true\"\n        kubescape.io/tier: \"core\"\n        name: host-scanner\n    spec:\n      nodeSelector:\n        kubernetes.io/os: linux\n      affinity:\n      tolerations:\n        - effect: NoSchedule\n          key: node-role.kubernetes.io/control-plane\n          operator: Exists\n        - effect: NoSchedule\n          key: node-role.kubernetes.io/master\n          operator: Exists\n      imagePullSecrets:\n      - name: armosec-readonly\n      containers:\n      - name: host-sensor\n        image: \"quay.io/kubescape/host-scanner:v1.0.78\"\n        imagePullPolicy: IfNotPresent\n        securityContext:\n          allowPrivilegeEscalation: true\n          privileged: true\n          readOnlyRootFilesystem: true\n          procMount: Unmasked\n        env:\n        - name: KS_LOGGER_LEVEL\n          value: \"info\"\n        - name: KS_LOGGER_NAME\n          value: \"zap\"\n        ports:\n          - name: scanner # Do not change port name\n            containerPort: 7888\n            protocol: TCP\n        resources:\n          limits:\n            cpu: 0.4m\n            memory: 400Mi\n          requests:\n            cpu: 0.1m\n            memory: 200Mi\n        volumeMounts:\n        - mountPath: /host_fs\n          name: host-filesystem\n        startupProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          failureThreshold: 30\n          periodSeconds: 1\n        livenessProbe:\n          httpGet:\n            path: /healthz\n            port: 7888\n          periodSeconds: 10\n      terminationGracePeriodSeconds: 120\n      dnsPolicy: ClusterFirstWithHostNet\n      serviceAccountName: node-agent\n      automountServiceAccountToken: false\n      volumes:\n      - hostPath:\n          path: /\n          type: Directory\n        name: host-filesystem\n      hostPID: true\n      hostIPC: true"
+      host-scanner-yaml: "apiVersion: apps/v1\nkind: DaemonSet\nmetadata:\n  name: host-scanner\n  namespace: kubescape\n  annotations:\n    \n  labels:\n    helm.sh/chart: kubescape-operator-1.30.0-rc8\n    app.kubernetes.io/name: kubescape-operator\n    app.kubernetes.io/instance: RELEASE-NAME\n    app.kubernetes.io/component: host-scanner\n    app.kubernetes.io/version: \"1.30.0-rc8\"\n    app.kubernetes.io/managed-by: Helm\n    app.kubernetes.io/part-of: kubescape\n    app: host-scanner\n    tier: ks-control-plane\n    kubescape.io/ignore: \"true\"\nspec:\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: kubescape-operator\n      app.kubernetes.io/instance: RELEASE-NAME\n      app.kubernetes.io/component: host-scanner\n  template:\n    metadata:\n      annotations:\n        \n      labels:\n        helm.sh/chart: kubescape-operator-1.30.0-rc8\n        app.kubernetes.io/name: kubescape-operator\n        app.kubernetes.io/instance: RELEASE-NAME\n        app.kubernetes.io/component: host-scanner\n        app.kubernetes.io/version: \"1.30.0-rc8\"\n        app.kubernetes.io/managed-by: Helm\n        app.kubernetes.io/part-of: kubescape\n        app: host-scanner\n        tier: ks-control-plane\n        kubescape.io/ignore: \"true\"\n        kubescape.io/tier: \"core\"\n        name: host-scanner\n    spec:\n      nodeSelector:\n        kubernetes.io/os: linux\n      affinity:\n      tolerations:\n        - effect: NoSchedule\n          key: node-role.kubernetes.io/control-plane\n          operator: Exists\n        - effect: NoSchedule\n          key: node-role.kubernetes.io/master\n          operator: Exists\n      imagePullSecrets:\n      - name: armosec-readonly\n      containers:\n      - name: host-sensor\n        image: \"quay.io/kubescape/host-scanner:v1.0.78\"\n        imagePullPolicy: IfNotPresent\n        securityContext:\n          allowPrivilegeEscalation: true\n          privileged: true\n          readOnlyRootFilesystem: true\n          procMount: Unmasked\n        env:\n        - name: KS_LOGGER_LEVEL\n          value: \"info\"\n        - name: KS_LOGGER_NAME\n          value: \"zap\"\n        ports:\n          - name: scanner # Do not change port name\n            containerPort: 7888\n            protocol: TCP\n        resources:\n          limits:\n            cpu: 0.4m\n            memory: 400Mi\n          requests:\n            cpu: 0.1m\n            memory: 200Mi\n        volumeMounts:\n        - mountPath: /host_fs\n          name: host-filesystem\n        startupProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          failureThreshold: 30\n          periodSeconds: 1\n        livenessProbe:\n          httpGet:\n            path: /healthz\n            port: 7888\n          periodSeconds: 10\n      terminationGracePeriodSeconds: 120\n      dnsPolicy: ClusterFirstWithHostNet\n      serviceAccountName: node-agent\n      automountServiceAccountToken: false\n      volumes:\n      - hostPath:\n          path: /\n          type: Directory\n        name: host-filesystem\n      hostPID: true\n      hostIPC: true"
     kind: ConfigMap
     metadata:
       annotations: null
@@ -741,8 +741,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -760,8 +760,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -791,8 +791,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -817,8 +817,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -847,8 +847,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -866,8 +866,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -885,9 +885,9 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
         armo.tier: vuln-scan
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -907,9 +907,9 @@ minimal capabilities:
                 app.kubernetes.io/managed-by: Helm
                 app.kubernetes.io/name: kubescape-operator
                 app.kubernetes.io/part-of: kubescape
-                app.kubernetes.io/version: 1.30.0-rc6
+                app.kubernetes.io/version: 1.30.0-rc8
                 armo.tier: vuln-scan
-                helm.sh/chart: kubescape-operator-1.30.0-rc6
+                helm.sh/chart: kubescape-operator-1.30.0-rc8
                 kubescape.io/ignore: "true"
                 kubescape.io/tier: core
                 tier: ks-control-plane
@@ -972,8 +972,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -1013,8 +1013,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -1038,8 +1038,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -1067,8 +1067,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.30.0-rc6
-            helm.sh/chart: kubescape-operator-1.30.0-rc6
+            app.kubernetes.io/version: 1.30.0-rc8
+            helm.sh/chart: kubescape-operator-1.30.0-rc8
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -1181,8 +1181,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -1210,8 +1210,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -1228,8 +1228,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -1358,8 +1358,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -1421,8 +1421,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -1440,8 +1440,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -1467,8 +1467,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.30.0-rc6
-            helm.sh/chart: kubescape-operator-1.30.0-rc6
+            app.kubernetes.io/version: 1.30.0-rc8
+            helm.sh/chart: kubescape-operator-1.30.0-rc8
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -1516,9 +1516,10 @@ minimal capabilities:
                 - name: KUBELET_ROOT
                   value: /var/lib/kubelet
                 - name: AGENT_VERSION
-                  value: image-based-rc6
-                - name: NodeName
-              image: quay.io/armosec/node-agent:image-based-rc6
+                  value: image-based-rc8
+                - name: IGNORERULEBINDINGS
+                  value: "true"
+              image: quay.io/armosec/node-agent:image-based-rc8
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -1598,6 +1599,7 @@ minimal capabilities:
           hostPID: true
           imagePullSecrets:
             - name: armosec-readonly
+          initContainers: null
           nodeSelector:
             kubernetes.io/os: linux
           priorityClassName: kubescape-critical
@@ -1664,636 +1666,6 @@ minimal capabilities:
                 name: node-agent
               name: config
   29: |
-    apiVersion: kubescape.io/v1
-    kind: RuntimeRuleAlertBinding
-    metadata:
-      annotations: null
-      labels:
-        app: node-agent
-        app.kubernetes.io/component: node-agent
-        app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: kubescape-operator
-        app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
-        kubescape.io/ignore: "true"
-        tier: ks-control-plane
-      name: all-rules-all-pods
-    spec:
-      namespaceSelector:
-        matchExpressions:
-          - key: kubernetes.io/metadata.name
-            operator: NotIn
-            values:
-              - kubescape
-              - kube-system
-              - kube-public
-              - kube-node-lease
-              - kubeconfig
-              - gmp-system
-              - gmp-public
-      rules:
-        - ruleName: Unexpected process launched
-        - ruleName: Files Access Anomalies in container
-        - ruleName: Syscalls Anomalies in container
-        - ruleName: Linux Capabilities Anomalies in container
-        - ruleName: DNS Anomalies in container
-        - ruleName: Unexpected service account token access
-        - ruleName: Workload uses Kubernetes API unexpectedly
-        - ruleName: Process executed from malicious source
-        - ruleName: Process tries to load a kernel module
-        - ruleName: Drifted process executed
-        - ruleName: Disallowed ssh connection
-        - ruleName: Fileless execution detected
-        - ruleName: Crypto miner launched
-        - ruleName: Process executed from mount
-        - ruleName: Crypto Mining Related Port Communication
-        - ruleName: Crypto Mining Domain Communication
-        - ruleName: Read Environment Variables from procfs
-        - ruleName: eBPF Program Load
-        - ruleName: Soft link created over sensitive file
-        - ruleName: Unexpected Sensitive File Access
-        - ruleName: Hard link created over sensitive file
-        - ruleName: Exec to pod
-        - ruleName: Port forward
-        - ruleName: Unexpected Egress Network Traffic
-        - ruleName: Malicious Ptrace Usage
-        - ruleName: Unexpected io_uring Operation Detected
-  30: |
-    apiVersion: kubescape.io/v1
-    kind: Rules
-    metadata:
-      annotations: null
-      labels:
-        app: node-agent
-        app.kubernetes.io/component: node-agent
-        app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: kubescape-operator
-        app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
-        kubescape.io/ignore: "true"
-        tier: ks-control-plane
-      name: default-rules
-      namespace: kubescape
-    spec:
-      rules:
-        - description: Detects unexpected process launches that are not in the baseline
-          enabled: true
-          expressions:
-            message: '''Unexpected process launched: '' + event.comm + '' with PID '' + string(event.pid)'
-            ruleExpression:
-              - eventType: exec
-                expression: '!ap.was_executed(event.containerId, parse.get_exec_path(event.args, event.comm))'
-            uniqueId: event.comm + '_' + event.exepath
-          id: R0001
-          isTriggerAlert: true
-          mitreTactic: TA0002
-          mitreTechnique: T1059
-          name: Unexpected process launched
-          profileDependency: 0
-          severity: 1
-          supportPolicy: false
-          tags:
-            - anomaly
-            - process
-            - exec
-            - applicationprofile
-        - description: Detects unexpected file access that is not in the baseline
-          enabled: false
-          expressions:
-            message: '''Unexpected file access detected: '' + event.comm + '' with PID '' + string(event.pid) + '' to '' + event.path'
-            ruleExpression:
-              - eventType: open
-                expression: |
-                  (event.path.startsWith('/etc/') || event.path.startsWith('/var/log/') || event.path.startsWith('/var/run/') || event.path.startsWith('/run/') || event.path.startsWith('/var/spool/cron/') || event.path.startsWith('/var/www/') || event.path.startsWith('/var/lib/') || event.path.startsWith('/opt/') || event.path.startsWith('/usr/local/') || event.path.startsWith('/app/') || event.path == '/.dockerenv' || event.path == '/proc/self/environ') && !(event.path.startsWith('/run/secrets/kubernetes.io/serviceaccount') ||
-                    event.path.startsWith('/var/run/secrets/kubernetes.io/serviceaccount') ||
-                    event.path.startsWith('/tmp'))
-                  && !ap.was_path_opened(event.containerId, event.path)
-            uniqueId: event.comm + '_' + event.path
-          id: R0002
-          isTriggerAlert: false
-          mitreTactic: TA0009
-          mitreTechnique: T1005
-          name: Files Access Anomalies in container
-          profileDependency: 0
-          severity: 1
-          supportPolicy: false
-          tags:
-            - anomaly
-            - file
-            - open
-            - applicationprofile
-        - description: Detects unexpected system calls that are not whitelisted by application profile
-          enabled: true
-          expressions:
-            message: '''Unexpected system call detected: '' + event.syscallName + '' with PID '' + string(event.pid)'
-            ruleExpression:
-              - eventType: syscall
-                expression: '!ap.was_syscall_used(event.containerId, event.syscallName)'
-            uniqueId: event.syscallName
-          id: R0003
-          isTriggerAlert: false
-          mitreTactic: TA0002
-          mitreTechnique: T1059
-          name: Syscalls Anomalies in container
-          profileDependency: 0
-          severity: 1
-          supportPolicy: false
-          tags:
-            - anomaly
-            - syscall
-            - applicationprofile
-        - description: Detects unexpected capabilities that are not whitelisted by application profile
-          enabled: true
-          expressions:
-            message: '''Unexpected capability used: '' + event.capName + '' in syscall '' + event.syscallName + '' with PID '' + string(event.pid)'
-            ruleExpression:
-              - eventType: capabilities
-                expression: '!ap.was_capability_used(event.containerId, event.capName)'
-            uniqueId: event.comm + '_' + event.capName
-          id: R0004
-          isTriggerAlert: false
-          mitreTactic: TA0002
-          mitreTechnique: T1059
-          name: Linux Capabilities Anomalies in container
-          profileDependency: 0
-          severity: 1
-          supportPolicy: false
-          tags:
-            - anomaly
-            - capabilities
-            - applicationprofile
-        - description: Detecting unexpected domain requests that are not whitelisted by application profile.
-          enabled: true
-          expressions:
-            message: '''Unexpected domain communication: '' + event.name + '' from: '' + event.containerName'
-            ruleExpression:
-              - eventType: dns
-                expression: '!event.name.endsWith(''.svc.cluster.local.'') && !nn.is_domain_in_egress(event.containerId, event.name)'
-            uniqueId: event.comm + '_' + event.name
-          id: R0005
-          isTriggerAlert: false
-          mitreTactic: TA0011
-          mitreTechnique: T1071.004
-          name: DNS Anomalies in container
-          profileDependency: 0
-          severity: 1
-          supportPolicy: false
-          tags:
-            - dns
-            - anomaly
-            - networkprofile
-        - description: Detecting unexpected access to service account token.
-          enabled: true
-          expressions:
-            message: '''Unexpected access to service account token: '' + event.path + '' with flags: '' + event.flags.join('','')'
-            ruleExpression:
-              - eventType: open
-                expression: |
-                  ((event.path.startsWith('/run/secrets/kubernetes.io/serviceaccount') && event.path.endsWith('/token')) ||
-                   (event.path.startsWith('/var/run/secrets/kubernetes.io/serviceaccount') && event.path.endsWith('/token')) ||
-                   (event.path.startsWith('/run/secrets/eks.amazonaws.com/serviceaccount') && event.path.endsWith('/token')) ||
-                   (event.path.startsWith('/var/run/secrets/eks.amazonaws.com/serviceaccount') && event.path.endsWith('/token'))) &&
-                  !ap.was_path_opened_with_prefix(event.containerId, '/run/secrets/kubernetes.io/serviceaccount') && !ap.was_path_opened_with_prefix(event.containerId, '/var/run/secrets/kubernetes.io/serviceaccount') && !ap.was_path_opened_with_prefix(event.containerId, '/run/secrets/eks.amazonaws.com/serviceaccount') && !ap.was_path_opened_with_prefix(event.containerId, '/var/run/secrets/eks.amazonaws.com/serviceaccount')
-            uniqueId: event.comm
-          id: R0006
-          isTriggerAlert: true
-          mitreTactic: TA0006
-          mitreTechnique: T1528
-          name: Unexpected service account token access
-          profileDependency: 1
-          severity: 5
-          supportPolicy: false
-          tags:
-            - anomaly
-            - serviceaccount
-            - applicationprofile
-        - description: Detecting execution of kubernetes client
-          enabled: true
-          expressions:
-            message: 'eventType == ''exec'' ? ''Kubernetes client ('' + event.comm + '') was executed with PID '' + string(event.pid) : ''Network connection to Kubernetes API server from container '' + event.containerName'
-            ruleExpression:
-              - eventType: exec
-                expression: (event.comm == 'kubectl' || event.exepath.endsWith('/kubectl')) && !ap.was_executed(event.containerId, parse.get_exec_path(event.args, event.comm))
-              - eventType: network
-                expression: event.pktType == 'OUTGOING' && k8s.is_api_server_address(event.dstAddr) && !nn.was_address_in_egress(event.containerId, event.dstAddr)
-            uniqueId: 'eventType == ''exec'' ? ''exec_'' + event.comm : ''network_'' + event.dstAddr'
-          id: R0007
-          isTriggerAlert: true
-          mitreTactic: TA0008
-          mitreTechnique: T1210
-          name: Workload uses Kubernetes API unexpectedly
-          profileDependency: 0
-          severity: 5
-          supportPolicy: false
-          tags:
-            - exec
-            - network
-            - anomaly
-            - applicationprofile
-        - description: Detecting reading environment variables from procfs.
-          enabled: true
-          expressions:
-            message: '''Reading environment variables from procfs: '' + event.path + '' by process '' + event.comm'
-            ruleExpression:
-              - eventType: open
-                expression: |
-                  event.path.startsWith('/proc/') && event.path.endsWith('/environ') && !ap.was_path_opened_with_suffix(event.containerId, '/environ')
-            uniqueId: event.comm + '_' + event.path
-          id: R0008
-          isTriggerAlert: true
-          mitreTactic: TA0006
-          mitreTechnique: T1552.001
-          name: Read Environment Variables from procfs
-          profileDependency: 0
-          severity: 5
-          supportPolicy: false
-          tags:
-            - anomaly
-            - procfs
-            - environment
-            - applicationprofile
-        - description: Detecting eBPF program load.
-          enabled: true
-          expressions:
-            message: '''bpf program load system call (bpf) was called by process ('' + event.comm + '') with command (BPF_PROG_LOAD)'''
-            ruleExpression:
-              - eventType: bpf
-                expression: event.cmd == uint(5) && !ap.was_syscall_used(event.containerId, 'bpf')
-            uniqueId: event.comm + '_' + 'bpf' + '_' + string(event.cmd)
-          id: R0009
-          isTriggerAlert: true
-          mitreTactic: TA0005
-          mitreTechnique: T1218
-          name: eBPF Program Load
-          profileDependency: 1
-          severity: 5
-          supportPolicy: false
-          tags:
-            - bpf
-            - ebpf
-            - applicationprofile
-        - description: Detecting access to sensitive files.
-          enabled: true
-          expressions:
-            message: '''Unexpected sensitive file access: '' + event.path + '' by process '' + event.comm'
-            ruleExpression:
-              - eventType: open
-                expression: event.path.startsWith('/etc/shadow') && !ap.was_path_opened(event.containerId, event.path)
-            uniqueId: event.comm + '_' + event.path
-          id: R0010
-          isTriggerAlert: true
-          mitreTactic: TA0006
-          mitreTechnique: T1005
-          name: Unexpected Sensitive File Access
-          profileDependency: 1
-          severity: 5
-          supportPolicy: false
-          tags:
-            - files
-            - anomaly
-            - applicationprofile
-        - description: Detecting unexpected egress network traffic that is not whitelisted by application profile.
-          enabled: false
-          expressions:
-            message: '''Unexpected egress network communication to: '' + event.dstAddr + '':'' + string(event.dstPort) + '' using '' + event.proto + '' from: '' + event.containerName'
-            ruleExpression:
-              - eventType: network
-                expression: event.pktType == 'OUTGOING' && !net.is_private_ip(event.dstAddr) && !nn.was_address_in_egress(event.containerId, event.dstAddr)
-            uniqueId: event.dstAddr + '_' + string(event.dstPort) + '_' + event.proto
-          id: R0011
-          isTriggerAlert: false
-          mitreTactic: TA0010
-          mitreTechnique: T1041
-          name: Unexpected Egress Network Traffic
-          profileDependency: 0
-          severity: 5
-          supportPolicy: false
-          tags:
-            - whitelisted
-            - network
-            - anomaly
-            - networkprofile
-        - description: 'Detecting exec calls that are from malicious source like: /dev/shm'
-          enabled: true
-          expressions:
-            message: '''Execution from malicious source: '' + event.exepath + '' in directory '' + event.cwd'
-            ruleExpression:
-              - eventType: exec
-                expression: |
-                  (event.exepath == '/dev/shm' || event.exepath.startsWith('/dev/shm/')) || (event.cwd == '/dev/shm' || event.cwd.startsWith('/dev/shm/') || (parse.get_exec_path(event.args, event.comm).startsWith('/dev/shm/')))
-            uniqueId: event.comm + '_' + event.exepath + '_' + event.pcomm
-          id: R1000
-          isTriggerAlert: true
-          mitreTactic: TA0002
-          mitreTechnique: T1059
-          name: Process executed from malicious source
-          profileDependency: 2
-          severity: 8
-          supportPolicy: false
-          tags:
-            - exec
-            - signature
-            - malicious
-        - description: Detecting exec calls of binaries that are not included in the base image
-          enabled: true
-          expressions:
-            message: '''Process ('' + event.comm + '') was executed and is not part of the image'''
-            ruleExpression:
-              - eventType: exec
-                expression: |
-                  (event.upperlayer == true ||
-                   event.pupperlayer == true) &&
-                  !ap.was_executed(event.containerId, parse.get_exec_path(event.args, event.comm))
-            uniqueId: event.comm + '_' + event.exepath + '_' + event.pcomm
-          id: R1001
-          isTriggerAlert: true
-          mitreTactic: TA0005
-          mitreTechnique: T1036
-          name: Drifted process executed
-          profileDependency: 1
-          severity: 8
-          supportPolicy: false
-          tags:
-            - exec
-            - malicious
-            - binary
-            - base image
-            - applicationprofile
-        - description: Detecting Kernel Module Load.
-          enabled: true
-          expressions:
-            message: '''Kernel module ('' + event.module + '') loading attempt with syscall ('' + event.syscallName + '') was called by process ('' + event.comm + '')'''
-            ruleExpression:
-              - eventType: kmod
-                expression: event.syscallName == 'init_module' || event.syscallName == 'finit_module'
-            uniqueId: event.comm + '_' + event.syscallName + '_' + event.module
-          id: R1002
-          isTriggerAlert: true
-          mitreTactic: TA0005
-          mitreTechnique: T1547.006
-          name: Process tries to load a kernel module
-          profileDependency: 2
-          severity: 10
-          supportPolicy: false
-          tags:
-            - kmod
-            - kernel
-            - module
-            - load
-        - description: Detecting ssh connection to disallowed port
-          enabled: false
-          expressions:
-            message: '''Malicious SSH connection attempt to '' + event.dstIp + '':'' + string(dyn(event.dstPort))'
-            ruleExpression:
-              - eventType: ssh
-                expression: dyn(event.srcPort) >= 32768 && dyn(event.srcPort) <= 60999 && !(dyn(event.dstPort) in [22, 2022]) && !nn.was_address_in_egress(event.containerId, event.dstIp)
-            uniqueId: event.comm + '_' + event.dstIp + '_' + string(dyn(event.dstPort))
-          id: R1003
-          isTriggerAlert: true
-          mitreTactic: TA0008
-          mitreTechnique: T1021.001
-          name: Disallowed ssh connection
-          profileDependency: 1
-          severity: 5
-          supportPolicy: false
-          tags:
-            - ssh
-            - connection
-            - port
-            - malicious
-            - networkprofile
-        - description: Detecting exec calls from mounted paths.
-          enabled: true
-          expressions:
-            message: '''Process ('' + event.comm + '') was executed from a mounted path'''
-            ruleExpression:
-              - eventType: exec
-                expression: '!ap.was_executed(event.containerId, parse.get_exec_path(event.args, event.comm)) && k8s.get_container_mount_paths(event.namespace, event.podName, event.containerName).exists(mount, event.exepath.startsWith(mount) || parse.get_exec_path(event.args, event.comm).startsWith(mount))'
-            uniqueId: event.comm + '_' + event.exepath + '_'
-          id: R1004
-          isTriggerAlert: true
-          mitreTactic: TA0002
-          mitreTechnique: T1059
-          name: Process executed from mount
-          profileDependency: 1
-          severity: 5
-          supportPolicy: false
-          tags:
-            - exec
-            - mount
-            - applicationprofile
-        - description: Detecting Fileless Execution
-          enabled: true
-          expressions:
-            message: '''Fileless execution detected: exec call "'' + event.comm + ''" is from a malicious source'''
-            ruleExpression:
-              - eventType: exec
-                expression: event.exepath.contains('memfd') || event.exepath.startsWith('/proc/self/fd') || event.exepath.matches('/proc/[0-9]+/fd/[0-9]+')
-            uniqueId: event.comm + '_' + event.exepath + '_' + event.pcomm
-          id: R1005
-          isTriggerAlert: true
-          mitreTactic: TA0005
-          mitreTechnique: T1055
-          name: Fileless execution detected
-          profileDependency: 2
-          severity: 8
-          supportPolicy: false
-          tags:
-            - fileless
-            - execution
-            - malicious
-        - description: Detecting Unshare System Call usage, which can be used to escape container.
-          enabled: true
-          expressions:
-            message: '''Unshare system call (unshare) was called by process ('' + event.comm + '')'''
-            ruleExpression:
-              - eventType: unshare
-                expression: '!ap.was_syscall_used(event.containerId, ''unshare'')'
-            uniqueId: event.comm + '_' + 'unshare'
-          id: R1006
-          isTriggerAlert: true
-          mitreTactic: TA0004
-          mitreTechnique: T1611
-          name: Process tries to escape container
-          profileDependency: 2
-          severity: 5
-          supportPolicy: false
-          tags:
-            - unshare
-            - escape
-            - unshare
-            - anomaly
-            - applicationprofile
-        - description: Detecting XMR Crypto Miners by randomx algorithm usage.
-          enabled: true
-          expressions:
-            message: '''XMR Crypto Miner process: ('' + event.exepath + '') executed'''
-            ruleExpression:
-              - eventType: randomx
-                expression: "true"
-            uniqueId: event.exepath + '_' + event.comm
-          id: R1007
-          isTriggerAlert: true
-          mitreTactic: TA0040
-          mitreTechnique: T1496
-          name: Crypto miner launched
-          profileDependency: 2
-          severity: 10
-          supportPolicy: false
-          tags:
-            - crypto
-            - miners
-            - malicious
-        - description: Detecting Crypto miners communication by domain
-          enabled: true
-          expressions:
-            message: '''Communication with a known crypto mining domain: '' + event.name'
-            ruleExpression:
-              - eventType: dns
-                expression: event.name in ['2cryptocalc.com.', '2miners.com.', 'antpool.com.', 'asia1.ethpool.org.', 'bohemianpool.com.', 'botbox.dev.', 'btm.antpool.com.', 'c3pool.com.', 'c4pool.org.', 'ca.minexmr.com.', 'cn.stratum.slushpool.com.', 'dash.antpool.com.', 'data.miningpoolstats.stream.', 'de.minexmr.com.', 'eth-ar.dwarfpool.com.', 'eth-asia.dwarfpool.com.', 'eth-asia1.nanopool.org.', 'eth-au.dwarfpool.com.', 'eth-au1.nanopool.org.', 'eth-br.dwarfpool.com.', 'eth-cn.dwarfpool.com.', 'eth-cn2.dwarfpool.com.', 'eth-eu.dwarfpool.com.', 'eth-eu1.nanopool.org.', 'eth-eu2.nanopool.org.', 'eth-hk.dwarfpool.com.', 'eth-jp1.nanopool.org.', 'eth-ru.dwarfpool.com.', 'eth-ru2.dwarfpool.com.', 'eth-sg.dwarfpool.com.', 'eth-us-east1.nanopool.org.', 'eth-us-west1.nanopool.org.', 'eth-us.dwarfpool.com.', 'eth-us2.dwarfpool.com.', 'eth.antpool.com.', 'eu.stratum.slushpool.com.', 'eu1.ethermine.org.', 'eu1.ethpool.org.', 'fastpool.xyz.', 'fr.minexmr.com.', 'kriptokyng.com.', 'mine.moneropool.com.', 'mine.xmrpool.net.', 'miningmadness.com.', 'monero.cedric-crispin.com.', 'monero.crypto-pool.fr.', 'monero.fairhash.org.', 'monero.hashvault.pro.', 'monero.herominers.com.', 'monerod.org.', 'monerohash.com.', 'moneroocean.stream.', 'monerop.com.', 'multi-pools.com.', 'p2pool.io.', 'pool.kryptex.com.', 'pool.minexmr.com.', 'pool.monero.hashvault.pro.', 'pool.rplant.xyz.', 'pool.supportxmr.com.', 'pool.xmr.pt.', 'prohashing.com.', 'rx.unmineable.com.', 'sg.minexmr.com.', 'sg.stratum.slushpool.com.', 'skypool.org.', 'solo-xmr.2miners.com.', 'ss.antpool.com.', 'stratum-btm.antpool.com.', 'stratum-dash.antpool.com.', 'stratum-eth.antpool.com.', 'stratum-ltc.antpool.com.', 'stratum-xmc.antpool.com.', 'stratum-zec.antpool.com.', 'stratum.antpool.com.', 'supportxmr.com.', 'trustpool.cc.', 'us-east.stratum.slushpool.com.', 'us1.ethermine.org.', 'us1.ethpool.org.', 'us2.ethermine.org.', 'us2.ethpool.org.', 'web.xmrpool.eu.', 'www.domajorpool.com.', 'www.dxpool.com.', 'www.mining-dutch.nl.', 'xmc.antpool.com.', 'xmr-asia1.nanopool.org.', 'xmr-au1.nanopool.org.', 'xmr-eu1.nanopool.org.', 'xmr-eu2.nanopool.org.', 'xmr-jp1.nanopool.org.', 'xmr-us-east1.nanopool.org.', 'xmr-us-west1.nanopool.org.', 'xmr.2miners.com.', 'xmr.crypto-pool.fr.', 'xmr.gntl.uk.', 'xmr.nanopool.org.', 'xmr.pool-pay.com.', 'xmr.pool.minergate.com.', 'xmr.solopool.org.', 'xmr.volt-mine.com.', 'xmr.zeropool.io.', 'zec.antpool.com.', 'zergpool.com.', 'auto.c3pool.org.', 'us.monero.herominers.com.']
-            uniqueId: event.name + '_' + event.comm
-          id: R1008
-          isTriggerAlert: true
-          mitreTactic: TA0011
-          mitreTechnique: T1071.004
-          name: Crypto Mining Domain Communication
-          profileDependency: 2
-          severity: 10
-          supportPolicy: false
-          tags:
-            - network
-            - crypto
-            - miners
-            - malicious
-            - dns
-        - description: Detecting Crypto Miners by suspicious port usage.
-          enabled: true
-          expressions:
-            message: '''Detected crypto mining related port communication on port '' + string(event.dstPort) + '' to '' + event.dstAddr + '' with protocol '' + event.proto'
-            ruleExpression:
-              - eventType: network
-                expression: event.proto == 'TCP' && event.pktType == 'OUTGOING' && event.dstPort in [3333, 45700] && !nn.was_address_in_egress(event.containerId, event.dstAddr)
-            uniqueId: event.comm + '_' + string(event.dstPort)
-          id: R1009
-          isTriggerAlert: false
-          mitreTactic: TA0011
-          mitreTechnique: T1071
-          name: Crypto Mining Related Port Communication
-          profileDependency: 1
-          severity: 3
-          supportPolicy: false
-          tags:
-            - network
-            - crypto
-            - miners
-            - malicious
-            - networkprofile
-        - description: Detects symlink creation over sensitive files
-          enabled: true
-          expressions:
-            message: '''Symlink created over sensitive file: '' + event.oldPath + '' -> '' + event.newPath'
-            ruleExpression:
-              - eventType: symlink
-                expression: (event.oldPath.startsWith('/etc/shadow') || event.oldPath.startsWith('/etc/sudoers')) && !ap.was_path_opened(event.containerId, event.oldPath)
-            uniqueId: event.comm + '_' + event.oldPath
-          id: R1010
-          isTriggerAlert: true
-          mitreTactic: TA0006
-          mitreTechnique: T1005
-          name: Soft link created over sensitive file
-          profileDependency: 1
-          severity: 5
-          supportPolicy: true
-          tags:
-            - anomaly
-            - symlink
-            - applicationprofile
-        - description: Detecting ld_preload hook techniques.
-          enabled: false
-          expressions:
-            message: 'eventType == ''exec'' ? ''Process ('' + event.comm + '') is using a dynamic linker hook: '' + process.get_ld_hook_var(event.pid) : ''The dynamic linker configuration file ('' + event.path + '') was modified by process ('' + event.comm + '')'''
-            ruleExpression:
-              - eventType: exec
-                expression: event.comm != 'java' && event.containerName != 'matlab' && process.get_ld_hook_var(event.pid) != ''
-              - eventType: open
-                expression: event.path == '/etc/ld.so.preload' && has(event.flagsRaw) && event.flagsRaw != 0
-            uniqueId: 'eventType == ''exec'' ? ''exec_'' + event.comm : ''open_'' + event.path'
-          id: R1011
-          isTriggerAlert: true
-          mitreTactic: TA0005
-          mitreTechnique: T1574.006
-          name: ld_preload hooks technique detected
-          profileDependency: 1
-          severity: 5
-          supportPolicy: true
-          tags:
-            - exec
-            - malicious
-            - applicationprofile
-        - description: Detecting hardlink creation over sensitive files.
-          enabled: true
-          expressions:
-            message: '''Hardlink created over sensitive file: '' + event.oldPath + '' - '' + event.newPath'
-            ruleExpression:
-              - eventType: hardlink
-                expression: (event.oldPath.startsWith('/etc/shadow') || event.oldPath.startsWith('/etc/sudoers')) && !ap.was_path_opened(event.containerId, event.oldPath)
-            uniqueId: event.comm + '_' + event.oldPath
-          id: R1012
-          isTriggerAlert: true
-          mitreTactic: TA0006
-          mitreTechnique: T1005
-          name: Hard link created over sensitive file
-          profileDependency: 1
-          severity: 5
-          supportPolicy: true
-          tags:
-            - files
-            - malicious
-            - applicationprofile
-        - description: Detecting potentially malicious ptrace usage.
-          enabled: true
-          expressions:
-            message: '''Malicious ptrace usage detected from: '' + event.comm'
-            ruleExpression:
-              - eventType: ptrace
-                expression: "true"
-            uniqueId: event.exepath + '_' + event.comm
-          id: R1015
-          isTriggerAlert: true
-          mitreTactic: TA0005
-          mitreTechnique: T1622
-          name: Malicious Ptrace Usage
-          profileDependency: 2
-          severity: 5
-          supportPolicy: false
-          tags:
-            - process
-            - malicious
-        - description: Detects io_uring operations that were not recorded during the initial observation period, indicating potential unauthorized activity.
-          enabled: true
-          expressions:
-            message: '''Unexpected io_uring operation detected: (opcode='' + string(event.opcode) + '') flags=0x'' + (has(event.flagsRaw) ? string(event.flagsRaw) : ''0'') + '' in '' + event.comm + ''.'''
-            ruleExpression:
-              - eventType: iouring
-                expression: "true"
-            uniqueId: string(event.opcode) + '_' + event.comm
-          id: R1030
-          isTriggerAlert: true
-          mitreTactic: TA0002
-          mitreTechnique: T1218
-          name: Unexpected io_uring Operation Detected
-          profileDependency: 0
-          severity: 5
-          supportPolicy: true
-          tags:
-            - syscalls
-            - io_uring
-            - applicationprofile
-  31: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -2305,8 +1677,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -2321,7 +1693,7 @@ minimal capabilities:
         app.kubernetes.io/component: node-agent
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
-  32: |
+  30: |
     apiVersion: v1
     kind: ServiceAccount
     metadata:
@@ -2333,13 +1705,13 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
       namespace: kubescape
-  33: |
+  31: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -2351,8 +1723,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook
@@ -2366,7 +1738,7 @@ minimal capabilities:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  34: |
+  32: |
     apiVersion: v1
     data:
       tls.crt: bW9jay1jZXJ0LWNlcnQ=
@@ -2381,14 +1753,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook.kubescape.svc-kubescape-tls-pair
       namespace: kubescape
     type: kubernetes.io/tls
-  35: |
+  33: |
     apiVersion: admissionregistration.k8s.io/v1
     kind: ValidatingWebhookConfiguration
     metadata:
@@ -2400,8 +1772,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: validation
@@ -2436,7 +1808,7 @@ minimal capabilities:
               - rolebindings
             scope: '*'
         sideEffects: None
-  36: |
+  34: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -2448,8 +1820,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -2554,7 +1926,7 @@ minimal capabilities:
           - list
           - update
           - patch
-  37: |
+  35: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -2566,8 +1938,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -2579,7 +1951,7 @@ minimal capabilities:
       - kind: ServiceAccount
         name: operator
         namespace: kubescape
-  38: |
+  36: |
     apiVersion: v1
     data:
       config.json: |
@@ -2606,14 +1978,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: operator
       namespace: kubescape
-  39: |
+  37: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -2625,8 +1997,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -2660,8 +2032,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.30.0-rc6
-            helm.sh/chart: kubescape-operator-1.30.0-rc6
+            app.kubernetes.io/version: 1.30.0-rc8
+            helm.sh/chart: kubescape-operator-1.30.0-rc8
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -2675,7 +2047,7 @@ minimal capabilities:
                     fieldRef:
                       fieldPath: spec.nodeName
                 - name: HELM_RELEASE
-                  value: kubescape-operator-1.30.0-rc6
+                  value: kubescape-operator-1.30.0-rc8
                 - name: GOMEMLIMIT
                   valueFrom:
                     resourceFieldRef:
@@ -2795,7 +2167,7 @@ minimal capabilities:
                     path: matchingRules.json
                 name: cs-matching-rules
               name: cs-matching-rules
-  40: |
+  38: |
     apiVersion: v1
     data:
       cronjobTemplate: |-
@@ -2875,14 +2247,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: kubescape-cronjob-template
       namespace: kubescape
-  41: |
+  39: |
     apiVersion: v1
     data:
       cronjobTemplate: |-
@@ -2962,14 +2334,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: kubevuln-cronjob-template
       namespace: kubescape
-  42: |
+  40: |
     apiVersion: v1
     data:
       cronjobTemplate: |-
@@ -3049,14 +2421,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: registry-scan-cronjob-template
       namespace: kubescape
-  43: |
+  41: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
@@ -3068,8 +2440,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -3100,7 +2472,7 @@ minimal capabilities:
           - list
           - patch
           - delete
-  44: |
+  42: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
@@ -3112,8 +2484,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -3126,7 +2498,7 @@ minimal capabilities:
       - kind: ServiceAccount
         name: operator
         namespace: kubescape
-  45: |
+  43: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -3138,8 +2510,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -3154,7 +2526,7 @@ minimal capabilities:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  46: |
+  44: |
     apiVersion: v1
     automountServiceAccountToken: false
     kind: ServiceAccount
@@ -3167,13 +2539,13 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
       namespace: kubescape
-  47: |
+  45: |
     apiVersion: apiregistration.k8s.io/v1
     kind: APIService
     metadata:
@@ -3185,8 +2557,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: v1beta1.spdx.softwarecomposition.kubescape.io
@@ -3199,7 +2571,7 @@ minimal capabilities:
         namespace: kubescape
       version: v1beta1
       versionPriority: 15
-  48: |
+  46: |
     apiVersion: v1
     data:
       ca.crt: bW9jay1jYS1jZXJ0
@@ -3215,14 +2587,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-ca
       namespace: kubescape
     type: kubernetes.io/tls
-  49: |
+  47: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -3234,8 +2606,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
@@ -3288,7 +2660,7 @@ minimal capabilities:
           - get
           - watch
           - list
-  50: |
+  48: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -3300,8 +2672,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage:system:auth-delegator
@@ -3313,7 +2685,7 @@ minimal capabilities:
       - kind: ServiceAccount
         name: storage
         namespace: kubescape
-  51: |
+  49: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -3325,8 +2697,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
@@ -3338,7 +2710,7 @@ minimal capabilities:
       - kind: ServiceAccount
         name: storage
         namespace: kubescape
-  52: |
+  50: |
     apiVersion: v1
     data:
       config.json: |
@@ -3365,14 +2737,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: storage
       namespace: kubescape
-  53: |
+  51: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -3384,8 +2756,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -3411,8 +2783,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.30.0-rc6
-            helm.sh/chart: kubescape-operator-1.30.0-rc6
+            app.kubernetes.io/version: 1.30.0-rc8
+            helm.sh/chart: kubescape-operator-1.30.0-rc8
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -3501,7 +2873,7 @@ minimal capabilities:
             - name: ca-certificates
               secret:
                 secretName: storage-ca
-  54: |
+  52: |
     apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
@@ -3513,8 +2885,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-storage
@@ -3525,7 +2897,7 @@ minimal capabilities:
       resources:
         requests:
           storage: 5Gi
-  55: |
+  53: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
@@ -3537,8 +2909,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-auth-reader
@@ -3551,7 +2923,7 @@ minimal capabilities:
       - kind: ServiceAccount
         name: storage
         namespace: kubescape
-  56: |
+  54: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -3563,8 +2935,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
@@ -3579,7 +2951,7 @@ minimal capabilities:
         app.kubernetes.io/component: storage
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
-  57: |
+  55: |
     apiVersion: v1
     kind: ServiceAccount
     metadata:
@@ -3591,8 +2963,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc6
-        helm.sh/chart: kubescape-operator-1.30.0-rc6
+        app.kubernetes.io/version: 1.30.0-rc8
+        helm.sh/chart: kubescape-operator-1.30.0-rc8
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
