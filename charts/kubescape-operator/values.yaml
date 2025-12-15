@@ -11,8 +11,8 @@ kubescape-operator:
   imagePullSecrets: armosec-readonly
   nodeAgent:
     config:
-      hostMalwareSensor: disabled
-      hostNetworkSensor: disabled
+      hostMalwareSensor: disable
+      hostNetworkSensor: disable
     env:
       - name: IGNORERULEBINDINGS
         value: true
