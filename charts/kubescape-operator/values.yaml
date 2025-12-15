@@ -2,6 +2,7 @@ kubescape-operator:
   alertCRD:
     installDefault: false
   capabilities:
+    backend-storage: disable
     manageWorkloads: enable
     nodeProfileService: enable
     runtimeDetection: enable
@@ -11,14 +12,14 @@ kubescape-operator:
   imagePullSecrets: armosec-readonly
   nodeAgent:
     config:
-      hostMalwareSensor: disabled
-      hostNetworkSensor: disabled
+      hostMalwareSensor: disable
+      hostNetworkSensor: disable
     env:
       - name: IGNORERULEBINDINGS
         value: true
     image:
       repository: quay.io/armosec/node-agent
-      tag: image-based-rc8
+      tag: backend-storage-rc2
     resources:
       limits:
         memory: 1000Mi
