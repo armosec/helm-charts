@@ -2,8 +2,10 @@ kubescape-operator:
   alertCRD:
     installDefault: false
   capabilities:
+    backend-storage: enable
     manageWorkloads: enable
     nodeProfileService: enable
+    nodeSbomGeneration: disable
     runtimeDetection: enable
   imagePullSecret:
     server: quay.io

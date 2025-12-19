@@ -8,6 +8,7 @@ on:
         description: What chart do you want to release?
         options:
           - kubescape-operator
+          - rapid7-operator
       HELM_E2E_TEST:
         required: false
         default: true
@@ -77,10 +78,15 @@ jobs:
         # with:
         #   version: v3.4.0
 
+      - name: Filter charts
+        run: |
+          find charts -mindepth 1 -maxdepth 1 -type d -not -name "${{ inputs.CHARTS_NAME }}" -exec rm -rf {} +
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.7.0
+        with:
+          charts_dir: charts
         env:
-          charts_dir: "charts/kubescape-operator"
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Mark as pre-release
@@ -88,5 +94,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          chart_name=$(grep '^name:' charts/${{ inputs.CHARTS_NAME }}/Chart.yaml | awk '{print $2}')
           version=$(grep '^version:' charts/${{ inputs.CHARTS_NAME }}/Chart.yaml | awk '{print $2}')
-          gh release edit ${{ inputs.CHARTS_NAME }}-$version --prerelease
+          gh release edit $chart_name-$version --prerelease

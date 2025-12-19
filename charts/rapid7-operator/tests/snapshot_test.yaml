@@ -1,0 +1,35 @@
+suite: Snapshot tests
+kubernetesProvider:
+  scheme:
+    "v1/Secret":
+      gvr:
+        version: v1
+        resource: secrets
+      namespaced: true
+  objects:
+    - kind: Secret
+      apiVersion: v1
+      metadata:
+        name: extra-certificates
+        namespace: kubescape
+      data:
+        cert1.pem: Zm9v
+        cert2.pem: Zm9v
+tests:
+  - it: minimal capabilities
+    asserts:
+      - matchSnapshot: {}
+    capabilities:
+      apiVersions:
+        - batch/v1
+    set:
+      kubescape-operator:
+        account: 9e6c0c2c-6bd0-4919-815b-55030de7c9a0
+        accessKey: f304d73b-d43c-412b-82ea-e4c859493ce6
+        unittest: true
+        configurations.otelUrl: "otelCollector.svc.monitoring:4317"
+        clusterName: kind-kind
+        kubescapeScheduler:
+          scanSchedule: "1 2 3 4 5"
+        kubevulnScheduler:
+          scanSchedule: "1 2 3 4 5"
