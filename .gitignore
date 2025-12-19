@@ -1,4 +1,25 @@
-.vscode
-.idea
-charts/kubescape-operator/Chart.lock
-charts/kubescape-operator/charts/
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Helm
+# Ignore the charts/ directory inside each chart, as these are populated by 'helm dependency update'
+charts/*/charts/
+# Ignore Chart.lock files as they are generated
+charts/*/Chart.lock
+
+# Temporary/Generated files
+login
+*.tgz
+*.log

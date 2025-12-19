@@ -1517,10 +1517,10 @@ minimal capabilities:
                 - name: KUBELET_ROOT
                   value: /var/lib/kubelet
                 - name: AGENT_VERSION
-                  value: backend-storage-rc2
+                  value: v0.0.180
                 - name: IGNORERULEBINDINGS
                   value: "true"
-              image: quay.io/armosec/node-agent:backend-storage-rc2
+              image: quay.io/armosec/node-agent:v0.0.180
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
