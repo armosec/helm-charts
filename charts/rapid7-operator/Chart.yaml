@@ -1,7 +1,6 @@
 apiVersion: v2
-name: armosec-kubescape-operator
-description:
-  Kubescape is an E2E Kubernetes cluster security platform
+name: rapid7-operator
+description: Rapid7 Operator for Kubernetes security
 
 # A chart can be either an 'application' or a 'library' chart.
 #
