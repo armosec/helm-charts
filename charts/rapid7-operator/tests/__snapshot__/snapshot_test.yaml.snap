@@ -1,15 +1,11 @@
 minimal capabilities:
   1: |+
     raw: |+
-      Thank you for installing kubescape-operator version 1.30.0-rc9.
+      Thank you for installing kubescape-operator version 1.30.0.
 
 
 
-      View your image vulnerabilities scan summaries:
-      > kubectl get vulnerabilitymanifestsummaries -A
 
-      Detailed reports are also available:
-      > kubectl get vulnerabilitymanifests -A
 
       kubescape-operator generates suggested network policies. To view them:
       > kubectl get generatednetworkpolicies -n <namespace>
@@ -29,8 +25,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         kubescape.io/infra: credentials
         tier: ks-control-plane
@@ -75,8 +71,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         kubescape.io/infra: config
         kubescape.io/tier: core
@@ -88,7 +84,7 @@ minimal capabilities:
     data:
       capabilities: |
         {
-          "capabilities":{"admissionController":"enable","autoUpgrading":"disable","backend-storage":"enable","configurationScan":"enable","httpDetection":"enable","kubescapeOffline":"disable","malwareDetection":"disable","manageWorkloads":"enable","networkEventsStreaming":"enable","networkPolicyService":"enable","nodeProfileService":"enable","nodeSbomGeneration":"disable","nodeScan":"enable","prometheusExporter":"disable","relevancy":"enable","runtimeDetection":"enable","runtimeObservability":"enable","scanEmbeddedSBOMs":"disable","seccompProfileService":"enable","syncSBOM":"disable","testing":{"nodeAgentMultiplication":{"enabled":false,"replicas":5}},"vexGeneration":"disable","vulnerabilityScan":"enable"},
+          "capabilities":{"admissionController":"enable","autoUpgrading":"disable","backend-storage":"enable","configurationScan":"disable","continuousScan":"disable","httpDetection":"enable","kubescapeOffline":"disable","malwareDetection":"disable","manageWorkloads":"enable","networkEventsStreaming":"enable","networkPolicyService":"enable","nodeProfileService":"enable","nodeSbomGeneration":"disable","nodeScan":"enable","operator":"enable","prometheusExporter":"disable","relevancy":"enable","runtimeDetection":"enable","runtimeObservability":"enable","scanEmbeddedSBOMs":"disable","seccompProfileService":"enable","syncSBOM":"disable","testing":{"nodeAgentMultiplication":{"enabled":false,"replicas":5}},"vexGeneration":"disable","vulnerabilityScan":"disable"},
           "components":{"autoUpdater":{"enabled":false},"clamAV":{"enabled":false},"cloudSecret":{"create":true,"name":"cloud-secret"},"customCaCertificates":{"name":"custom-ca-certificates"},"hostScanner":{"enabled":false},"kubescape":{"enabled":false},"kubescapeScheduler":{"enabled":false},"kubevuln":{"enabled":false},"kubevulnScheduler":{"enabled":false},"nodeAgent":{"enabled":true},"operator":{"enabled":true},"otelCollector":{"enabled":false},"prometheusExporter":{"enabled":false},"serviceDiscovery":{"enabled":false},"storage":{"enabled":false},"synchronizer":{"enabled":false}},
           "configurations":{"persistence":"enable","priorityClass":{"daemonset":100000100,"enabled":true},"prometheusAnnotations":"disable"} ,
           "serviceScanConfig" :{"enabled":false,"interval":"1h"}
@@ -103,8 +99,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -134,8 +130,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -155,8 +151,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-critical
@@ -173,8 +169,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -303,8 +299,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -367,8 +363,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -386,8 +382,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -413,8 +409,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.30.0-rc9
-            helm.sh/chart: kubescape-operator-1.30.0-rc9
+            app.kubernetes.io/version: 1.30.0
+            helm.sh/chart: kubescape-operator-1.30.0
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -623,8 +619,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -651,8 +647,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -669,8 +665,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook
@@ -699,8 +695,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook.kubescape.svc-kubescape-tls-pair
@@ -718,8 +714,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: validation
@@ -766,8 +762,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -884,8 +880,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -924,8 +920,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -943,8 +939,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -966,7 +962,7 @@ minimal capabilities:
       template:
         metadata:
           annotations:
-            checksum/capabilities-config: c67407d807c02e146685e93f19c563aec4f35c1bbcf83cabe6ec16cda972ff56
+            checksum/capabilities-config: 30bd9a14ec40bbb57fe17875de3e2319ca0cf071797544e08994bf30f96508f5
             checksum/cloud-config: 4814eee8ad49ae2455bf5967a90f18d23114a27776a8855f69a9a3cf8112b450
             checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424
             checksum/matching-rules-config: c81857b415602f6b161db3199a16461c5acd8ba44ec7572189441f4f294a3614
@@ -978,8 +974,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.30.0-rc9
-            helm.sh/chart: kubescape-operator-1.30.0-rc9
+            app.kubernetes.io/version: 1.30.0
+            helm.sh/chart: kubescape-operator-1.30.0
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -993,7 +989,7 @@ minimal capabilities:
                     fieldRef:
                       fieldPath: spec.nodeName
                 - name: HELM_RELEASE
-                  value: kubescape-operator-1.30.0-rc9
+                  value: kubescape-operator-1.30.0
                 - name: GOMEMLIMIT
                   valueFrom:
                     resourceFieldRef:
@@ -1146,7 +1142,7 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: kubescape-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.15"
+                    image: "quay.io/kubescape/http-request:v0.2.16"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
@@ -1193,8 +1189,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -1233,7 +1229,7 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: kubevuln-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.15"
+                    image: "quay.io/kubescape/http-request:v0.2.16"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
@@ -1280,8 +1276,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -1320,7 +1316,7 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: registry-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.15"
+                    image: "quay.io/kubescape/http-request:v0.2.16"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
@@ -1367,8 +1363,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -1386,8 +1382,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -1430,8 +1426,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -1456,8 +1452,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -1485,8 +1481,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -1507,8 +1503,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.30.0-rc9
-        helm.sh/chart: kubescape-operator-1.30.0-rc9
+        app.kubernetes.io/version: 1.30.0
+        helm.sh/chart: kubescape-operator-1.30.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-ca
