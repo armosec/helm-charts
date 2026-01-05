@@ -146,8 +146,14 @@ jobs:
 
           if [ "${{ inputs.CHARTS_NAME }}" = "rapid7-operator" ]; then
             BACKEND="armo-prod-us-east-1"
+            # Use Rapid7-specific credentials for rapid7-operator
+            export CLIENT_ID="${{ secrets.CLIENT_ID_RAPID7_PROD }}"
+            export SECRET_KEY="${{ secrets.SECRET_KEY_RAPID7_PROD }}"
           else
             BACKEND="production"
+            # Use default production credentials
+            export CLIENT_ID="${{ secrets.CLIENT_ID_PROD }}"
+            export SECRET_KEY="${{ secrets.SECRET_KEY_PROD }}"
           fi
 
           python3 systest-cli.py  \
