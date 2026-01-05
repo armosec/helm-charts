@@ -144,9 +144,15 @@ jobs:
 
           echo "Selected chart: ${{ inputs.CHARTS_NAME }}"
 
+          if [ "${{ inputs.CHARTS_NAME }}" = "rapid7-operator" ]; then
+            BACKEND="armo-prod-us-east-1"
+          else
+            BACKEND="production"
+          fi
+
           python3 systest-cli.py  \
           -t ${{ matrix.test }}   \
-          -b production           \
+          -b "$BACKEND"        \
           -c CyberArmorTests      \
           --logger DEBUG          \
           --kwargs helm_branch=${{ inputs.BRANCH }} ks_branch=${{ inputs.KS_BRANCH }} charts_name=${{ inputs.CHARTS_NAME }} charts_repo=${{ github.repository }}
