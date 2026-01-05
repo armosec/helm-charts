@@ -10,6 +10,7 @@ on:
           - kubescape-operator
           - rapid7-operator
       HELM_E2E_TEST:
+        description: "Run Helm E2E tests as part of the workflow"
         required: false
         default: true
         type: boolean
@@ -27,12 +28,15 @@ on:
   workflow_call:
     inputs:
       COMMIT_REF:
+        description: "commit reference to release from"
         required: true
         type: string
       CHARTS_NAME:
+        description: "What chart do you want to release?"
         required: true
         type: string
       HELM_E2E_TEST:
+        description: "Whether to run Helm E2E tests when calling this workflow"
         required: false
         default: true
         type: boolean
@@ -49,6 +53,7 @@ jobs:
       BRANCH: ${{ inputs.RELEASE_BRANCH || 'main' }}
       TESTS_BRANCH: ${{ inputs.TESTS_BRANCH }}
       KS_BRANCH: "master"
+      CHARTS_NAME: ${{ inputs.CHARTS_NAME }}
     uses: ./.github/workflows/02-e2e-test.yaml
     secrets: inherit
 

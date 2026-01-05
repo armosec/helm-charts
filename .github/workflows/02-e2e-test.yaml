@@ -17,6 +17,12 @@ on:
         default: 'release'
         type: string
         description: 'kubescape branch name'
+      CHARTS_NAME:
+        type: choice
+        description: 'What chart do you want to test?'
+        options:
+          - kubescape-operator
+          - rapid7-operator
 
   workflow_call:
     inputs:
@@ -35,6 +41,11 @@ on:
         default: 'release'
         type: string
         description: 'kubescape branch name'
+      CHARTS_NAME:
+        required: false
+        default: 'kubescape-operator'
+        type: string
+        description: 'chart name to test'
 
 jobs:
   e2e-test:
@@ -131,12 +142,14 @@ jobs:
           cat /tmp/testhistory
           source systests_python_env/bin/activate
 
+          echo "Selected chart: ${{ inputs.CHARTS_NAME }}"
+
           python3 systest-cli.py  \
           -t ${{ matrix.test }}   \
           -b production           \
           -c CyberArmorTests      \
           --logger DEBUG          \
-          --kwargs helm_branch=${{ inputs.BRANCH }} ks_branch=${{ inputs.KS_BRANCH }}
+          --kwargs helm_branch=${{ inputs.BRANCH }} ks_branch=${{ inputs.KS_BRANCH }} charts_name=${{ inputs.CHARTS_NAME }}
 
           deactivate
 
