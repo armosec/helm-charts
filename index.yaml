@@ -2,6 +2,20 @@ apiVersion: v1
 entries:
   armosec-kubescape-operator:
     - apiVersion: v2
+      appVersion: 1.30.1+private.1
+      created: "2026-01-06T12:56:05.293789809Z"
+      dependencies:
+        - name: kubescape-operator
+          repository: https://kubescape.github.io/helm-charts/
+          version: 1.30.1
+      description: Kubescape is an E2E Kubernetes cluster security platform
+      digest: 8aaad83742b3b625fcc6682cc553238b83840fba40c265ca1c384de9d15ff843
+      name: armosec-kubescape-operator
+      type: application
+      urls:
+        - https://github.com/armosec/helm-charts/releases/download/armosec-kubescape-operator-1.30.1%2Bprivate.1/armosec-kubescape-operator-1.30.1%2Bprivate.1.tgz
+      version: 1.30.1+private.1
+    - apiVersion: v2
       appVersion: 1.30.0+private.3
       created: "2025-12-25T11:51:54Z"
       dependencies:
@@ -115,6 +129,20 @@ entries:
       version: 1.29.12+private.1
   rapid7-operator:
     - apiVersion: v2
+      appVersion: 1.30.1+private.1
+      created: "2026-01-06T12:56:05.293789809Z"
+      dependencies:
+        - name: kubescape-operator
+          repository: https://kubescape.github.io/helm-charts/
+          version: 1.30.1
+      description: Rapid7 Operator for Kubernetes security
+      digest: a225dee0ea5aef16ff3fe5ace4fd41b4baec3f242bf9683ecddc210e47ad965f
+      name: rapid7-operator
+      type: application
+      urls:
+        - https://github.com/armosec/helm-charts/releases/download/rapid7-operator-1.30.1%2Bprivate.1/rapid7-operator-1.30.1%2Bprivate.1.tgz
+      version: 1.30.1+private.1
+    - apiVersion: v2
       appVersion: 1.30.0+private.3
       created: "2025-12-25T11:51:54Z"
       dependencies:
@@ -156,4 +184,4 @@ entries:
       urls:
         - https://github.com/armosec/helm-charts/releases/download/rapid7-operator-1.30.0%2Bprivate.1/rapid7-operator-1.30.0%2Bprivate.1.tgz
       version: 1.30.0+private.1
-generated: "2025-12-22T10:41:46Z"
+generated: "2026-01-06T12:56:05.293789809Z"
