@@ -123,6 +123,39 @@ jobs:
         with:
           cluster_name: ${{ steps.uuid.outputs.RANDOM_UUID }}
 
+      - name: Parse Multi-Prod Client Mapping (JSON Secret)
+        id: parse-multi-prod-client-mapping
+        env:
+          MULTI_PROD_CLIENT_MAPPING: ${{ secrets.MULTI_PROD_CLIENT_MAPPING }}
+        run: |
+          # Make parsing resilient to missing/invalid MULTI_PROD_CLIENT_MAPPING.
+          # If the secret is empty or not valid JSON, set empty outputs and continue without failing the job.
+          if [ -z "$MULTI_PROD_CLIENT_MAPPING" ]; then
+            echo "MULTI_PROD_CLIENT_MAPPING is empty or not set; skipping parse"
+            echo "CLIENT_ID_PROD_US_EAST_1=" >> $GITHUB_OUTPUT
+            echo "SECRET_KEY_PROD_US_EAST_1=" >> $GITHUB_OUTPUT
+          else
+            # Ensure the MULTI_PROD_CLIENT_MAPPING contains valid JSON.
+            if ! echo "$MULTI_PROD_CLIENT_MAPPING" | jq -e . >/dev/null 2>&1; then
+              echo "MULTI_PROD_CLIENT_MAPPING is present but not valid JSON; skipping parse"
+              echo "CLIENT_ID_PROD_US_EAST_1=" >> $GITHUB_OUTPUT
+              echo "SECRET_KEY_PROD_US_EAST_1=" >> $GITHUB_OUTPUT
+            else
+              # Parse the JSON secret and extract production credentials for US_EAST_1
+              # Expected JSON structure:
+              # { "armo_prod_us_east_1": { "client_id": "...", "secret_key": "..." }, ... }
+              CLIENT_ID_PROD_US_EAST_1=$(echo "$MULTI_PROD_CLIENT_MAPPING" | jq -r '."armo_prod_us_east_1".client_id // empty')
+              SECRET_KEY_PROD_US_EAST_1=$(echo "$MULTI_PROD_CLIENT_MAPPING" | jq -r '."armo_prod_us_east_1".secret_key // empty')
+
+              # Mask secrets in logs
+              [[ -n "$SECRET_KEY_PROD_US_EAST_1" ]] && echo "::add-mask::$SECRET_KEY_PROD_US_EAST_1"
+
+              # Set outputs for downstream steps
+              echo "CLIENT_ID_PROD_US_EAST_1=$CLIENT_ID_PROD_US_EAST_1" >> $GITHUB_OUTPUT
+              echo "SECRET_KEY_PROD_US_EAST_1=$SECRET_KEY_PROD_US_EAST_1" >> $GITHUB_OUTPUT
+            fi
+          fi
+
       - name: run-tests
         env:
           CUSTOMER: ${{ secrets.CUSTOMER }}
@@ -146,9 +179,9 @@ jobs:
 
           if [ "${{ inputs.CHARTS_NAME }}" = "rapid7-operator" ]; then
             BACKEND="armo-prod-us-east-1"
-            # Use Rapid7-specific credentials for rapid7-operator
-            export CLIENT_ID="${{ secrets.CLIENT_ID_RAPID7_PROD }}"
-            export SECRET_KEY="${{ secrets.SECRET_KEY_RAPID7_PROD }}"
+            # Use armo_prod_us_east_1 credentials for rapid7-operator
+            export CLIENT_ID="${{ steps.parse-multi-prod-client-mapping.outputs.CLIENT_ID_PROD_US_EAST_1 }}"
+            export SECRET_KEY="${{ steps.parse-multi-prod-client-mapping.outputs.SECRET_KEY_PROD_US_EAST_1 }}"
           else
             BACKEND="production"
             # Use default production credentials
