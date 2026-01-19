@@ -9,6 +9,7 @@ kubescape-operator:
     runtimeDetection: enable
     configurationScan: disable
     vulnerabilityScan: disable
+    seccompProfileBackend: crd
   imagePullSecret:
     server: quay.io
     username: armosec+armosec_ro
