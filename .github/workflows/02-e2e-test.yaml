@@ -28,6 +28,14 @@ jobs:
   dispatch-e2e-tests:
     runs-on: ubuntu-latest
     steps:
+      - name: Set dispatch info
+        id: dispatch-info
+        run: |
+          # Correlation ID WITHOUT attempt - so re-runs can find the original run
+          CORRELATION_ID="${GITHUB_REPOSITORY##*/}-${{ github.run_id }}"
+          echo "correlation_id=${CORRELATION_ID}" >> "$GITHUB_OUTPUT"
+          echo "Correlation ID: ${CORRELATION_ID}, Attempt: ${{ github.run_attempt }}"
+
       - name: Generate GitHub App token
         id: app-token
         uses: actions/create-github-app-token@v1
@@ -38,38 +46,149 @@ jobs:
           repositories: shared-workflows
 
       - name: Dispatch Helm E2E to private repo
+        if: ${{ github.run_attempt == 1 }}
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
-          DISPATCH_REPO: armosec/shared-workflows
-          DISPATCH_EVENT: e2e-test-trigger
           ENVIRONMENT: ${{ inputs.CHARTS_NAME == 'rapid7-operator' && 'armo-prod-us-east-1' || 'production' }}
-          TESTS_GROUPS: HELM_CHARTS_E2E
-          SYSTESTS_BRANCH: ${{ inputs.TESTS_BRANCH }}
-          IN_CLUSTER_CHART_BRANCH: ${{ inputs.BRANCH }}
-          KS_BRANCH: ${{ inputs.KS_BRANCH }}
-          CHARTS_NAME: ${{ inputs.CHARTS_NAME }}
-          CHARTS_REPO: ${{ github.repository }}
+          TESTS_GROUPS: ${{ inputs.CHARTS_NAME == 'rapid7-operator' && 'HELM_CHARTS_E2E' || 'HELM_CHARTS_E2E_KUBESCAPE' }}
         run: |
-          payload=$(cat <<JSON
-          {
-            "event_type": "${DISPATCH_EVENT}",
-            "client_payload": {
-              "github_repository": "${GITHUB_REPOSITORY}",
-              "environment": "${ENVIRONMENT}",
-              "tests_groups": "${TESTS_GROUPS}",
-              "systests_branch": "${SYSTESTS_BRANCH}",
-              "in_cluster_chart_branch": "${IN_CLUSTER_CHART_BRANCH}",
-              "ks_branch": "${KS_BRANCH}",
-              "charts_name": "${CHARTS_NAME}",
-              "charts_repo": "${CHARTS_REPO}"
-            }
-          }
-          JSON
-          )
+          gh api "repos/armosec/shared-workflows/dispatches" \
+            -f event_type="e2e-test-trigger" \
+            -f "client_payload[correlation_id]=${{ steps.dispatch-info.outputs.correlation_id }}" \
+            -f "client_payload[github_repository]=${GITHUB_REPOSITORY}" \
+            -f "client_payload[environment]=${ENVIRONMENT}" \
+            -f "client_payload[tests_groups]=${TESTS_GROUPS}" \
+            -f "client_payload[systests_branch]=${{ inputs.TESTS_BRANCH }}" \
+            -f "client_payload[in_cluster_chart_branch]=${{ inputs.BRANCH }}" \
+            -f "client_payload[ks_branch]=${{ inputs.KS_BRANCH }}" \
+            -f "client_payload[charts_name]=${{ inputs.CHARTS_NAME }}" \
+            -f "client_payload[charts_repo]=${GITHUB_REPOSITORY}"
 
-          curl -L -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${DISPATCH_REPO}/dispatches" \
-            -d "$payload"
+      - name: Find E2E workflow run
+        id: find-run
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          CORRELATION_ID: ${{ steps.dispatch-info.outputs.correlation_id }}
+        run: |
+          for i in {1..15}; do
+            run_id=$(gh api "repos/armosec/shared-workflows/actions/runs?event=repository_dispatch&per_page=30" \
+              --jq '.workflow_runs | map(select(.name | contains("'"$CORRELATION_ID"'"))) | first | .id // empty')
+            
+            if [ -n "$run_id" ]; then
+              echo "run_id=${run_id}" >> "$GITHUB_OUTPUT"
+              gh api "repos/armosec/shared-workflows/actions/runs/${run_id}" --jq '"url=" + .html_url' >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Attempt $i: waiting for run..."
+            sleep $((i < 5 ? 10 : 30))
+          done
+          echo "::error::Could not find workflow run"
+          exit 1
+
+      - name: Re-run failed jobs in private repo
+        id: rerun
+        if: ${{ github.run_attempt > 1 }}
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          RUN_ID: ${{ steps.find-run.outputs.run_id }}
+        run: |
+          conclusion=$(gh api "repos/armosec/shared-workflows/actions/runs/${RUN_ID}" --jq '.conclusion')
+          echo "Previous conclusion: $conclusion"
+          
+          if [ "$conclusion" = "success" ]; then
+            echo "Previous run passed. Nothing to re-run."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          
+          # Full rerun if cancelled, partial if failed
+          if [ "$conclusion" = "cancelled" ]; then
+            echo "Run was cancelled - triggering full re-run"
+            gh api --method POST "repos/armosec/shared-workflows/actions/runs/${RUN_ID}/rerun"
+          else
+            echo "Re-running failed jobs only"
+            gh api --method POST "repos/armosec/shared-workflows/actions/runs/${RUN_ID}/rerun-failed-jobs"
+          fi
+          
+          # Wait for status to flip from 'completed'
+          for i in {1..30}; do
+            [ "$(gh api "repos/armosec/shared-workflows/actions/runs/${RUN_ID}" --jq '.status')" != "completed" ] && break
+            sleep 2
+          done
+
+      - name: Wait for E2E tests to complete
+        if: ${{ steps.rerun.outputs.skip != 'true' }}
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          RUN_ID: ${{ steps.find-run.outputs.run_id }}
+          URL: ${{ steps.find-run.outputs.url }}
+        run: |
+          echo "Monitoring: ${URL}"
+          
+          for i in {1..60}; do  # 60 iterations × 60s = 1 hour max
+            read status conclusion < <(gh api "repos/armosec/shared-workflows/actions/runs/${RUN_ID}" \
+              --jq '[.status, .conclusion // "null"] | @tsv')
+            
+            echo "Status: ${status} | Conclusion: ${conclusion}"
+            
+            if [ "$status" = "completed" ]; then
+              if [ "$conclusion" = "success" ]; then
+                echo "E2E tests passed!"
+                exit 0
+              fi
+              
+              echo "::error::E2E tests failed: ${conclusion}"
+              echo ""
+              
+              # Get failed job IDs to a file first
+              gh api "repos/armosec/shared-workflows/actions/runs/${RUN_ID}/jobs" \
+                --jq '.jobs[] | select(.conclusion == "failure") | [.id, .name, (.steps[] | select(.conclusion == "failure") | .name)] | @tsv' > /tmp/failed_jobs.txt
+              
+              # Process each failed job
+              while IFS=$'\t' read -r job_id job_name step_name; do
+                # Extract test name: "run-helm-e2e / ST (relevancy_python)" → "relevancy_python"
+                test_name=$(echo "$job_name" | sed 's/.*(\(.*\))/\1/')
+                
+                echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+                echo "${job_name}"
+                echo "   Step: ${step_name}"
+                echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+                
+                # Fetch logs to temp file
+                gh api "repos/armosec/shared-workflows/actions/jobs/${job_id}/logs" 2>/dev/null > /tmp/job_logs.txt
+                
+                # Show summary in console
+                grep -E "(ERROR|FAILURE)" /tmp/job_logs.txt | tail -10
+                echo ""
+                
+                # Save to separate file per test
+                log_file="failed_${test_name}.txt"
+                echo "════════════════════════════════════════" > "$log_file"
+                echo "${job_name}" >> "$log_file"
+                echo "   Step: ${step_name}" >> "$log_file"
+                echo "════════════════════════════════════════" >> "$log_file"
+                last_endgroup=$(grep -n "##\[endgroup\]" /tmp/job_logs.txt | tail -1 | cut -d: -f1)
+                if [ -n "$last_endgroup" ]; then
+                  tail -n +$((last_endgroup + 1)) /tmp/job_logs.txt >> "$log_file"
+                else
+                  tail -500 /tmp/job_logs.txt >> "$log_file"
+                fi
+              done < /tmp/failed_jobs.txt
+              
+              echo "View full logs: ${URL}"
+              exit 1
+            fi
+            
+            sleep 60
+          done
+          
+          echo "::error::Timeout waiting for tests"
+          exit 1
+
+      - name: Upload failed step logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: failed-e2e-logs-attempt-${{ github.run_attempt }}
+          path: failed_*.txt
+          retention-days: 7
