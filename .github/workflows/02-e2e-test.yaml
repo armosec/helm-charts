@@ -50,7 +50,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           ENVIRONMENT: ${{ inputs.CHARTS_NAME == 'rapid7-operator' && 'armo-prod-us-east-1' || 'production' }}
-          TESTS_GROUPS: ${{ inputs.CHARTS_NAME == 'rapid7-operator' && 'HELM_CHARTS_E2E' || 'HELM_CHARTS_E2E_KUBESCAPE' }}
+          TESTS_GROUPS: ${{ inputs.CHARTS_NAME == 'rapid7-operator' && 'R7-tests' || 'HELM_CHARTS_E2E' }}
         run: |
           gh api "repos/armosec/shared-workflows/dispatches" \
             -f event_type="e2e-test-trigger" \
