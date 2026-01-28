@@ -9,6 +9,7 @@ kubescape-operator:
     runtimeDetection: enable
     configurationScan: disable
     vulnerabilityScan: disable
+    seccompProfileBackend: crd
   imagePullSecret:
     server: quay.io
     username: armosec+armosec_ro
@@ -22,7 +23,7 @@ kubescape-operator:
         value: true
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.185
+      tag: v0.0.190
     resources:
       limits:
         memory: 1000Mi
