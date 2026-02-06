@@ -5,7 +5,8 @@ on:
     inputs:
       CHARTS_NAME:
         type: choice
-        description: What chart do you want to release?
+        description: What chart do you want to release? Leave empty to release all charts
+        required: false
         options:
           - kubescape-operator
           - rapid7-operator
@@ -37,8 +38,8 @@ on:
         required: true
         type: string
       CHARTS_NAME:
-        description: "What chart do you want to release?"
-        required: true
+        description: "What chart do you want to release? Leave empty to release all charts"
+        required: false
         type: string
       HELM_E2E_TEST:
         description: "Whether to run Helm E2E tests when calling this workflow"
@@ -58,7 +59,7 @@ on:
 
 jobs:
   e2e-test:
-    if: ${{ inputs.HELM_E2E_TEST }}
+    if: ${{ inputs.HELM_E2E_TEST && inputs.CHARTS_NAME }}
     with:
       BRANCH: ${{ inputs.RELEASE_BRANCH || 'main' }}
       TESTS_BRANCH: ${{ inputs.TESTS_BRANCH }}
@@ -69,7 +70,7 @@ jobs:
 
   helm-chart-release:
     needs: e2e-test
-    if: ${{ !cancelled() && (needs.e2e-test.result == 'success' || needs.e2e-test.result == 'skipped') }}
+    if: ${{ !cancelled() && (needs.e2e-test.result == 'success' || needs.e2e-test.result == 'skipped' || !inputs.HELM_E2E_TEST || !inputs.CHARTS_NAME) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -88,21 +89,11 @@ jobs:
 
       - name: Install Helm
         uses: azure/setup-helm@v3.5
-        # with:
-        #   version: v3.4.0
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.7.0
         with:
-          charts_dir: charts/${{ inputs.CHARTS_NAME }}
+          charts_dir: charts
         env:
           GITHUB_TOKEN: "${{ github.token }}"
           CR_TOKEN: "${{ github.token }}"
-
-      - name: Mark as pre-release
-        if: inputs.RELEASE_BRANCH && inputs.RELEASE_BRANCH != 'main'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          version=$(grep '^version:' charts/${{ inputs.CHARTS_NAME }}/Chart.yaml | awk '{print $2}')
-          gh release edit ${{ steps.chart-info.outputs.chart_name }}-$version --prerelease
