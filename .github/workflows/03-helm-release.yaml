@@ -95,7 +95,7 @@ jobs:
         with:
           charts_dir: charts
         env:
-          CR_TOKEN: "${{ github.token }}"
+          GITHUB_TOKEN: "${{ github.token }}"
 
       - name: Mark as pre-release
         if: inputs.RELEASE_BRANCH && inputs.RELEASE_BRANCH != 'main'
