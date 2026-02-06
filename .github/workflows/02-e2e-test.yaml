@@ -23,6 +23,27 @@ on:
         options:
           - kubescape-operator
           - rapid7-operator
+  workflow_call:
+    inputs:
+      BRANCH:
+        description: 'helm chart branch name'
+        required: false
+        default: 'main'
+        type: string
+      TESTS_BRANCH:
+        description: 'tests branch name'
+        required: false
+        default: 'master'
+        type: string
+      KS_BRANCH:
+        required: false
+        default: 'release'
+        type: string
+        description: 'kubescape branch name'
+      CHARTS_NAME:
+        required: true
+        type: string
+        description: 'What chart do you want to test?'
 
 jobs:
   dispatch-e2e-tests:
