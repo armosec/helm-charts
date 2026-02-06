@@ -24,6 +24,11 @@ on:
         required: false
         default: "main"
         type: string
+      COMMIT_REF:
+        description: "commit reference to release from"
+        required: false
+        default: "main"
+        type: string
 
   workflow_call:
     inputs:
@@ -70,7 +75,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: ${{ inputs.RELEASE_BRANCH || inputs.COMMIT_REF }}
+          ref: ${{ inputs.RELEASE_BRANCH || inputs.COMMIT_REF || 'main' }}
           fetch-depth: 0
 
       - name: git status
@@ -90,6 +95,13 @@ jobs:
         run: |
           find charts -mindepth 1 -maxdepth 1 -type d -not -name "${{ inputs.CHARTS_NAME }}" -exec rm -rf {} +
 
+      - name: Get chart name
+        id: chart-info
+        run: |
+          chart_name=$(grep '^name:' charts/${{ inputs.CHARTS_NAME }}/Chart.yaml | awk '{print $2}')
+          echo "chart_name=${chart_name}" >> "$GITHUB_OUTPUT"
+          echo "Chart name: ${chart_name}"
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.7.0
         with:
@@ -102,6 +114,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          chart_name=$(grep '^name:' charts/${{ inputs.CHARTS_NAME }}/Chart.yaml | awk '{print $2}')
           version=$(grep '^version:' charts/${{ inputs.CHARTS_NAME }}/Chart.yaml | awk '{print $2}')
-          gh release edit $chart_name-$version --prerelease
+          gh release edit ${{ steps.chart-info.outputs.chart_name }}-$version --prerelease
