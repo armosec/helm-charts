@@ -107,6 +107,7 @@ jobs:
         with:
           charts_dir: charts
         env:
+          GITHUB_TOKEN: "${{ github.token }}"
           CR_TOKEN: "${{ github.token }}"
 
       - name: Mark as pre-release
