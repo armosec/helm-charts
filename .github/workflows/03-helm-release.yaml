@@ -45,6 +45,11 @@ on:
         required: false
         default: "master"
         type: string
+      RELEASE_BRANCH:
+        description: "branch to release from"
+        required: false
+        default: "main"
+        type: string
 
 jobs:
   e2e-test:
@@ -90,12 +95,12 @@ jobs:
         with:
           charts_dir: charts
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_TOKEN: "${{ github.token }}"
 
       - name: Mark as pre-release
         if: inputs.RELEASE_BRANCH && inputs.RELEASE_BRANCH != 'main'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           chart_name=$(grep '^name:' charts/${{ inputs.CHARTS_NAME }}/Chart.yaml | awk '{print $2}')
           version=$(grep '^version:' charts/${{ inputs.CHARTS_NAME }}/Chart.yaml | awk '{print $2}')
