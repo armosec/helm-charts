@@ -8,6 +8,7 @@ on:
         description: What chart do you want to release? Leave empty to release all charts
         required: false
         options:
+          - ''
           - kubescape-operator
           - rapid7-operator
       HELM_E2E_TEST:
