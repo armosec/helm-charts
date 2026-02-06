@@ -26,3 +26,6 @@ kubescape-operator:
     rulesUpdateConfig:
       enabled: true
       interval: 5m
+  synchronizer:
+    image:
+      tag: v0.0.130
