@@ -18,7 +18,7 @@ kubescape-operator:
         value: true
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.204
+      tag: v0.0.215
     resources:
       limits:
         memory: 1000Mi
@@ -26,6 +26,3 @@ kubescape-operator:
     rulesUpdateConfig:
       enabled: true
       interval: 5m
-  synchronizer:
-    image:
-      tag: v0.0.130
