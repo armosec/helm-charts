@@ -72,7 +72,7 @@ jobs:
   helm-chart-release:
     needs: e2e-test
     if: ${{ !cancelled() && (needs.e2e-test.result == 'success' || needs.e2e-test.result == 'skipped' || !inputs.HELM_E2E_TEST || !inputs.CHARTS_NAME) }}
-    runs-on: ubuntu-latest
+    runs-on: armo-main-small
     steps:
       - name: Checkout
         uses: actions/checkout@v3
