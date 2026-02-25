@@ -47,7 +47,7 @@ on:
 
 jobs:
   dispatch-e2e-tests:
-    runs-on: armo-main-small
+    runs-on: ubuntu-latest
     steps:
       - name: Set dispatch info
         id: dispatch-info
