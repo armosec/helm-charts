@@ -16,6 +16,20 @@ entries:
         - https://github.com/armosec/helm-charts/releases/download/armosec-kubescape-operator-1.30.5%2Bprivate.1/armosec-kubescape-operator-1.30.5%2Bprivate.1.tgz
       version: 1.30.5+private.1
     - apiVersion: v2
+      appVersion: 1.30.5+private.2
+      created: "2026-03-02T11:24:35Z"
+      dependencies:
+        - name: kubescape-operator
+          repository: https://kubescape.github.io/helm-charts/
+          version: 1.30.5
+      description: Kubescape is an E2E Kubernetes cluster security platform
+      digest: 7af5f0a1a474464809781d4615b496fea649385dcdc31b608fcef7000eccb6a0
+      name: armosec-kubescape-operator
+      type: application
+      urls:
+        - https://github.com/armosec/helm-charts/releases/download/armosec-kubescape-operator-1.30.5%2Bprivate.2/armosec-kubescape-operator-1.30.5%2Bprivate.2.tgz
+      version: 1.30.5+private.2
+    - apiVersion: v2
       appVersion: 1.30.4+private.2
       created: "2026-02-12T19:58:55Z"
       dependencies:
@@ -213,6 +227,20 @@ entries:
         - https://github.com/armosec/helm-charts/releases/download/rapid7-operator-1.30.4%2Bprivate.2/rapid7-operator-1.30.4%2Bprivate.2.tgz
       version: 1.30.4+private.2
     - apiVersion: v2
+      appVersion: 1.30.5+private.2
+      created: "2026-03-02T11:24:35Z"
+      dependencies:
+        - name: kubescape-operator
+          repository: https://kubescape.github.io/helm-charts/
+          version: 1.30.5
+      description: Rapid7 Operator for Kubernetes security
+      digest: 80c356b98eb04d900fdbf82b5419d7d769d339566b62a5e359f8877507ab588f
+      name: rapid7-operator
+      type: application
+      urls:
+        - https://github.com/armosec/helm-charts/releases/download/rapid7-operator-1.30.5%2Bprivate.2/rapid7-operator-1.30.5%2Bprivate.2.tgz
+      version: 1.30.5+private.2
+    - apiVersion: v2
       appVersion: 1.30.4+private.1
       created: "2026-02-12T17:24:57Z"
       dependencies:
@@ -310,4 +338,4 @@ entries:
       urls:
         - https://github.com/armosec/helm-charts/releases/download/rapid7-operator-1.30.0%2Bprivate.1/rapid7-operator-1.30.0%2Bprivate.1.tgz
       version: 1.30.0+private.1
-generated: "2026-02-26T00:00:00Z"
+generated: "2026-03-02T11:24:35Z"
