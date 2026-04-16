@@ -22,6 +22,9 @@ kubescape-operator:
     resources:
       limits:
         memory: 1000Mi
+    sbomScanner:
+      image:
+        repository: quay.io/armosec/node-agent
   operator:
     rulesUpdateConfig:
       enabled: true
