@@ -33,3 +33,19 @@ tests:
           scanSchedule: "1 2 3 4 5"
         kubevulnScheduler:
           scanSchedule: "1 2 3 4 5"
+
+  - it: sbom scanner sidecar uses armosec node-agent image
+    asserts:
+      - matchSnapshot: { }
+    capabilities:
+      apiVersions:
+        - batch/v1
+    set:
+      kubescape-operator:
+        account: 9e6c0c2c-6bd0-4919-815b-55030de7c9a0
+        accessKey: f304d73b-d43c-412b-82ea-e4c859493ce6
+        unittest: true
+        clusterName: kind-kind
+        nodeAgent:
+          sbomScanner:
+            enabled: true
