@@ -1100,7 +1100,7 @@ minimal capabilities:
                   value: ""
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
-              image: quay.io/kubescape/kubevuln:v0.3.132
+              image: quay.io/kubescape/kubevuln:v0.3.137
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -3637,7 +3637,7 @@ sbom scanner sidecar uses armosec node-agent image:
                 - configMap:
                     name: kubescape-scheduler
                   name: kubescape-scheduler
-      schedule: 16 18 * * *
+      schedule: 48 16 * * *
       successfulJobsHistoryLimit: 3
   10: |
     apiVersion: rbac.authorization.k8s.io/v1
@@ -4321,7 +4321,7 @@ sbom scanner sidecar uses armosec node-agent image:
                 - configMap:
                     name: kubevuln-scheduler
                   name: kubevuln-scheduler
-      schedule: 3 14 * * *
+      schedule: 53 2 * * *
       successfulJobsHistoryLimit: 3
   20: |
     apiVersion: rbac.authorization.k8s.io/v1
@@ -4462,7 +4462,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: ""
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
-              image: quay.io/kubescape/kubevuln:v0.3.132
+              image: quay.io/kubescape/kubevuln:v0.3.137
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:

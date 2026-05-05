@@ -14,6 +14,9 @@ kubescape-operator:
     server: quay.io
     username: armosec+armosec_ro
   imagePullSecrets: armosec-readonly
+  kubevuln:
+    image:
+      tag: v0.3.137
   nodeAgent:
     config:
       hostMalwareSensor: disable
