@@ -14,6 +14,9 @@ kubescape-operator:
     server: quay.io
     username: armosec+armosec_ro
   imagePullSecrets: armosec-readonly
+  kubevuln:
+    sbomScanner:
+      enabled: true
   nodeAgent:
     config:
       hostMalwareSensor: disable
@@ -23,10 +26,14 @@ kubescape-operator:
         value: true
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.264
+      tag: v0.0.265
     resources:
       limits:
         memory: 1000Mi
+    sbomScanner:
+      enabled: true
+      image:
+        repository: quay.io/armosec/node-agent
   operator:
     rulesUpdateConfig:
       enabled: true

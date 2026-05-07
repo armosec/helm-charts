@@ -98,7 +98,7 @@ minimal capabilities:
       capabilities: |
         {
           "capabilities":{"admissionController":"enable","autoUpgrading":"disable","configurationScan":"enable","continuousScan":"disable","httpDetection":"enable","kubescapeOffline":"disable","malwareDetection":"disable","manageWorkloads":"enable","networkEventsStreaming":"enable","networkPolicyService":"enable","nodeProfileService":"enable","nodeSbomGeneration":"enable","nodeScan":"enable","operator":"enable","prometheusExporter":"disable","relevancy":"enable","riskAcceptance":"disable","runtimeDetection":"enable","runtimeObservability":"enable","scanEmbeddedSBOMs":"disable","seccompProfileBackend":"crd","seccompProfileService":"enable","syncSBOM":"disable","testing":{"nodeAgentMultiplication":{"enabled":false,"replicas":5}},"vexGeneration":"disable","vulnerabilityScan":"enable"},
-          "components":{"autoUpdater":{"enabled":false},"clamAV":{"enabled":false},"cloudSecret":{"create":true,"name":"cloud-secret"},"customCaCertificates":{"name":"custom-ca-certificates"},"kubescape":{"enabled":true},"kubescapeScheduler":{"enabled":true},"kubevuln":{"enabled":true},"kubevulnScheduler":{"enabled":true},"nodeAgent":{"enabled":true},"operator":{"enabled":true},"otelCollector":{"enabled":false},"prometheusExporter":{"enabled":false},"sbomScanner":{"enabled":false},"serviceDiscovery":{"enabled":false},"storage":{"enabled":true},"synchronizer":{"enabled":false}},
+          "components":{"autoUpdater":{"enabled":false},"clamAV":{"enabled":false},"cloudSecret":{"create":true,"name":"cloud-secret"},"customCaCertificates":{"name":"custom-ca-certificates"},"kubescape":{"enabled":true},"kubescapeScheduler":{"enabled":true},"kubevuln":{"enabled":true},"kubevulnScheduler":{"enabled":true},"nodeAgent":{"enabled":true},"operator":{"enabled":true},"otelCollector":{"enabled":false},"prometheusExporter":{"enabled":false},"sbomScanner":{"enabled":true},"serviceDiscovery":{"enabled":false},"storage":{"enabled":true},"synchronizer":{"enabled":false}},
           "configurations":{"persistence":"enable","priorityClass":{"daemonset":100000100,"enabled":true},"prometheusAnnotations":"disable"} ,
           "serviceScanConfig" :{"enabled":false,"interval":"1h"}
         }
@@ -1091,6 +1091,10 @@ minimal capabilities:
                   value: zap
                 - name: PRINT_POST_JSON
                   value: ""
+                - name: SBOM_SCANNER_SOCKET
+                  value: /sbom-comm/scanner.sock
+                - name: SCANNER_MEMORY_LIMIT
+                  value: 5Gi
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
               image: quay.io/kubescape/kubevuln:v0.3.137
@@ -1136,6 +1140,38 @@ minimal capabilities:
                   subPath: clusterData.json
                 - mountPath: /home/nonroot/.cache/grype
                   name: grype-db
+                - mountPath: /sbom-comm
+                  name: sbom-comm
+            - command:
+                - /usr/bin/sbom-scanner
+              env:
+                - name: GOMEMLIMIT
+                  value: 4096MiB
+                - name: SOCKET_PATH
+                  value: /sbom-comm/scanner.sock
+                - name: KS_LOGGER_LEVEL
+                  value: info
+                - name: KS_LOGGER_NAME
+                  value: sbom-scanner
+              image: quay.io/kubescape/kubevuln:v0.3.137
+              imagePullPolicy: IfNotPresent
+              name: sbom-scanner
+              resources:
+                limits:
+                  cpu: 1000m
+                  memory: 5Gi
+                requests:
+                  cpu: 100m
+                  memory: 512Mi
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+              volumeMounts:
+                - mountPath: /sbom-comm
+                  name: sbom-comm
+                - mountPath: /tmp
+                  name: tmp-dir
           imagePullSecrets:
             - name: armosec-readonly
           nodeSelector:
@@ -1163,6 +1199,8 @@ minimal capabilities:
               name: ks-cloud-config
             - emptyDir: {}
               name: grype-db
+            - emptyDir: {}
+              name: sbom-comm
   22: |
     apiVersion: v1
     kind: Service
@@ -1878,6 +1916,39 @@ minimal capabilities:
                           - linux
           automountServiceAccountToken: true
           containers:
+            - command:
+                - /usr/bin/sbom-scanner
+              env:
+                - name: GOMEMLIMIT
+                  value: 3276MiB
+                - name: SOCKET_PATH
+                  value: /sbom-comm/scanner.sock
+                - name: HOST_ROOT
+                  value: /host
+              image: quay.io/armosec/node-agent:v0.0.265
+              imagePullPolicy: IfNotPresent
+              name: sbom-scanner
+              resources:
+                limits:
+                  cpu: 1000m
+                  memory: 4Gi
+                requests:
+                  cpu: 50m
+                  memory: 256Mi
+              securityContext:
+                capabilities:
+                  drop:
+                    - ALL
+                readOnlyRootFilesystem: true
+                runAsUser: 0
+              volumeMounts:
+                - mountPath: /sbom-comm
+                  name: sbom-comm
+                - mountPath: /host
+                  name: host
+                  readOnly: true
+                - mountPath: /tmp
+                  name: sbom-scanner-tmp
             - env:
                 - name: GOMEMLIMIT
                   value: 800MiB
@@ -1887,6 +1958,10 @@ minimal capabilities:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
+                - name: SBOM_SCANNER_SOCKET
+                  value: /sbom-comm/scanner.sock
+                - name: SCANNER_MEMORY_LIMIT
+                  value: 4Gi
                 - name: NODE_NAME
                   valueFrom:
                     fieldRef:
@@ -1902,10 +1977,10 @@ minimal capabilities:
                 - name: KUBELET_ROOT
                   value: /var/lib/kubelet
                 - name: AGENT_VERSION
-                  value: v0.0.264
+                  value: v0.0.265
                 - name: IGNORERULEBINDINGS
                   value: "true"
-              image: quay.io/armosec/node-agent:v0.0.264
+              image: quay.io/armosec/node-agent:v0.0.265
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -1976,6 +2051,8 @@ minimal capabilities:
                   readOnly: true
                 - mountPath: /clamav
                   name: clamrun
+                - mountPath: /sbom-comm
+                  name: sbom-comm
                 - mountPath: /etc/credentials
                   name: cloud-secret
                   readOnly: true
@@ -2044,6 +2121,12 @@ minimal capabilities:
                     path: freshclam.conf
                 name: clamav
               name: etc
+            - emptyDir:
+                medium: Memory
+                sizeLimit: 10Mi
+              name: sbom-comm
+            - emptyDir: {}
+              name: sbom-scanner-tmp
             - name: cloud-secret
               secret:
                 secretName: cloud-secret
@@ -2402,7 +2485,7 @@ minimal capabilities:
             },
             "minResources": {
               "cpu": "100m",
-              "memory": "600Mi"
+              "memory": "180Mi"
             },
             "maxResources": {
               "cpu": "2000m",
@@ -2466,11 +2549,11 @@ minimal capabilities:
       template:
         metadata:
           annotations:
-            checksum/capabilities-config: 40946e51795a48b49794bab914922b1605c45c9022723a90113c19596c230ca8
+            checksum/capabilities-config: 00dfb62f15cba71b88f8b04986ae18e79e96aa619c2b53ed8e8a0d4dfcaf33e0
             checksum/cloud-config: 9e73128486147557ac429152a572f5a7d3a34906835991129709219495e05b1a
             checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424
             checksum/matching-rules-config: c81857b415602f6b161db3199a16461c5acd8ba44ec7572189441f4f294a3614
-            checksum/operator-config: b8deed11cd233b4b44ef6297b2fd6082dc287d2157907ae8985e2363c845e254
+            checksum/operator-config: a79866efb28a4893f66e06939cbd6d878dce419652bc47a0a4196e5f2f6c8f83
           labels:
             app: operator
             app.kubernetes.io/component: operator
@@ -4846,6 +4929,10 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: zap
                 - name: PRINT_POST_JSON
                   value: ""
+                - name: SBOM_SCANNER_SOCKET
+                  value: /sbom-comm/scanner.sock
+                - name: SCANNER_MEMORY_LIMIT
+                  value: 5Gi
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
               image: quay.io/kubescape/kubevuln:v0.3.137
@@ -4891,6 +4978,38 @@ sbom scanner sidecar uses armosec node-agent image:
                   subPath: clusterData.json
                 - mountPath: /home/nonroot/.cache/grype
                   name: grype-db
+                - mountPath: /sbom-comm
+                  name: sbom-comm
+            - command:
+                - /usr/bin/sbom-scanner
+              env:
+                - name: GOMEMLIMIT
+                  value: 4096MiB
+                - name: SOCKET_PATH
+                  value: /sbom-comm/scanner.sock
+                - name: KS_LOGGER_LEVEL
+                  value: info
+                - name: KS_LOGGER_NAME
+                  value: sbom-scanner
+              image: quay.io/kubescape/kubevuln:v0.3.137
+              imagePullPolicy: IfNotPresent
+              name: sbom-scanner
+              resources:
+                limits:
+                  cpu: 1000m
+                  memory: 5Gi
+                requests:
+                  cpu: 100m
+                  memory: 512Mi
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+              volumeMounts:
+                - mountPath: /sbom-comm
+                  name: sbom-comm
+                - mountPath: /tmp
+                  name: tmp-dir
           imagePullSecrets:
             - name: armosec-readonly
           nodeSelector:
@@ -4918,6 +5037,8 @@ sbom scanner sidecar uses armosec node-agent image:
               name: ks-cloud-config
             - emptyDir: {}
               name: grype-db
+            - emptyDir: {}
+              name: sbom-comm
   22: |
     apiVersion: v1
     kind: Service
@@ -5642,7 +5763,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: /sbom-comm/scanner.sock
                 - name: HOST_ROOT
                   value: /host
-              image: quay.io/armosec/node-agent:v0.0.264
+              image: quay.io/armosec/node-agent:v0.0.265
               imagePullPolicy: IfNotPresent
               name: sbom-scanner
               resources:
@@ -5694,10 +5815,10 @@ sbom scanner sidecar uses armosec node-agent image:
                 - name: KUBELET_ROOT
                   value: /var/lib/kubelet
                 - name: AGENT_VERSION
-                  value: v0.0.264
+                  value: v0.0.265
                 - name: IGNORERULEBINDINGS
                   value: "true"
-              image: quay.io/armosec/node-agent:v0.0.264
+              image: quay.io/armosec/node-agent:v0.0.265
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
