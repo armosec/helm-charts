@@ -1442,7 +1442,7 @@ minimal capabilities:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/operator:v0.2.141
+              image: quay.io/kubescape/operator:v0.2.142
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:

@@ -35,6 +35,8 @@ kubescape-operator:
       image:
         repository: quay.io/armosec/node-agent
   operator:
+    image:
+      tag: v0.2.142
     rulesUpdateConfig:
       enabled: true
       interval: 5m
