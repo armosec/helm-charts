@@ -841,10 +841,10 @@ minimal capabilities:
                 - name: KUBELET_ROOT
                   value: /var/lib/kubelet
                 - name: AGENT_VERSION
-                  value: v0.0.267
+                  value: v0.0.270
                 - name: IGNORERULEBINDINGS
                   value: "true"
-              image: quay.io/armosec/node-agent:v0.0.267
+              image: quay.io/armosec/node-agent:v0.0.270
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
