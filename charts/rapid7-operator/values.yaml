@@ -18,6 +18,8 @@ kubescape-operator:
     sbomScanner:
       enabled: true
   nodeAgent:
+    autoscaler:
+      enabled: true
     config:
       hostMalwareSensor: disable
       hostNetworkSensor: disable
