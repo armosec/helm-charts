@@ -9,6 +9,15 @@ kubescape-operator:
     server: quay.io
     username: armosec+armosec_ro
   imagePullSecrets: armosec-readonly
+  hostScannerCleanup:
+    image:
+      repository: quay.io/kubescape/kubectl
+      tag: 1.36.1
+      pullPolicy: IfNotPresent
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
   kubevuln:
     image:
       tag: v0.3.142
@@ -42,12 +51,3 @@ kubescape-operator:
   synchronizer:
     image:
       tag: v0.0.147
-  hostScannerCleanup:
-    image:
-      repository: quay.io/kubescape/kubectl
-      tag: 1.30.3
-      pullPolicy: IfNotPresent
-    nodeSelector: {}
-    affinity: {}
-    tolerations: []
-    priorityClassName: ""
