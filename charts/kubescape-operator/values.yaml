@@ -10,6 +10,8 @@ kubescape-operator:
     username: armosec+armosec_ro
   imagePullSecrets: armosec-readonly
   kubevuln:
+    image:
+      tag: v0.3.142
     sbomScanner:
       enabled: true
   nodeAgent:
@@ -23,7 +25,7 @@ kubescape-operator:
         value: true
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.273
+      tag: v0.0.276
     resources:
       limits:
         memory: 1000Mi
@@ -37,3 +39,6 @@ kubescape-operator:
     rulesUpdateConfig:
       enabled: true
       interval: 5m
+  synchronizer:
+    image:
+      tag: v0.0.147
