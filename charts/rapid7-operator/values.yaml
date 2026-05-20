@@ -30,7 +30,7 @@ kubescape-operator:
         value: true
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.276
+      tag: v0.0.277
     resources:
       limits:
         memory: 1000Mi

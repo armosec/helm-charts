@@ -1,7 +1,7 @@
 minimal capabilities:
   1: |+
     raw: |+
-      Thank you for installing kubescape-operator version 1.40.1.
+      Thank you for installing kubescape-operator version 1.40.2.
       View your cluster's configuration scanning schedule:
       > kubectl -n kubescape get cj kubescape-scheduler -o=jsonpath='{.metadata.name}{"\t"}{.spec.schedule}{"\n"}'
 
@@ -37,8 +37,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/infra: credentials
         tier: ks-control-plane
@@ -84,8 +84,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/infra: config
         kubescape.io/tier: core
@@ -112,8 +112,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -134,8 +134,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -155,8 +155,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-critical
@@ -175,8 +175,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -194,9 +194,9 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
+        app.kubernetes.io/version: 1.40.2
         armo.tier: kubescape-scan
-        helm.sh/chart: kubescape-operator-1.40.1
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -216,9 +216,9 @@ minimal capabilities:
                 app.kubernetes.io/managed-by: Helm
                 app.kubernetes.io/name: kubescape-operator
                 app.kubernetes.io/part-of: kubescape
-                app.kubernetes.io/version: 1.40.1
+                app.kubernetes.io/version: 1.40.2
                 armo.tier: kubescape-scan
-                helm.sh/chart: kubescape-operator-1.40.1
+                helm.sh/chart: kubescape-operator-1.40.2
                 kubescape.io/ignore: "true"
                 kubescape.io/tier: core
                 tier: ks-control-plane
@@ -281,8 +281,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -551,8 +551,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -576,8 +576,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -608,8 +608,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.1
-            helm.sh/chart: kubescape-operator-1.40.1
+            app.kubernetes.io/version: 1.40.2
+            helm.sh/chart: kubescape-operator-1.40.2
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -651,7 +651,7 @@ minimal capabilities:
                   value: "1500"
                 - name: KS_EXCLUDE_NAMESPACES
                   value: kubescape,kube-system,kube-public,kube-node-lease,kubeconfig,gmp-system,gmp-public
-              image: quay.io/kubescape/kubescape:v4.0.6
+              image: quay.io/kubescape/kubescape:v4.0.8
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -743,8 +743,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -762,8 +762,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -793,8 +793,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -819,8 +819,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -849,8 +849,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -868,8 +868,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -887,9 +887,9 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
+        app.kubernetes.io/version: 1.40.2
         armo.tier: vuln-scan
-        helm.sh/chart: kubescape-operator-1.40.1
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -909,9 +909,9 @@ minimal capabilities:
                 app.kubernetes.io/managed-by: Helm
                 app.kubernetes.io/name: kubescape-operator
                 app.kubernetes.io/part-of: kubescape
-                app.kubernetes.io/version: 1.40.1
+                app.kubernetes.io/version: 1.40.2
                 armo.tier: vuln-scan
-                helm.sh/chart: kubescape-operator-1.40.1
+                helm.sh/chart: kubescape-operator-1.40.2
                 kubescape.io/ignore: "true"
                 kubescape.io/tier: core
                 tier: ks-control-plane
@@ -974,8 +974,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -1015,8 +1015,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -1040,8 +1040,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -1069,8 +1069,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.1
-            helm.sh/chart: kubescape-operator-1.40.1
+            app.kubernetes.io/version: 1.40.2
+            helm.sh/chart: kubescape-operator-1.40.2
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -1213,8 +1213,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -1242,8 +1242,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -1629,8 +1629,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -1786,8 +1786,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -1853,8 +1853,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -1872,8 +1872,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -1900,8 +1900,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -1909,7 +1909,7 @@ minimal capabilities:
   39: |
     apiVersion: v1
     data:
-      daemonset-template.yaml: "apiVersion: apps/v1\nkind: DaemonSet\nmetadata:\n  name: \"{{ .Name }}\"\n  namespace: kubescape\n  annotations:\n    \n  labels:\n    helm.sh/chart: kubescape-operator-1.40.1\n    app.kubernetes.io/name: kubescape-operator\n    app.kubernetes.io/instance: RELEASE-NAME\n    app.kubernetes.io/component: node-agent\n    app.kubernetes.io/version: \"1.40.1\"\n    app.kubernetes.io/managed-by: Helm\n    app.kubernetes.io/part-of: kubescape\n    app: node-agent\n    tier: ks-control-plane\n    kubescape.io/ignore: \"true\"\n    kubescape.io/tier: \"core\"\n    kubescape.io/managed-by: operator-autoscaler\n    kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\nspec:\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: kubescape-operator\n      app.kubernetes.io/instance: RELEASE-NAME\n      app.kubernetes.io/component: node-agent\n      kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n  template:\n    metadata:\n      annotations:\n        \n        checksum/node-agent-config: 503090eccd2b923cd3dc19523e5401e48a0cd9d55a19ccc7d222c4b8aee441b5\n        checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424\n        checksum/cloud-config: 9e73128486147557ac429152a572f5a7d3a34906835991129709219495e05b1a\n        container.apparmor.security.beta.kubernetes.io/node-agent: unconfined\n      labels:\n        helm.sh/chart: kubescape-operator-1.40.1\n        app.kubernetes.io/name: kubescape-operator\n        app.kubernetes.io/instance: RELEASE-NAME\n        app.kubernetes.io/component: node-agent\n        app.kubernetes.io/version: \"1.40.1\"\n        app.kubernetes.io/managed-by: Helm\n        app.kubernetes.io/part-of: kubescape\n        app: node-agent\n        tier: ks-control-plane\n        kubescape.io/ignore: \"true\"\n        kubescape.io/tier: \"core\"\n        kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n    spec:\n      securityContext:\n      imagePullSecrets:\n      - name: armosec-readonly\n      priorityClassName: kubescape-critical\n      serviceAccountName: node-agent\n      automountServiceAccountToken: true\n      hostPID: true\n      volumes:\n      \n      - hostPath:\n          path: /\n        name: host\n      - hostPath:\n          path: /var/lib/kubelet\n        name: kubeletdir\n      - hostPath:\n          path: /run\n        name: run\n      - hostPath:\n          path: /var\n        name: var\n      - hostPath:\n          path: /sys/fs/cgroup\n        name: cgroup\n      - hostPath:\n          path: /lib/modules\n        name: modules\n      - hostPath:\n          path: /sys/fs/bpf\n        name: bpffs\n      - hostPath:\n          path: /sys/kernel/debug\n        name: debugfs\n      - hostPath:\n          path: /boot\n        name: boot\n      - emptyDir: null\n        name: data\n      - emptyDir: null\n        name: profiles\n      - hostPath:\n          path: /\n          type: Directory\n        name: host-filesystem\n      - emptyDir: {}\n        name: clamdb\n      - emptyDir: {}\n        name: clamrun\n      - configMap:\n          items:\n          - key: clamd.conf\n            path: clamd.conf\n          - key: freshclam.conf\n            path: freshclam.conf\n          name: clamav\n        name: etc\n      - emptyDir:\n          medium: Memory\n          sizeLimit: 10Mi\n        name: sbom-comm\n      - emptyDir: {}\n        name: sbom-scanner-tmp\n      - name: cloud-secret\n        secret:\n          secretName: cloud-secret\n      - name: ks-cloud-config\n        configMap:\n          name: ks-cloud-config\n          items:\n            - key: \"clusterData\"\n              path: \"clusterData.json\"\n      - name: config\n        configMap:\n          name: node-agent\n          items:\n            - key: \"config.json\"\n              path: \"config.json\"\n      containers:\n      \n      - name: sbom-scanner\n        image: \"quay.io/armosec/node-agent:v0.0.276\"\n        imagePullPolicy: IfNotPresent\n        command: \n          - /usr/bin/sbom-scanner\n        securityContext:\n          runAsUser: 0\n          readOnlyRootFilesystem: true\n          capabilities:\n            drop: [\"ALL\"]\n        resources:\n          limits:\n            cpu: 1000m\n            memory: 4Gi\n          requests:\n            cpu: 50m\n            memory: 256Mi\n        env:\n          - name: GOMEMLIMIT\n            value: \"3276MiB\"\n          - name: SOCKET_PATH\n            value: \"/sbom-comm/scanner.sock\"\n          - name: HOST_ROOT\n            value: \"/host\"\n        volumeMounts:\n          - mountPath: /sbom-comm\n            name: sbom-comm\n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /tmp\n            name: sbom-scanner-tmp\n      \n      - name: node-agent\n        image: \"quay.io/armosec/node-agent:v0.0.276\"\n        imagePullPolicy: IfNotPresent\n        livenessProbe:\n          httpGet:\n            path: /livez\n            port: 7888\n          periodSeconds: 3\n        readinessProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 3\n        startupProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 10\n          failureThreshold: 30\n          timeoutSeconds: 1\n        resources:\n          \n          requests:\n            cpu: \"{{ .Resources.Requests.CPU }}\"\n            memory: \"{{ .Resources.Requests.Memory }}\"\n          limits:\n            cpu: \"{{ .Resources.Limits.CPU }}\"\n            memory: \"{{ .Resources.Limits.Memory }}\"\n        env:\n          \n          - name: GOMEMLIMIT\n            value: \"{{ .GoMemLimit }}\"\n          - name: HOST_ROOT\n            value: \"/host\"\n          - name: KS_LOGGER_LEVEL\n            value: \"info\"\n          - name: KS_LOGGER_NAME\n            value: \"zap\"\n          - name: SBOM_SCANNER_SOCKET\n            value: \"/sbom-comm/scanner.sock\"\n          - name: SCANNER_MEMORY_LIMIT\n            value: \"4Gi\"\n          - name: NODE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: spec.nodeName\n          - name: POD_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.name\n          - name: NAMESPACE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.namespace\n          - name: KUBELET_ROOT\n            value: \"/var/lib/kubelet\"\n          - name: AGENT_VERSION\n            value: \"v0.0.276\"\n          - name: IGNORERULEBINDINGS\n            value: \"true\"\n        securityContext:\n          runAsUser: 0\n          privileged: false\n          capabilities:\n            add:\n              - SYS_ADMIN\n              - SYS_PTRACE\n              - NET_ADMIN\n              - SYSLOG\n              - SYS_RESOURCE\n              - IPC_LOCK\n              - NET_RAW\n          seLinuxOptions:\n            type: spc_t\n        volumeMounts:\n          \n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /var/lib/kubelet\n            name: kubeletdir\n          - mountPath: /run\n            name: run\n          - mountPath: /var\n            name: var\n            readOnly: true\n          - mountPath: /lib/modules\n            name: modules\n            readOnly: true\n          - mountPath: /sys/kernel/debug\n            name: debugfs\n          - mountPath: /sys/fs/cgroup\n            name: cgroup\n            readOnly: true\n          - mountPath: /sys/fs/bpf\n            name: bpffs\n          - mountPath: /data\n            name: data\n          - mountPath: /profiles\n            name: profiles\n          - mountPath: /boot\n            name: boot\n            readOnly: true\n          - mountPath: /clamav\n            name: clamrun\n          - name: sbom-comm\n            mountPath: /sbom-comm\n          - name: cloud-secret\n            mountPath: /etc/credentials\n            readOnly: true\n          - name: ks-cloud-config\n            mountPath: /etc/config/clusterData.json\n            readOnly: true\n            subPath: \"clusterData.json\"\n          - name: config\n            mountPath: /etc/config/config.json\n            readOnly: true\n            subPath: \"config.json\"\n      nodeSelector:\n        kubernetes.io/os: linux\n        node.kubernetes.io/instance-type: \"{{ .NodeGroupLabel }}\"\n      affinity:\n      \n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: kubernetes.io/os\n                operator: In\n                values:\n                - linux\n      tolerations:\n"
+      daemonset-template.yaml: "apiVersion: apps/v1\nkind: DaemonSet\nmetadata:\n  name: \"{{ .Name }}\"\n  namespace: kubescape\n  annotations:\n    \n  labels:\n    helm.sh/chart: kubescape-operator-1.40.2\n    app.kubernetes.io/name: kubescape-operator\n    app.kubernetes.io/instance: RELEASE-NAME\n    app.kubernetes.io/component: node-agent\n    app.kubernetes.io/version: \"1.40.2\"\n    app.kubernetes.io/managed-by: Helm\n    app.kubernetes.io/part-of: kubescape\n    app: node-agent\n    tier: ks-control-plane\n    kubescape.io/ignore: \"true\"\n    kubescape.io/tier: \"core\"\n    kubescape.io/managed-by: operator-autoscaler\n    kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\nspec:\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: kubescape-operator\n      app.kubernetes.io/instance: RELEASE-NAME\n      app.kubernetes.io/component: node-agent\n      kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n  template:\n    metadata:\n      annotations:\n        \n        checksum/node-agent-config: 503090eccd2b923cd3dc19523e5401e48a0cd9d55a19ccc7d222c4b8aee441b5\n        checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424\n        checksum/cloud-config: 9e73128486147557ac429152a572f5a7d3a34906835991129709219495e05b1a\n        container.apparmor.security.beta.kubernetes.io/node-agent: unconfined\n      labels:\n        helm.sh/chart: kubescape-operator-1.40.2\n        app.kubernetes.io/name: kubescape-operator\n        app.kubernetes.io/instance: RELEASE-NAME\n        app.kubernetes.io/component: node-agent\n        app.kubernetes.io/version: \"1.40.2\"\n        app.kubernetes.io/managed-by: Helm\n        app.kubernetes.io/part-of: kubescape\n        app: node-agent\n        tier: ks-control-plane\n        kubescape.io/ignore: \"true\"\n        kubescape.io/tier: \"core\"\n        kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n    spec:\n      securityContext:\n      imagePullSecrets:\n      - name: armosec-readonly\n      priorityClassName: kubescape-critical\n      serviceAccountName: node-agent\n      automountServiceAccountToken: true\n      hostPID: true\n      volumes:\n      \n      - hostPath:\n          path: /\n        name: host\n      - hostPath:\n          path: /var/lib/kubelet\n        name: kubeletdir\n      - hostPath:\n          path: /run\n        name: run\n      - hostPath:\n          path: /var\n        name: var\n      - hostPath:\n          path: /sys/fs/cgroup\n        name: cgroup\n      - hostPath:\n          path: /lib/modules\n        name: modules\n      - hostPath:\n          path: /sys/fs/bpf\n        name: bpffs\n      - hostPath:\n          path: /sys/kernel/debug\n        name: debugfs\n      - hostPath:\n          path: /boot\n        name: boot\n      - emptyDir: null\n        name: data\n      - emptyDir: null\n        name: profiles\n      - hostPath:\n          path: /\n          type: Directory\n        name: host-filesystem\n      - emptyDir: {}\n        name: clamdb\n      - emptyDir: {}\n        name: clamrun\n      - configMap:\n          items:\n          - key: clamd.conf\n            path: clamd.conf\n          - key: freshclam.conf\n            path: freshclam.conf\n          name: clamav\n        name: etc\n      - emptyDir:\n          medium: Memory\n          sizeLimit: 10Mi\n        name: sbom-comm\n      - emptyDir: {}\n        name: sbom-scanner-tmp\n      - name: cloud-secret\n        secret:\n          secretName: cloud-secret\n      - name: ks-cloud-config\n        configMap:\n          name: ks-cloud-config\n          items:\n            - key: \"clusterData\"\n              path: \"clusterData.json\"\n      - name: config\n        configMap:\n          name: node-agent\n          items:\n            - key: \"config.json\"\n              path: \"config.json\"\n      containers:\n      \n      - name: sbom-scanner\n        image: \"quay.io/armosec/node-agent:v0.0.277\"\n        imagePullPolicy: IfNotPresent\n        command: \n          - /usr/bin/sbom-scanner\n        securityContext:\n          runAsUser: 0\n          readOnlyRootFilesystem: true\n          capabilities:\n            drop: [\"ALL\"]\n        resources:\n          limits:\n            cpu: 1000m\n            memory: 4Gi\n          requests:\n            cpu: 50m\n            memory: 256Mi\n        env:\n          - name: GOMEMLIMIT\n            value: \"3276MiB\"\n          - name: SOCKET_PATH\n            value: \"/sbom-comm/scanner.sock\"\n          - name: HOST_ROOT\n            value: \"/host\"\n        volumeMounts:\n          - mountPath: /sbom-comm\n            name: sbom-comm\n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /tmp\n            name: sbom-scanner-tmp\n      \n      - name: node-agent\n        image: \"quay.io/armosec/node-agent:v0.0.277\"\n        imagePullPolicy: IfNotPresent\n        livenessProbe:\n          httpGet:\n            path: /livez\n            port: 7888\n          periodSeconds: 3\n        readinessProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 3\n        startupProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 10\n          failureThreshold: 30\n          timeoutSeconds: 1\n        resources:\n          \n          requests:\n            cpu: \"{{ .Resources.Requests.CPU }}\"\n            memory: \"{{ .Resources.Requests.Memory }}\"\n          limits:\n            cpu: \"{{ .Resources.Limits.CPU }}\"\n            memory: \"{{ .Resources.Limits.Memory }}\"\n        env:\n          \n          - name: GOMEMLIMIT\n            value: \"{{ .GoMemLimit }}\"\n          - name: HOST_ROOT\n            value: \"/host\"\n          - name: KS_LOGGER_LEVEL\n            value: \"info\"\n          - name: KS_LOGGER_NAME\n            value: \"zap\"\n          - name: SBOM_SCANNER_SOCKET\n            value: \"/sbom-comm/scanner.sock\"\n          - name: SCANNER_MEMORY_LIMIT\n            value: \"4Gi\"\n          - name: NODE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: spec.nodeName\n          - name: POD_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.name\n          - name: NAMESPACE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.namespace\n          - name: KUBELET_ROOT\n            value: \"/var/lib/kubelet\"\n          - name: AGENT_VERSION\n            value: \"v0.0.277\"\n          - name: IGNORERULEBINDINGS\n            value: \"true\"\n        securityContext:\n          runAsUser: 0\n          privileged: false\n          capabilities:\n            add:\n              - SYS_ADMIN\n              - SYS_PTRACE\n              - NET_ADMIN\n              - SYSLOG\n              - SYS_RESOURCE\n              - IPC_LOCK\n              - NET_RAW\n          seLinuxOptions:\n            type: spc_t\n        volumeMounts:\n          \n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /var/lib/kubelet\n            name: kubeletdir\n          - mountPath: /run\n            name: run\n          - mountPath: /var\n            name: var\n            readOnly: true\n          - mountPath: /lib/modules\n            name: modules\n            readOnly: true\n          - mountPath: /sys/kernel/debug\n            name: debugfs\n          - mountPath: /sys/fs/cgroup\n            name: cgroup\n            readOnly: true\n          - mountPath: /sys/fs/bpf\n            name: bpffs\n          - mountPath: /data\n            name: data\n          - mountPath: /profiles\n            name: profiles\n          - mountPath: /boot\n            name: boot\n            readOnly: true\n          - mountPath: /clamav\n            name: clamrun\n          - name: sbom-comm\n            mountPath: /sbom-comm\n          - name: cloud-secret\n            mountPath: /etc/credentials\n            readOnly: true\n          - name: ks-cloud-config\n            mountPath: /etc/config/clusterData.json\n            readOnly: true\n            subPath: \"clusterData.json\"\n          - name: config\n            mountPath: /etc/config/config.json\n            readOnly: true\n            subPath: \"config.json\"\n      nodeSelector:\n        kubernetes.io/os: linux\n        node.kubernetes.io/instance-type: \"{{ .NodeGroupLabel }}\"\n      affinity:\n      \n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: kubernetes.io/os\n                operator: In\n                values:\n                - linux\n      tolerations:\n"
     kind: ConfigMap
     metadata:
       annotations: null
@@ -1920,14 +1920,60 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: node-agent-daemonset-template
       namespace: kubescape
   40: |
+    apiVersion: v1
+    data:
+      tls.crt: bW9jay1jYS1jZXJ0
+      tls.key: bW9jay1jYS1rZXk=
+    kind: Secret
+    metadata:
+      annotations:
+        helm.sh/resource-policy: keep
+      labels:
+        app: operator
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: kubescape-admission-webhook-ca
+      namespace: kubescape
+    type: kubernetes.io/tls
+  41: |
+    apiVersion: v1
+    data:
+      ca.crt: bW9jay1jYS1jZXJ0
+      tls.crt: bW9jay1jZXJ0LWNlcnQ=
+      tls.key: bW9jay1jZXJ0LWtleQ==
+    kind: Secret
+    metadata:
+      annotations: null
+      labels:
+        app: kubescape-admission-webhook
+        app.kubernetes.io/component: kubescape-admission-webhook
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: kubescape-admission-webhook-tls
+      namespace: kubescape
+    type: kubernetes.io/tls
+  42: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -1939,8 +1985,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook
@@ -1954,7 +2000,7 @@ minimal capabilities:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  41: |
+  43: |
     apiVersion: admissionregistration.k8s.io/v1
     kind: ValidatingWebhookConfiguration
     metadata:
@@ -1966,8 +2012,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook
@@ -2002,52 +2048,6 @@ minimal capabilities:
               - rolebindings
             scope: '*'
         sideEffects: None
-  42: |
-    apiVersion: v1
-    data:
-      tls.crt: bW9jay1jYS1jZXJ0
-      tls.key: bW9jay1jYS1rZXk=
-    kind: Secret
-    metadata:
-      annotations:
-        helm.sh/resource-policy: keep
-      labels:
-        app: operator
-        app.kubernetes.io/component: operator
-        app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: kubescape-operator
-        app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
-        kubescape.io/ignore: "true"
-        tier: ks-control-plane
-      name: kubescape-admission-webhook-ca
-      namespace: kubescape
-    type: kubernetes.io/tls
-  43: |
-    apiVersion: v1
-    data:
-      ca.crt: bW9jay1jYS1jZXJ0
-      tls.crt: bW9jay1jZXJ0LWNlcnQ=
-      tls.key: bW9jay1jZXJ0LWtleQ==
-    kind: Secret
-    metadata:
-      annotations: null
-      labels:
-        app: kubescape-admission-webhook
-        app.kubernetes.io/component: kubescape-admission-webhook
-        app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: kubescape-operator
-        app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
-        kubescape.io/ignore: "true"
-        tier: ks-control-plane
-      name: kubescape-admission-webhook-tls
-      namespace: kubescape
-    type: kubernetes.io/tls
   44: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
@@ -2060,8 +2060,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -2185,8 +2185,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -2246,8 +2246,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -2265,8 +2265,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -2300,8 +2300,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.1
-            helm.sh/chart: kubescape-operator-1.40.1
+            app.kubernetes.io/version: 1.40.2
+            helm.sh/chart: kubescape-operator-1.40.2
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -2315,7 +2315,7 @@ minimal capabilities:
                     fieldRef:
                       fieldPath: spec.nodeName
                 - name: HELM_RELEASE
-                  value: kubescape-operator-1.40.1
+                  value: kubescape-operator-1.40.2
                 - name: GOMEMLIMIT
                   valueFrom:
                     resourceFieldRef:
@@ -2516,8 +2516,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -2603,8 +2603,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -2690,8 +2690,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -2709,8 +2709,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -2765,8 +2765,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -2791,8 +2791,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -2820,8 +2820,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -2838,8 +2838,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: v1beta1.spdx.softwarecomposition.kubescape.io
@@ -2868,8 +2868,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-tls-ca
@@ -2891,8 +2891,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-tls
@@ -2910,8 +2910,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
@@ -2976,8 +2976,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage:system:auth-delegator
@@ -3001,8 +3001,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
@@ -3042,8 +3042,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -3061,8 +3061,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -3087,8 +3087,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.1
-            helm.sh/chart: kubescape-operator-1.40.1
+            app.kubernetes.io/version: 1.40.2
+            helm.sh/chart: kubescape-operator-1.40.2
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -3184,8 +3184,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-storage
@@ -3208,8 +3208,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-auth-reader
@@ -3234,8 +3234,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: seccompprofiles.kubescape.io
@@ -3558,8 +3558,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
@@ -3587,8 +3587,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
@@ -3608,8 +3608,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1+private.1
-        helm.sh/chart: armosec-kubescape-operator-1.40.1_private.1
+        app.kubernetes.io/version: 1.40.2-private.rc1
+        helm.sh/chart: armosec-kubescape-operator-1.40.2-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -3629,8 +3629,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1+private.1
-        helm.sh/chart: armosec-kubescape-operator-1.40.1_private.1
+        app.kubernetes.io/version: 1.40.2-private.rc1
+        helm.sh/chart: armosec-kubescape-operator-1.40.2-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -3658,8 +3658,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1+private.1
-        helm.sh/chart: armosec-kubescape-operator-1.40.1_private.1
+        app.kubernetes.io/version: 1.40.2-private.rc1
+        helm.sh/chart: armosec-kubescape-operator-1.40.2-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -3687,8 +3687,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1+private.1
-        helm.sh/chart: armosec-kubescape-operator-1.40.1_private.1
+        app.kubernetes.io/version: 1.40.2-private.rc1
+        helm.sh/chart: armosec-kubescape-operator-1.40.2-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -3703,8 +3703,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: armosec-kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.1+private.1
-            helm.sh/chart: armosec-kubescape-operator-1.40.1_private.1
+            app.kubernetes.io/version: 1.40.2-private.rc1
+            helm.sh/chart: armosec-kubescape-operator-1.40.2-private.rc1
             kubescape.io/ignore: "true"
             tier: ks-control-plane
         spec:
@@ -3749,7 +3749,7 @@ minimal capabilities:
 sbom scanner sidecar uses armosec node-agent image:
   1: |+
     raw: |+
-      Thank you for installing kubescape-operator version 1.40.1.
+      Thank you for installing kubescape-operator version 1.40.2.
       View your cluster's configuration scanning schedule:
       > kubectl -n kubescape get cj kubescape-scheduler -o=jsonpath='{.metadata.name}{"\t"}{.spec.schedule}{"\n"}'
 
@@ -3785,8 +3785,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/infra: credentials
         tier: ks-control-plane
@@ -3832,8 +3832,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/infra: config
         kubescape.io/tier: core
@@ -3860,8 +3860,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -3882,8 +3882,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -3903,8 +3903,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-critical
@@ -3923,8 +3923,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -3942,9 +3942,9 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
+        app.kubernetes.io/version: 1.40.2
         armo.tier: kubescape-scan
-        helm.sh/chart: kubescape-operator-1.40.1
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -3964,9 +3964,9 @@ sbom scanner sidecar uses armosec node-agent image:
                 app.kubernetes.io/managed-by: Helm
                 app.kubernetes.io/name: kubescape-operator
                 app.kubernetes.io/part-of: kubescape
-                app.kubernetes.io/version: 1.40.1
+                app.kubernetes.io/version: 1.40.2
                 armo.tier: kubescape-scan
-                helm.sh/chart: kubescape-operator-1.40.1
+                helm.sh/chart: kubescape-operator-1.40.2
                 kubescape.io/ignore: "true"
                 kubescape.io/tier: core
                 tier: ks-control-plane
@@ -4029,8 +4029,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -4299,8 +4299,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -4324,8 +4324,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -4356,8 +4356,8 @@ sbom scanner sidecar uses armosec node-agent image:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.1
-            helm.sh/chart: kubescape-operator-1.40.1
+            app.kubernetes.io/version: 1.40.2
+            helm.sh/chart: kubescape-operator-1.40.2
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -4399,7 +4399,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: "1500"
                 - name: KS_EXCLUDE_NAMESPACES
                   value: kubescape,kube-system,kube-public,kube-node-lease,kubeconfig,gmp-system,gmp-public
-              image: quay.io/kubescape/kubescape:v4.0.6
+              image: quay.io/kubescape/kubescape:v4.0.8
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -4491,8 +4491,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -4510,8 +4510,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -4541,8 +4541,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -4567,8 +4567,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -4597,8 +4597,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape
@@ -4616,8 +4616,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -4635,9 +4635,9 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
+        app.kubernetes.io/version: 1.40.2
         armo.tier: vuln-scan
-        helm.sh/chart: kubescape-operator-1.40.1
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -4657,9 +4657,9 @@ sbom scanner sidecar uses armosec node-agent image:
                 app.kubernetes.io/managed-by: Helm
                 app.kubernetes.io/name: kubescape-operator
                 app.kubernetes.io/part-of: kubescape
-                app.kubernetes.io/version: 1.40.1
+                app.kubernetes.io/version: 1.40.2
                 armo.tier: vuln-scan
-                helm.sh/chart: kubescape-operator-1.40.1
+                helm.sh/chart: kubescape-operator-1.40.2
                 kubescape.io/ignore: "true"
                 kubescape.io/tier: core
                 tier: ks-control-plane
@@ -4722,8 +4722,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -4763,8 +4763,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -4788,8 +4788,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -4817,8 +4817,8 @@ sbom scanner sidecar uses armosec node-agent image:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.1
-            helm.sh/chart: kubescape-operator-1.40.1
+            app.kubernetes.io/version: 1.40.2
+            helm.sh/chart: kubescape-operator-1.40.2
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -4961,8 +4961,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -4990,8 +4990,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubevuln
@@ -5377,8 +5377,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -5534,8 +5534,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -5601,8 +5601,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -5620,8 +5620,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -5648,8 +5648,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -5657,7 +5657,7 @@ sbom scanner sidecar uses armosec node-agent image:
   39: |
     apiVersion: v1
     data:
-      daemonset-template.yaml: "apiVersion: apps/v1\nkind: DaemonSet\nmetadata:\n  name: \"{{ .Name }}\"\n  namespace: kubescape\n  annotations:\n    \n  labels:\n    helm.sh/chart: kubescape-operator-1.40.1\n    app.kubernetes.io/name: kubescape-operator\n    app.kubernetes.io/instance: RELEASE-NAME\n    app.kubernetes.io/component: node-agent\n    app.kubernetes.io/version: \"1.40.1\"\n    app.kubernetes.io/managed-by: Helm\n    app.kubernetes.io/part-of: kubescape\n    app: node-agent\n    tier: ks-control-plane\n    kubescape.io/ignore: \"true\"\n    kubescape.io/tier: \"core\"\n    kubescape.io/managed-by: operator-autoscaler\n    kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\nspec:\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: kubescape-operator\n      app.kubernetes.io/instance: RELEASE-NAME\n      app.kubernetes.io/component: node-agent\n      kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n  template:\n    metadata:\n      annotations:\n        \n        checksum/node-agent-config: 503090eccd2b923cd3dc19523e5401e48a0cd9d55a19ccc7d222c4b8aee441b5\n        checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424\n        checksum/cloud-config: 9e73128486147557ac429152a572f5a7d3a34906835991129709219495e05b1a\n        container.apparmor.security.beta.kubernetes.io/node-agent: unconfined\n      labels:\n        helm.sh/chart: kubescape-operator-1.40.1\n        app.kubernetes.io/name: kubescape-operator\n        app.kubernetes.io/instance: RELEASE-NAME\n        app.kubernetes.io/component: node-agent\n        app.kubernetes.io/version: \"1.40.1\"\n        app.kubernetes.io/managed-by: Helm\n        app.kubernetes.io/part-of: kubescape\n        app: node-agent\n        tier: ks-control-plane\n        kubescape.io/ignore: \"true\"\n        kubescape.io/tier: \"core\"\n        kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n    spec:\n      securityContext:\n      imagePullSecrets:\n      - name: armosec-readonly\n      priorityClassName: kubescape-critical\n      serviceAccountName: node-agent\n      automountServiceAccountToken: true\n      hostPID: true\n      volumes:\n      \n      - hostPath:\n          path: /\n        name: host\n      - hostPath:\n          path: /var/lib/kubelet\n        name: kubeletdir\n      - hostPath:\n          path: /run\n        name: run\n      - hostPath:\n          path: /var\n        name: var\n      - hostPath:\n          path: /sys/fs/cgroup\n        name: cgroup\n      - hostPath:\n          path: /lib/modules\n        name: modules\n      - hostPath:\n          path: /sys/fs/bpf\n        name: bpffs\n      - hostPath:\n          path: /sys/kernel/debug\n        name: debugfs\n      - hostPath:\n          path: /boot\n        name: boot\n      - emptyDir: null\n        name: data\n      - emptyDir: null\n        name: profiles\n      - hostPath:\n          path: /\n          type: Directory\n        name: host-filesystem\n      - emptyDir: {}\n        name: clamdb\n      - emptyDir: {}\n        name: clamrun\n      - configMap:\n          items:\n          - key: clamd.conf\n            path: clamd.conf\n          - key: freshclam.conf\n            path: freshclam.conf\n          name: clamav\n        name: etc\n      - emptyDir:\n          medium: Memory\n          sizeLimit: 10Mi\n        name: sbom-comm\n      - emptyDir: {}\n        name: sbom-scanner-tmp\n      - name: cloud-secret\n        secret:\n          secretName: cloud-secret\n      - name: ks-cloud-config\n        configMap:\n          name: ks-cloud-config\n          items:\n            - key: \"clusterData\"\n              path: \"clusterData.json\"\n      - name: config\n        configMap:\n          name: node-agent\n          items:\n            - key: \"config.json\"\n              path: \"config.json\"\n      containers:\n      \n      - name: sbom-scanner\n        image: \"quay.io/armosec/node-agent:v0.0.276\"\n        imagePullPolicy: IfNotPresent\n        command: \n          - /usr/bin/sbom-scanner\n        securityContext:\n          runAsUser: 0\n          readOnlyRootFilesystem: true\n          capabilities:\n            drop: [\"ALL\"]\n        resources:\n          limits:\n            cpu: 1000m\n            memory: 4Gi\n          requests:\n            cpu: 50m\n            memory: 256Mi\n        env:\n          - name: GOMEMLIMIT\n            value: \"3276MiB\"\n          - name: SOCKET_PATH\n            value: \"/sbom-comm/scanner.sock\"\n          - name: HOST_ROOT\n            value: \"/host\"\n        volumeMounts:\n          - mountPath: /sbom-comm\n            name: sbom-comm\n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /tmp\n            name: sbom-scanner-tmp\n      \n      - name: node-agent\n        image: \"quay.io/armosec/node-agent:v0.0.276\"\n        imagePullPolicy: IfNotPresent\n        livenessProbe:\n          httpGet:\n            path: /livez\n            port: 7888\n          periodSeconds: 3\n        readinessProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 3\n        startupProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 10\n          failureThreshold: 30\n          timeoutSeconds: 1\n        resources:\n          \n          requests:\n            cpu: \"{{ .Resources.Requests.CPU }}\"\n            memory: \"{{ .Resources.Requests.Memory }}\"\n          limits:\n            cpu: \"{{ .Resources.Limits.CPU }}\"\n            memory: \"{{ .Resources.Limits.Memory }}\"\n        env:\n          \n          - name: GOMEMLIMIT\n            value: \"{{ .GoMemLimit }}\"\n          - name: HOST_ROOT\n            value: \"/host\"\n          - name: KS_LOGGER_LEVEL\n            value: \"info\"\n          - name: KS_LOGGER_NAME\n            value: \"zap\"\n          - name: SBOM_SCANNER_SOCKET\n            value: \"/sbom-comm/scanner.sock\"\n          - name: SCANNER_MEMORY_LIMIT\n            value: \"4Gi\"\n          - name: NODE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: spec.nodeName\n          - name: POD_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.name\n          - name: NAMESPACE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.namespace\n          - name: KUBELET_ROOT\n            value: \"/var/lib/kubelet\"\n          - name: AGENT_VERSION\n            value: \"v0.0.276\"\n          - name: IGNORERULEBINDINGS\n            value: \"true\"\n        securityContext:\n          runAsUser: 0\n          privileged: false\n          capabilities:\n            add:\n              - SYS_ADMIN\n              - SYS_PTRACE\n              - NET_ADMIN\n              - SYSLOG\n              - SYS_RESOURCE\n              - IPC_LOCK\n              - NET_RAW\n          seLinuxOptions:\n            type: spc_t\n        volumeMounts:\n          \n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /var/lib/kubelet\n            name: kubeletdir\n          - mountPath: /run\n            name: run\n          - mountPath: /var\n            name: var\n            readOnly: true\n          - mountPath: /lib/modules\n            name: modules\n            readOnly: true\n          - mountPath: /sys/kernel/debug\n            name: debugfs\n          - mountPath: /sys/fs/cgroup\n            name: cgroup\n            readOnly: true\n          - mountPath: /sys/fs/bpf\n            name: bpffs\n          - mountPath: /data\n            name: data\n          - mountPath: /profiles\n            name: profiles\n          - mountPath: /boot\n            name: boot\n            readOnly: true\n          - mountPath: /clamav\n            name: clamrun\n          - name: sbom-comm\n            mountPath: /sbom-comm\n          - name: cloud-secret\n            mountPath: /etc/credentials\n            readOnly: true\n          - name: ks-cloud-config\n            mountPath: /etc/config/clusterData.json\n            readOnly: true\n            subPath: \"clusterData.json\"\n          - name: config\n            mountPath: /etc/config/config.json\n            readOnly: true\n            subPath: \"config.json\"\n      nodeSelector:\n        kubernetes.io/os: linux\n        node.kubernetes.io/instance-type: \"{{ .NodeGroupLabel }}\"\n      affinity:\n      \n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: kubernetes.io/os\n                operator: In\n                values:\n                - linux\n      tolerations:\n"
+      daemonset-template.yaml: "apiVersion: apps/v1\nkind: DaemonSet\nmetadata:\n  name: \"{{ .Name }}\"\n  namespace: kubescape\n  annotations:\n    \n  labels:\n    helm.sh/chart: kubescape-operator-1.40.2\n    app.kubernetes.io/name: kubescape-operator\n    app.kubernetes.io/instance: RELEASE-NAME\n    app.kubernetes.io/component: node-agent\n    app.kubernetes.io/version: \"1.40.2\"\n    app.kubernetes.io/managed-by: Helm\n    app.kubernetes.io/part-of: kubescape\n    app: node-agent\n    tier: ks-control-plane\n    kubescape.io/ignore: \"true\"\n    kubescape.io/tier: \"core\"\n    kubescape.io/managed-by: operator-autoscaler\n    kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\nspec:\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: kubescape-operator\n      app.kubernetes.io/instance: RELEASE-NAME\n      app.kubernetes.io/component: node-agent\n      kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n  template:\n    metadata:\n      annotations:\n        \n        checksum/node-agent-config: 503090eccd2b923cd3dc19523e5401e48a0cd9d55a19ccc7d222c4b8aee441b5\n        checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424\n        checksum/cloud-config: 9e73128486147557ac429152a572f5a7d3a34906835991129709219495e05b1a\n        container.apparmor.security.beta.kubernetes.io/node-agent: unconfined\n      labels:\n        helm.sh/chart: kubescape-operator-1.40.2\n        app.kubernetes.io/name: kubescape-operator\n        app.kubernetes.io/instance: RELEASE-NAME\n        app.kubernetes.io/component: node-agent\n        app.kubernetes.io/version: \"1.40.2\"\n        app.kubernetes.io/managed-by: Helm\n        app.kubernetes.io/part-of: kubescape\n        app: node-agent\n        tier: ks-control-plane\n        kubescape.io/ignore: \"true\"\n        kubescape.io/tier: \"core\"\n        kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n    spec:\n      securityContext:\n      imagePullSecrets:\n      - name: armosec-readonly\n      priorityClassName: kubescape-critical\n      serviceAccountName: node-agent\n      automountServiceAccountToken: true\n      hostPID: true\n      volumes:\n      \n      - hostPath:\n          path: /\n        name: host\n      - hostPath:\n          path: /var/lib/kubelet\n        name: kubeletdir\n      - hostPath:\n          path: /run\n        name: run\n      - hostPath:\n          path: /var\n        name: var\n      - hostPath:\n          path: /sys/fs/cgroup\n        name: cgroup\n      - hostPath:\n          path: /lib/modules\n        name: modules\n      - hostPath:\n          path: /sys/fs/bpf\n        name: bpffs\n      - hostPath:\n          path: /sys/kernel/debug\n        name: debugfs\n      - hostPath:\n          path: /boot\n        name: boot\n      - emptyDir: null\n        name: data\n      - emptyDir: null\n        name: profiles\n      - hostPath:\n          path: /\n          type: Directory\n        name: host-filesystem\n      - emptyDir: {}\n        name: clamdb\n      - emptyDir: {}\n        name: clamrun\n      - configMap:\n          items:\n          - key: clamd.conf\n            path: clamd.conf\n          - key: freshclam.conf\n            path: freshclam.conf\n          name: clamav\n        name: etc\n      - emptyDir:\n          medium: Memory\n          sizeLimit: 10Mi\n        name: sbom-comm\n      - emptyDir: {}\n        name: sbom-scanner-tmp\n      - name: cloud-secret\n        secret:\n          secretName: cloud-secret\n      - name: ks-cloud-config\n        configMap:\n          name: ks-cloud-config\n          items:\n            - key: \"clusterData\"\n              path: \"clusterData.json\"\n      - name: config\n        configMap:\n          name: node-agent\n          items:\n            - key: \"config.json\"\n              path: \"config.json\"\n      containers:\n      \n      - name: sbom-scanner\n        image: \"quay.io/armosec/node-agent:v0.0.277\"\n        imagePullPolicy: IfNotPresent\n        command: \n          - /usr/bin/sbom-scanner\n        securityContext:\n          runAsUser: 0\n          readOnlyRootFilesystem: true\n          capabilities:\n            drop: [\"ALL\"]\n        resources:\n          limits:\n            cpu: 1000m\n            memory: 4Gi\n          requests:\n            cpu: 50m\n            memory: 256Mi\n        env:\n          - name: GOMEMLIMIT\n            value: \"3276MiB\"\n          - name: SOCKET_PATH\n            value: \"/sbom-comm/scanner.sock\"\n          - name: HOST_ROOT\n            value: \"/host\"\n        volumeMounts:\n          - mountPath: /sbom-comm\n            name: sbom-comm\n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /tmp\n            name: sbom-scanner-tmp\n      \n      - name: node-agent\n        image: \"quay.io/armosec/node-agent:v0.0.277\"\n        imagePullPolicy: IfNotPresent\n        livenessProbe:\n          httpGet:\n            path: /livez\n            port: 7888\n          periodSeconds: 3\n        readinessProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 3\n        startupProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 10\n          failureThreshold: 30\n          timeoutSeconds: 1\n        resources:\n          \n          requests:\n            cpu: \"{{ .Resources.Requests.CPU }}\"\n            memory: \"{{ .Resources.Requests.Memory }}\"\n          limits:\n            cpu: \"{{ .Resources.Limits.CPU }}\"\n            memory: \"{{ .Resources.Limits.Memory }}\"\n        env:\n          \n          - name: GOMEMLIMIT\n            value: \"{{ .GoMemLimit }}\"\n          - name: HOST_ROOT\n            value: \"/host\"\n          - name: KS_LOGGER_LEVEL\n            value: \"info\"\n          - name: KS_LOGGER_NAME\n            value: \"zap\"\n          - name: SBOM_SCANNER_SOCKET\n            value: \"/sbom-comm/scanner.sock\"\n          - name: SCANNER_MEMORY_LIMIT\n            value: \"4Gi\"\n          - name: NODE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: spec.nodeName\n          - name: POD_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.name\n          - name: NAMESPACE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.namespace\n          - name: KUBELET_ROOT\n            value: \"/var/lib/kubelet\"\n          - name: AGENT_VERSION\n            value: \"v0.0.277\"\n          - name: IGNORERULEBINDINGS\n            value: \"true\"\n        securityContext:\n          runAsUser: 0\n          privileged: false\n          capabilities:\n            add:\n              - SYS_ADMIN\n              - SYS_PTRACE\n              - NET_ADMIN\n              - SYSLOG\n              - SYS_RESOURCE\n              - IPC_LOCK\n              - NET_RAW\n          seLinuxOptions:\n            type: spc_t\n        volumeMounts:\n          \n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /var/lib/kubelet\n            name: kubeletdir\n          - mountPath: /run\n            name: run\n          - mountPath: /var\n            name: var\n            readOnly: true\n          - mountPath: /lib/modules\n            name: modules\n            readOnly: true\n          - mountPath: /sys/kernel/debug\n            name: debugfs\n          - mountPath: /sys/fs/cgroup\n            name: cgroup\n            readOnly: true\n          - mountPath: /sys/fs/bpf\n            name: bpffs\n          - mountPath: /data\n            name: data\n          - mountPath: /profiles\n            name: profiles\n          - mountPath: /boot\n            name: boot\n            readOnly: true\n          - mountPath: /clamav\n            name: clamrun\n          - name: sbom-comm\n            mountPath: /sbom-comm\n          - name: cloud-secret\n            mountPath: /etc/credentials\n            readOnly: true\n          - name: ks-cloud-config\n            mountPath: /etc/config/clusterData.json\n            readOnly: true\n            subPath: \"clusterData.json\"\n          - name: config\n            mountPath: /etc/config/config.json\n            readOnly: true\n            subPath: \"config.json\"\n      nodeSelector:\n        kubernetes.io/os: linux\n        node.kubernetes.io/instance-type: \"{{ .NodeGroupLabel }}\"\n      affinity:\n      \n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: kubernetes.io/os\n                operator: In\n                values:\n                - linux\n      tolerations:\n"
     kind: ConfigMap
     metadata:
       annotations: null
@@ -5668,14 +5668,60 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: node-agent-daemonset-template
       namespace: kubescape
   40: |
+    apiVersion: v1
+    data:
+      tls.crt: bW9jay1jYS1jZXJ0
+      tls.key: bW9jay1jYS1rZXk=
+    kind: Secret
+    metadata:
+      annotations:
+        helm.sh/resource-policy: keep
+      labels:
+        app: operator
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: kubescape-admission-webhook-ca
+      namespace: kubescape
+    type: kubernetes.io/tls
+  41: |
+    apiVersion: v1
+    data:
+      ca.crt: bW9jay1jYS1jZXJ0
+      tls.crt: bW9jay1jZXJ0LWNlcnQ=
+      tls.key: bW9jay1jZXJ0LWtleQ==
+    kind: Secret
+    metadata:
+      annotations: null
+      labels:
+        app: kubescape-admission-webhook
+        app.kubernetes.io/component: kubescape-admission-webhook
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: kubescape-admission-webhook-tls
+      namespace: kubescape
+    type: kubernetes.io/tls
+  42: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -5687,8 +5733,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook
@@ -5702,7 +5748,7 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  41: |
+  43: |
     apiVersion: admissionregistration.k8s.io/v1
     kind: ValidatingWebhookConfiguration
     metadata:
@@ -5714,8 +5760,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook
@@ -5750,52 +5796,6 @@ sbom scanner sidecar uses armosec node-agent image:
               - rolebindings
             scope: '*'
         sideEffects: None
-  42: |
-    apiVersion: v1
-    data:
-      tls.crt: bW9jay1jYS1jZXJ0
-      tls.key: bW9jay1jYS1rZXk=
-    kind: Secret
-    metadata:
-      annotations:
-        helm.sh/resource-policy: keep
-      labels:
-        app: operator
-        app.kubernetes.io/component: operator
-        app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: kubescape-operator
-        app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
-        kubescape.io/ignore: "true"
-        tier: ks-control-plane
-      name: kubescape-admission-webhook-ca
-      namespace: kubescape
-    type: kubernetes.io/tls
-  43: |
-    apiVersion: v1
-    data:
-      ca.crt: bW9jay1jYS1jZXJ0
-      tls.crt: bW9jay1jZXJ0LWNlcnQ=
-      tls.key: bW9jay1jZXJ0LWtleQ==
-    kind: Secret
-    metadata:
-      annotations: null
-      labels:
-        app: kubescape-admission-webhook
-        app.kubernetes.io/component: kubescape-admission-webhook
-        app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: kubescape-operator
-        app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
-        kubescape.io/ignore: "true"
-        tier: ks-control-plane
-      name: kubescape-admission-webhook-tls
-      namespace: kubescape
-    type: kubernetes.io/tls
   44: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
@@ -5808,8 +5808,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -5933,8 +5933,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -5994,8 +5994,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -6013,8 +6013,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -6048,8 +6048,8 @@ sbom scanner sidecar uses armosec node-agent image:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.1
-            helm.sh/chart: kubescape-operator-1.40.1
+            app.kubernetes.io/version: 1.40.2
+            helm.sh/chart: kubescape-operator-1.40.2
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -6063,7 +6063,7 @@ sbom scanner sidecar uses armosec node-agent image:
                     fieldRef:
                       fieldPath: spec.nodeName
                 - name: HELM_RELEASE
-                  value: kubescape-operator-1.40.1
+                  value: kubescape-operator-1.40.2
                 - name: GOMEMLIMIT
                   valueFrom:
                     resourceFieldRef:
@@ -6264,8 +6264,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -6351,8 +6351,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -6438,8 +6438,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -6457,8 +6457,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -6513,8 +6513,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -6539,8 +6539,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -6568,8 +6568,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -6586,8 +6586,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: v1beta1.spdx.softwarecomposition.kubescape.io
@@ -6616,8 +6616,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-tls-ca
@@ -6639,8 +6639,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-tls
@@ -6658,8 +6658,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
@@ -6724,8 +6724,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage:system:auth-delegator
@@ -6749,8 +6749,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
@@ -6790,8 +6790,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -6809,8 +6809,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -6835,8 +6835,8 @@ sbom scanner sidecar uses armosec node-agent image:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.1
-            helm.sh/chart: kubescape-operator-1.40.1
+            app.kubernetes.io/version: 1.40.2
+            helm.sh/chart: kubescape-operator-1.40.2
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -6932,8 +6932,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-storage
@@ -6956,8 +6956,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-auth-reader
@@ -6982,8 +6982,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: seccompprofiles.kubescape.io
@@ -7306,8 +7306,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
@@ -7335,8 +7335,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1
-        helm.sh/chart: kubescape-operator-1.40.1
+        app.kubernetes.io/version: 1.40.2
+        helm.sh/chart: kubescape-operator-1.40.2
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage
@@ -7356,8 +7356,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1+private.1
-        helm.sh/chart: armosec-kubescape-operator-1.40.1_private.1
+        app.kubernetes.io/version: 1.40.2-private.rc1
+        helm.sh/chart: armosec-kubescape-operator-1.40.2-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -7377,8 +7377,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1+private.1
-        helm.sh/chart: armosec-kubescape-operator-1.40.1_private.1
+        app.kubernetes.io/version: 1.40.2-private.rc1
+        helm.sh/chart: armosec-kubescape-operator-1.40.2-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -7406,8 +7406,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1+private.1
-        helm.sh/chart: armosec-kubescape-operator-1.40.1_private.1
+        app.kubernetes.io/version: 1.40.2-private.rc1
+        helm.sh/chart: armosec-kubescape-operator-1.40.2-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -7435,8 +7435,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.1+private.1
-        helm.sh/chart: armosec-kubescape-operator-1.40.1_private.1
+        app.kubernetes.io/version: 1.40.2-private.rc1
+        helm.sh/chart: armosec-kubescape-operator-1.40.2-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -7451,8 +7451,8 @@ sbom scanner sidecar uses armosec node-agent image:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: armosec-kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.1+private.1
-            helm.sh/chart: armosec-kubescape-operator-1.40.1_private.1
+            app.kubernetes.io/version: 1.40.2-private.rc1
+            helm.sh/chart: armosec-kubescape-operator-1.40.2-private.rc1
             kubescape.io/ignore: "true"
             tier: ks-control-plane
         spec:
