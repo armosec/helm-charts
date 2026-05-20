@@ -42,3 +42,12 @@ kubescape-operator:
   synchronizer:
     image:
       tag: v0.0.147
+  hostScannerCleanup:
+    image:
+      repository: quay.io/kubescape/kubectl
+      tag: 1.30.3
+      pullPolicy: IfNotPresent
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    priorityClassName: ""
