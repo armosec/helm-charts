@@ -1,6 +1,11 @@
 {{- $ksValues := index .Values "kubescape-operator" }}
 {{- $kubectlImage := $ksValues.hostScannerCleanup.image }}
 {{- $cleanupName := printf "%s-host-scanner-cleanup" .Release.Name }}
+{{- /* This wrapper chart tags its (app)version with SemVer build metadata (e.g. 1.40.2+private.1).
+       The shared kubescape-operator.labels helper emits .Chart.AppVersion into the
+       app.kubernetes.io/version label, and '+' is not a valid Kubernetes label value. Pass a
+       sanitized Chart so these wrapper-scoped hook resources render a valid label. */}}
+{{- $chart := dict "Name" .Chart.Name "Version" (.Chart.Version | replace "+" "_") "AppVersion" (.Chart.AppVersion | replace "+" "_") }}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -13,7 +18,7 @@ metadata:
     "helm.sh/hook-weight": "-5"
     {{- include "kubescape-operator.annotations" (dict "Values" $ksValues) | nindent 4 }}
   labels:
-    {{- include "kubescape-operator.labels" (dict "Chart" .Chart "Release" .Release "Values" $ksValues "app" $cleanupName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
+    {{- include "kubescape-operator.labels" (dict "Chart" $chart "Release" .Release "Values" $ksValues "app" $cleanupName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -26,7 +31,7 @@ metadata:
     "helm.sh/hook-weight": "-5"
     {{- include "kubescape-operator.annotations" (dict "Values" $ksValues) | nindent 4 }}
   labels:
-    {{- include "kubescape-operator.labels" (dict "Chart" .Chart "Release" .Release "Values" $ksValues "app" $cleanupName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
+    {{- include "kubescape-operator.labels" (dict "Chart" $chart "Release" .Release "Values" $ksValues "app" $cleanupName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
 rules:
   - apiGroups: ["apps"]
     resources: ["daemonsets"]
@@ -43,7 +48,7 @@ metadata:
     "helm.sh/hook-weight": "-5"
     {{- include "kubescape-operator.annotations" (dict "Values" $ksValues) | nindent 4 }}
   labels:
-    {{- include "kubescape-operator.labels" (dict "Chart" .Chart "Release" .Release "Values" $ksValues "app" $cleanupName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
+    {{- include "kubescape-operator.labels" (dict "Chart" $chart "Release" .Release "Values" $ksValues "app" $cleanupName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -64,13 +69,13 @@ metadata:
     "helm.sh/hook-weight": "0"
     {{- include "kubescape-operator.annotations" (dict "Values" $ksValues) | nindent 4 }}
   labels:
-    {{- include "kubescape-operator.labels" (dict "Chart" .Chart "Release" .Release "Values" $ksValues "app" $cleanupName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
+    {{- include "kubescape-operator.labels" (dict "Chart" $chart "Release" .Release "Values" $ksValues "app" $cleanupName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
 spec:
   ttlSecondsAfterFinished: 60
   template:
     metadata:
       labels:
-        {{- include "kubescape-operator.labels" (dict "Chart" .Chart "Release" .Release "Values" $ksValues "app" $cleanupName "tier" $ksValues.global.namespaceTier) | nindent 8 }}
+        {{- include "kubescape-operator.labels" (dict "Chart" $chart "Release" .Release "Values" $ksValues "app" $cleanupName "tier" $ksValues.global.namespaceTier) | nindent 8 }}
     spec:
       securityContext:
         seccompProfile:
