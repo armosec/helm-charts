@@ -21,6 +21,11 @@ kubescape-operator:
     sbomScanner:
       enabled: true
   nodeAgent:
+    # GKE Autopilot: correct allowlist for this distribution (quay.io/armosec node-agent).
+    # Opt-in — enable on Autopilot clusters with nodeAgent.gke.allowlist.enabled=true.
+    gke:
+      allowlist:
+        name: armo-rapid7-node-agent-1.40-v2
     autoscaler:
       enabled: true
     config:
