@@ -1,0 +1,286 @@
+apiVersion: auto.gke.io/v1
+kind: WorkloadAllowlist
+minGKEVersion: 1.32.0-gke.1000000
+metadata:
+  name: armo-private-node-agent-1.40-v2
+  annotations:
+    autopilot.gke.io/no-connect: "true"
+exemptions:
+  # Node Agent monitors all processes/containers on the node, so it needs the host PID namespace.
+  - autogke-disallow-hostnamespaces
+  # Node Agent needs write access to parts of the host (container runtime socket, eBPF fs) for eBPF.
+  - autogke-no-write-mode-hostpath
+  # Node Agent needs SYS_ADMIN/SYS_PTRACE/NET_ADMIN/SYSLOG/SYS_RESOURCE/IPC_LOCK/NET_RAW for eBPF.
+  - autogke-default-linux-capabilities
+  # Autoscaler mode adds a node.kubernetes.io/instance-type nodeSelector per node group;
+  # Autopilot disallows that selector key without this exemption.
+  - autogke-node-affinity-selector-limitation
+matchingCriteria:
+  hostPID: true
+  containers:
+    - name: clamav
+      image: ^quay\.io/kubescape/klamav$
+      securityContext:
+        capabilities:
+          add:
+            - SYS_PTRACE
+      volumeMounts:
+        - mountPath: /var/lib/clamav-tmp
+          name: clamdb
+        - mountPath: /run/clamav
+          name: clamrun
+        - mountPath: /etc/clamav
+          name: etc
+          readOnly: true
+    - name: sbom-scanner
+      image: ^quay\.io/(armosec|kubescape)/node-agent$
+      command:
+        - /usr/bin/sbom-scanner
+      env:
+        - name: GOMEMLIMIT
+        - name: SOCKET_PATH
+        - name: HOST_ROOT
+        - name: OTEL_COLLECTOR_SVC
+        - name: NODE_NAME
+        - name: POD_NAME
+        - name: NAMESPACE
+        - name: CLUSTER_NAME
+      securityContext:
+        capabilities:
+          drop:
+            - ALL
+      volumeMounts:
+        - mountPath: /sbom-comm
+          name: sbom-comm
+        - mountPath: /host
+          name: host
+          readOnly: true
+        - mountPath: /tmp
+          name: sbom-scanner-tmp
+    - name: node-agent
+      image: ^quay\.io/(armosec|kubescape)/node-agent$
+      env:
+        - name: GOMEMLIMIT
+        - name: HOST_ROOT
+        - name: KS_LOGGER_LEVEL
+        - name: KS_LOGGER_NAME
+        - name: OTEL_COLLECTOR_SVC
+        - name: CLAMAV_SOCKET
+        - name: SBOM_SCANNER_SOCKET
+        - name: SCANNER_MEMORY_LIMIT
+        - name: NODE_NAME
+        - name: POD_NAME
+        - name: NAMESPACE_NAME
+        - name: KUBELET_ROOT
+        - name: AGENT_VERSION
+        - name: NodeName
+        - name: IGNORERULEBINDINGS
+        # API_URL is set whenever .Values.server is configured (every backend-connected install).
+        - name: API_URL
+        # Conditional env from optional node-agent features (egress proxy / custom container
+        # runtime path / kernel-version-check skip / full-filesystem malware scan).
+        - name: HTTPS_PROXY
+        - name: no_proxy
+        - name: RUNTIME_PATH
+        - name: SKIP_KERNEL_VERSION_CHECK
+        - name: MALWARE_SCAN_ALL_FILES
+      securityContext:
+        capabilities:
+          add:
+            - SYS_ADMIN
+            - SYS_PTRACE
+            - NET_ADMIN
+            - SYSLOG
+            - SYS_RESOURCE
+            - IPC_LOCK
+            - NET_RAW
+        privileged: false
+      volumeMounts:
+        - mountPath: /host
+          name: host
+          readOnly: true
+        - mountPath: /var/lib/kubelet
+          name: kubeletdir
+        - mountPath: /run
+          name: run
+        - mountPath: /var
+          name: var
+          readOnly: true
+        - mountPath: /lib/modules
+          name: modules
+          readOnly: true
+        - mountPath: /sys/kernel/debug
+          name: debugfs
+        - mountPath: /sys/fs/cgroup
+          name: cgroup
+          readOnly: true
+        - mountPath: /sys/fs/bpf
+          name: bpffs
+        - mountPath: /data
+          name: data
+        - mountPath: /profiles
+          name: profiles
+        - mountPath: /boot
+          name: boot
+          readOnly: true
+        - mountPath: /clamav
+          name: clamrun
+        - mountPath: /sbom-comm
+          name: sbom-comm
+        - mountPath: /etc/credentials
+          name: cloud-secret
+          readOnly: true
+        - mountPath: /etc/config/clusterData.json
+          name: ks-cloud-config
+          readOnly: true
+          subPath: clusterData.json
+        - mountPath: /etc/config/config.json
+          name: config
+          readOnly: true
+          subPath: config.json
+  securityContext:
+    appArmorProfile:
+      type: Unconfined
+  volumes:
+    - hostPath:
+        path: /
+      name: host
+    - hostPath:
+        path: /var/lib/kubelet
+      name: kubeletdir
+    - hostPath:
+        path: /run
+      name: run
+    - hostPath:
+        path: /var
+      name: var
+    - hostPath:
+        path: /sys/fs/cgroup
+      name: cgroup
+    - hostPath:
+        path: /lib/modules
+      name: modules
+    - hostPath:
+        path: /sys/fs/bpf
+      name: bpffs
+    - hostPath:
+        path: /sys/kernel/debug
+      name: debugfs
+    - hostPath:
+        path: /boot
+      name: boot
+    - name: data
+    - name: profiles
+    - hostPath:
+        path: /
+      name: host-filesystem
+    - name: clamdb
+    - name: clamrun
+    - configMap:
+        defaultMode: 420
+        name: clamav
+      name: etc
+    - name: sbom-comm
+    - name: sbom-scanner-tmp
+    - name: cloud-secret
+    - configMap:
+        defaultMode: 420
+        name: ks-cloud-config
+      name: ks-cloud-config
+    - configMap:
+        defaultMode: 420
+        name: node-agent
+      name: config
+containerImageDigests:
+  - containerName: node-agent
+    imageDigests:
+      # quay.io/armosec/node-agent:v0.0.334
+      - ea34a70afde3138fb340dc7c24dbf3f49c2e478ae3af1585a088cd7754403535
+      # quay.io/armosec/node-agent:v0.0.330
+      - 19674bd687fb1d164953cca396e31956d28b58ea8b9aa778f2b6b2365c011e04
+      # quay.io/armosec/node-agent:v0.0.314
+      - 01b4012777572c07bd577ac498f28ebb5f82394a4161dd1e4c95518f5c418684
+      # quay.io/armosec/node-agent:v0.0.289
+      - 355a10eaefc898c9f789cb99a63bb901b5ff800d7e1bf94b69a5b50b3dec09ca
+      # quay.io/armosec/node-agent:v0.0.285
+      - f7cf011e29d24c6f068232c7ee36f1ab1d6d3610f2310808f26362e54bfdeea8
+      # quay.io/armosec/node-agent:v0.0.280
+      - 9d550fb6e4848753e3a22e3aadd4724e8fbe8b3e791708663b82405ac8d5f3cf
+      # quay.io/armosec/node-agent:v0.0.279
+      - d27fc67f828492593d93d7a95baf616c03fcb85d5c518aac5940430606fd314e
+      # quay.io/armosec/node-agent:v0.0.277
+      - e82159073ab6b532da8f2f53f163a90150ec2b7201220ebd8a29bd811e84d69f
+      # quay.io/armosec/node-agent:v0.0.276
+      - cbdb1b4b087b6912c13d32aca75f0e9bf0e462c2dc0ab3e51885a29f1c313d37
+      # quay.io/armosec/node-agent:v0.0.273
+      - da374c13d64f46a358e6268076c5df423df1b8c49fc600d0858da518597a6f6a
+      # quay.io/armosec/node-agent:v0.0.270
+      - 66b1cfa1e1d3fe4214d69b5c9582d50dc4b1c4df89523959faa1b41884691c33
+      # quay.io/armosec/node-agent:v0.0.267
+      - 3516f61e84c65a66624904caa3e9418c5604b43fd274a7b8c67723d64d5df666
+      # quay.io/armosec/node-agent:v0.0.265
+      - c48a597444191b77cd8feaeec2b58e67cfb98f78bb0b8bcadbef0f6868bd1f96
+      # quay.io/armosec/node-agent:v0.0.264
+      - 7d2b9c8f1eab16bfaa28213902eb90883b4ee951095d2dbf61edf4c255030c45
+      # quay.io/armosec/node-agent:v0.0.259
+      - 7a7ac8afcc22257fe93331a66569df2370836dee85bda0c50e00d0abb232c3c7
+      # quay.io/armosec/node-agent:v0.0.254
+      - d1994ec79468b0ee47223cb7d4689cc39a95102f5179896313f22a61198471b5
+      # quay.io/armosec/node-agent:v0.0.240
+      - 4993a05fd9a6c082a3bbf737efea56c431d859f8484717d510feb50a978e29bd
+      # quay.io/armosec/node-agent:v0.0.231
+      - 3246b39045e66891c32d835b29ecbfe84254d4e13da9265dfd1c560dbdcced47
+      # quay.io/armosec/node-agent:v0.0.230
+      - 26ed9db45eef41dbd3514d61ba2b7201f5b6a0fed09ba068ac78868ea837bced
+      # quay.io/armosec/node-agent:v0.0.227
+      - 6bf8423f7aa996d04d9f657d4605e1a393e6b6011a194e18ec66d80d8106021c
+      # quay.io/armosec/node-agent:v0.0.215
+      - 9262dd77fbde94323bbd3943711a9850764a16bb11a190e0d63554ce980f06e4
+      # quay.io/armosec/node-agent:v0.0.214
+      - 05893fbe2ae88b9f42867551c9d2577551773a7fcdc536f8dfa21e451077c928
+  - containerName: sbom-scanner
+    imageDigests:
+      # quay.io/armosec/node-agent:v0.0.334
+      - ea34a70afde3138fb340dc7c24dbf3f49c2e478ae3af1585a088cd7754403535
+      # quay.io/armosec/node-agent:v0.0.330
+      - 19674bd687fb1d164953cca396e31956d28b58ea8b9aa778f2b6b2365c011e04
+      # quay.io/armosec/node-agent:v0.0.314
+      - 01b4012777572c07bd577ac498f28ebb5f82394a4161dd1e4c95518f5c418684
+      # quay.io/armosec/node-agent:v0.0.289
+      - 355a10eaefc898c9f789cb99a63bb901b5ff800d7e1bf94b69a5b50b3dec09ca
+      # quay.io/armosec/node-agent:v0.0.285
+      - f7cf011e29d24c6f068232c7ee36f1ab1d6d3610f2310808f26362e54bfdeea8
+      # quay.io/armosec/node-agent:v0.0.280
+      - 9d550fb6e4848753e3a22e3aadd4724e8fbe8b3e791708663b82405ac8d5f3cf
+      # quay.io/armosec/node-agent:v0.0.279
+      - d27fc67f828492593d93d7a95baf616c03fcb85d5c518aac5940430606fd314e
+      # quay.io/armosec/node-agent:v0.0.277
+      - e82159073ab6b532da8f2f53f163a90150ec2b7201220ebd8a29bd811e84d69f
+      # quay.io/armosec/node-agent:v0.0.276
+      - cbdb1b4b087b6912c13d32aca75f0e9bf0e462c2dc0ab3e51885a29f1c313d37
+      # quay.io/armosec/node-agent:v0.0.273
+      - da374c13d64f46a358e6268076c5df423df1b8c49fc600d0858da518597a6f6a
+      # quay.io/armosec/node-agent:v0.0.270
+      - 66b1cfa1e1d3fe4214d69b5c9582d50dc4b1c4df89523959faa1b41884691c33
+      # quay.io/armosec/node-agent:v0.0.267
+      - 3516f61e84c65a66624904caa3e9418c5604b43fd274a7b8c67723d64d5df666
+      # quay.io/armosec/node-agent:v0.0.265
+      - c48a597444191b77cd8feaeec2b58e67cfb98f78bb0b8bcadbef0f6868bd1f96
+      # quay.io/armosec/node-agent:v0.0.264
+      - 7d2b9c8f1eab16bfaa28213902eb90883b4ee951095d2dbf61edf4c255030c45
+      # quay.io/armosec/node-agent:v0.0.259
+      - 7a7ac8afcc22257fe93331a66569df2370836dee85bda0c50e00d0abb232c3c7
+      # quay.io/armosec/node-agent:v0.0.254
+      - d1994ec79468b0ee47223cb7d4689cc39a95102f5179896313f22a61198471b5
+      # quay.io/armosec/node-agent:v0.0.240
+      - 4993a05fd9a6c082a3bbf737efea56c431d859f8484717d510feb50a978e29bd
+      # quay.io/armosec/node-agent:v0.0.231
+      - 3246b39045e66891c32d835b29ecbfe84254d4e13da9265dfd1c560dbdcced47
+      # quay.io/armosec/node-agent:v0.0.230
+      - 26ed9db45eef41dbd3514d61ba2b7201f5b6a0fed09ba068ac78868ea837bced
+      # quay.io/armosec/node-agent:v0.0.227
+      - 6bf8423f7aa996d04d9f657d4605e1a393e6b6011a194e18ec66d80d8106021c
+      # quay.io/armosec/node-agent:v0.0.215
+      - 9262dd77fbde94323bbd3943711a9850764a16bb11a190e0d63554ce980f06e4
+      # quay.io/armosec/node-agent:v0.0.214
+      - 05893fbe2ae88b9f42867551c9d2577551773a7fcdc536f8dfa21e451077c928
