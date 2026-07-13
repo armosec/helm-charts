@@ -50,6 +50,22 @@ time instead of in the field.
   the vendored `gke-allowlist/` copy and the chart's `nodeAgent.gke.allowlist.name` default once the new
   allowlist is approved.
 
+## PR behavior
+
+The same check (both charts) also runs on pull requests (`pr-allowlist-drift.yaml`) for PRs touching a
+node-agent render, a vendored allowlist, or the drift tooling — so drift is caught at review time, not
+only at release. A PR is automated (no manual `BYPASS_ALLOWLIST_DRIFT` input), so instead:
+
+- **No drift** → the check passes and any prior drift comment is removed.
+- **Drift detected** → the workflow posts (and keeps updated) a **sticky comment that @-mentions the PR
+  author** with the specific missing fields (per chart) and the next step, and the check **fails**.
+- **Acknowledged drift** → after opening the Gerrit allowlist update, a maintainer adds the
+  **`allowlist-drift-ack`** label to the PR. The check re-runs on the label and passes (the PR-flow
+  equivalent of "set as pass after you opened Gerrit to allowlist").
+- **Check crashed** (any non-`0`/`2` exit) → hard failure; the label does **not** bypass a crash.
+
+Make the check a required status in branch protection to block merge on un-acknowledged drift.
+
 ## Run locally
 
 ```bash
