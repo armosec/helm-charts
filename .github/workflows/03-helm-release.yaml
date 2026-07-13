@@ -83,11 +83,14 @@ jobs:
     # allowlist (vendored under gke-allowlist/). Bypass with BYPASS_ALLOWLIST_DRIFT=true
     # after opening a Gerrit allowlist update. See scripts/gke-allowlist/README.md.
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ inputs.RELEASE_BRANCH || inputs.COMMIT_REF || 'main' }}
+          persist-credentials: false
       - name: Install Helm
         uses: azure/setup-helm@v3.5
       - name: Install Python
@@ -97,11 +100,23 @@ jobs:
       - run: pip install pyyaml
       - name: Check node-agents vs approved allowlists
         run: |
-          set +e; fail=0
-          scripts/gke-allowlist/check-drift.sh charts/kubescape-operator gke-allowlist/armo-private-node-agent-1.40-v2.yaml --wrapper || fail=1
-          scripts/gke-allowlist/check-drift.sh charts/rapid7-operator   gke-allowlist/armo-rapid7-node-agent-1.40-v2.yaml  --wrapper || fail=1
-          set -e
-          if [ "$fail" -ne 0 ]; then
+          drift=0; crash=0
+          check() {
+            set +e
+            scripts/gke-allowlist/check-drift.sh "$@"
+            local rc=$?
+            set -e
+            # exit 2 = spec-drift (bypassable); 0 = OK; anything else = the check crashed.
+            if [ "$rc" -eq 2 ]; then drift=1
+            elif [ "$rc" -ne 0 ]; then crash=1; fi
+          }
+          check charts/kubescape-operator gke-allowlist/armo-private-node-agent-1.40-v2.yaml --wrapper
+          check charts/rapid7-operator   gke-allowlist/armo-rapid7-node-agent-1.40-v2.yaml  --wrapper
+          if [ "$crash" -ne 0 ]; then
+            echo "::error::allowlist drift check failed to run — not a drift result, so BYPASS_ALLOWLIST_DRIFT does not apply. Fix the check."
+            exit 1
+          fi
+          if [ "$drift" -ne 0 ]; then
             if [ "${{ inputs.BYPASS_ALLOWLIST_DRIFT }}" = "true" ]; then
               echo "::warning::node-agent drifts from an approved allowlist, but BYPASS_ALLOWLIST_DRIFT=true — ensure a Gerrit allowlist update is open."
             else
