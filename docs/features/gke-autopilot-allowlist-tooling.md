@@ -64,7 +64,12 @@ only at release. A PR is automated (no manual `BYPASS_ALLOWLIST_DRIFT` input), s
   equivalent of "set as pass after you opened Gerrit to allowlist").
 - **Check crashed** (any non-`0`/`2` exit) → hard failure; the label does **not** bypass a crash.
 
-Make the check a required status in branch protection to block merge on un-acknowledged drift.
+The check is **advisory** — a loud, self-clearing notification, not a required status. It is scoped with a
+`paths:` filter, so it does not run on unrelated PRs. Do **not** mark it a required status in branch
+protection while that filter is in place: GitHub skips a path-filtered workflow on non-matching PRs, and a
+required check that never runs would block those PRs forever on "Expected — waiting for status". To turn it
+into a hard gate, first drop the `paths:` filter and no-op early inside the job, then require it. Fork PRs
+get a read-only token and can't post the sticky comment — use a `workflow_run` companion if forks are accepted.
 
 ## Run locally
 
