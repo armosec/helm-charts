@@ -32,8 +32,9 @@ kubescape-operator:
     autoscaler:
       enabled: true
     config:
-      hostMalwareSensor: disable
-      hostNetworkSensor: disable
+      extra:
+        hostMalwareSensorEnabled: false
+        hostNetworkSensorEnabled: false
     env:
       - name: IGNORERULEBINDINGS
         value: true
