@@ -2,7 +2,6 @@ kubescape-operator:
   alertCRD:
     installDefault: false
   capabilities:
-    backend-storage: enable
     manageWorkloads: enable
     nodeProfileService: enable
     nodeSbomGeneration: disable
@@ -30,6 +29,8 @@ kubescape-operator:
     config:
       hostMalwareSensor: disable
       hostNetworkSensor: disable
+      extra:
+        backendStorageEnabled: true
     env:
       - name: IGNORERULEBINDINGS
         value: true
