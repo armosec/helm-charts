@@ -35,7 +35,7 @@ time instead of in the field.
   `no-op` / `digest-only` / `spec-drift` (exit 2 on spec-drift).
 - **`scripts/gke-allowlist/check-drift.sh`** — CI wrapper: renders the node-agent with all optional
   features enabled (backend server/`API_URL`, proxy, custom runtime, kernel-check skip, full malware
-  scan, ClamAV, SBOM scanner, OTEL) and verifies it is a subset of the allowlist.
+  scan, SBOM scanner, OTEL) and verifies it is a subset of the allowlist.
 - **`scripts/gke-allowlist/build-allowlists.py`, `refresh-digests.py`** — allowlist-repo-side helpers.
 - **`gke-allowlist/*.yaml`** — vendored copies of the approved allowlists the gate checks against.
 
