@@ -207,16 +207,27 @@ containerImageDigests:
 """
 
 
+# An approved WorkloadAllowlist is immutable except for containerImageDigests, so
+# any change to the spec — a removed container, a dropped env name, a dropped mount
+# — needs a NEW version rather than an edit of the live one. Removing ClamAV is such
+# a change. Bump this, generate, submit through Gerrit, and only then bump
+# nodeAgent.gke.allowlist.name in both charts to match. The charts pin -v2 today.
+#
+# Do not submit a version that drops ClamAV until the charts pin an upstream
+# kubescape-operator release that no longer renders it: the allowlist is a superset
+# check, so a list without ClamAV cannot admit a chart that still has it.
+ALLOWLIST_VERSION = "v3"
+
 KS = r"^quay\.io/kubescape/node-agent$"
 ARMO = r"^quay\.io/(armosec|kubescape)/node-agent$"
 
 specs = [
     # (dir, name, node-agent img, sbom img, node-agent digests, sbom digests)
-    ("armo-kubescape-node-agent", "armo-kubescape-node-agent-1.40", KS, KS, KS_DIGESTS, KS_DIGESTS),
-    ("armo-private-node-agent",   "armo-private-node-agent-1.40",   ARMO, ARMO, ARMO_DIGESTS, ARMO_DIGESTS),
+    ("armo-kubescape-node-agent", f"armo-kubescape-node-agent-1.40-{ALLOWLIST_VERSION}", KS, KS, KS_DIGESTS, KS_DIGESTS),
+    ("armo-private-node-agent",   f"armo-private-node-agent-1.40-{ALLOWLIST_VERSION}",   ARMO, ARMO, ARMO_DIGESTS, ARMO_DIGESTS),
     # Rapid7: node-agent uses armosec; sbom-scanner image rendered as kubescape (chart-values gap),
     # both covered by the armosec|kubescape regex. Digests: node-agent=armosec, sbom-scanner=kubescape.
-    ("armo-rapid7-node-agent",    "armo-rapid7-node-agent-1.40",    ARMO, ARMO, ARMO_DIGESTS, KS_DIGESTS),
+    ("armo-rapid7-node-agent",    f"armo-rapid7-node-agent-1.40-{ALLOWLIST_VERSION}",    ARMO, ARMO, ARMO_DIGESTS, KS_DIGESTS),
 ]
 
 for d, name, na, sbom, nad, sbd in specs:

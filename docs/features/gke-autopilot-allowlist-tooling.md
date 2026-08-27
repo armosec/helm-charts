@@ -45,6 +45,22 @@ time instead of in the field.
 
 - **No drift** → passes, release proceeds.
 - **Drift** → **fails** with the specific missing fields, blocking the release.
+### Submitting a new allowlist version
+
+An approved allowlist is immutable except for `containerImageDigests`. So any change to the
+matched surface — a removed container, a dropped env name, a dropped mount — needs a **new
+version**, not an edit of the live one. Removing ClamAV is exactly that.
+
+The order matters, because admission is a superset check:
+
+1. Bump `ALLOWLIST_VERSION` in `scripts/gke-allowlist/build-allowlists.py` and generate.
+2. Submit through Gerrit and wait for approval.
+3. Only then bump `nodeAgent.gke.allowlist.name` in both charts, and refresh the vendored copy
+   under `gke-allowlist/`.
+
+Do not submit a version that drops ClamAV until the charts pin an upstream `kubescape-operator`
+release that no longer renders it. A list without ClamAV cannot admit a chart that still has one.
+
 - **Intentional drift** → open the Gerrit allowlist update, then re-run the release with
   **`BYPASS_ALLOWLIST_DRIFT: true`** ("set as pass after you opened Gerrit to allowlist"). Also update
   the vendored `gke-allowlist/` copy and the chart's `nodeAgent.gke.allowlist.name` default once the new
