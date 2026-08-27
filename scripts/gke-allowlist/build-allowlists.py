@@ -38,7 +38,10 @@ ARMO_DIGESTS = load_digests(f"{GEN}/digests-armosec-node-agent.txt")
 
 # --- canonical body (everything except metadata.name, the image regexes, digests) ---
 # Full union of chart-conditional node-agent env names (subset matching => an uncovered env
-# rejects the workload). Kept in sync with the vendored gke-allowlist/*-1.40-v2.yaml files.
+# rejects the workload). This is the surface for the version this generator emits
+# (ALLOWLIST_VERSION below), NOT a mirror of the vendored gke-allowlist/*-1.40-v2.yaml files:
+# those still carry CLAMAV_SOCKET and stay a valid superset of what the charts render. Bring
+# the two back in sync when the new version is approved and vendored.
 NODE_AGENT_ENV = [
     "GOMEMLIMIT", "HOST_ROOT", "KS_LOGGER_LEVEL", "KS_LOGGER_NAME",
     "OTEL_COLLECTOR_SVC", "SBOM_SCANNER_SOCKET", "SCANNER_MEMORY_LIMIT",
