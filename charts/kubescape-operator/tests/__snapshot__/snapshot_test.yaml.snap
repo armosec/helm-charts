@@ -3768,6 +3768,31 @@ minimal capabilities:
           serviceAccountName: RELEASE-NAME-host-scanner-cleanup
           tolerations: null
       ttlSecondsAfterFinished: 60
+  72: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: node-agent-pod-delete
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - pods
+        verbs:
+          - delete
+  73: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: node-agent-pod-delete
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: node-agent-pod-delete
+    subjects:
+      - kind: ServiceAccount
+        name: node-agent
+        namespace: kubescape
 sbom scanner sidecar uses armosec node-agent image:
   1: |+
     raw: |+
@@ -7538,3 +7563,28 @@ sbom scanner sidecar uses armosec node-agent image:
           serviceAccountName: RELEASE-NAME-host-scanner-cleanup
           tolerations: null
       ttlSecondsAfterFinished: 60
+  72: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: node-agent-pod-delete
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - pods
+        verbs:
+          - delete
+  73: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: node-agent-pod-delete
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: node-agent-pod-delete
+    subjects:
+      - kind: ServiceAccount
+        name: node-agent
+        namespace: kubescape

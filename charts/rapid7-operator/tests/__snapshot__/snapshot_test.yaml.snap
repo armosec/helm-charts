@@ -2116,3 +2116,28 @@ minimal capabilities:
           storage: true
           subresources:
             status: {}
+  41: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: node-agent-pod-delete
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - pods
+        verbs:
+          - delete
+  42: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: node-agent-pod-delete
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: node-agent-pod-delete
+    subjects:
+      - kind: ServiceAccount
+        name: node-agent
+        namespace: kubescape
