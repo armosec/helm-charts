@@ -1,12 +1,15 @@
-# Restores the pods/delete permission the OSS chart intentionally dropped from
-# node-agent's ClusterRole (unused upstream, see
-# https://github.com/kubescape/helm-charts/issues/883). Only the private agent
-# needs it, so it is granted here as a separate, additive ClusterRole rather
-# than re-adding it to the public chart.
+# Grants the pods/delete permission to the node-agent ServiceAccount.
+# Upstream OSS kubescape-operator dropped this permission in PR #904
+# (see https://github.com/kubescape/helm-charts/issues/883). Only the private
+# agent needs this capability, so it is granted here as a separate, additive
+# ClusterRole rather than retaining it in the public OSS chart.
+# While the currently pinned subchart dependency (1.40.3) still includes this
+# permission, defining this additive RBAC ensures continuous compatibility
+# across upstream upgrades where it is removed.
 {{- $nodeAgentName := index .Values "kubescape-operator" "nodeAgent" "name" }}
 {{- $ksNamespace := index .Values "kubescape-operator" "ksNamespace" }}
-kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
 metadata:
   name: {{ $nodeAgentName }}-pod-delete
 rules:
@@ -14,8 +17,8 @@ rules:
   resources: ["pods"]
   verbs: ["delete"]
 ---
-kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
 metadata:
   name: {{ $nodeAgentName }}-pod-delete
 subjects:
