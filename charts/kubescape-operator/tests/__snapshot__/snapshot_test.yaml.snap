@@ -3772,6 +3772,18 @@ minimal capabilities:
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.3_private.1
+        helm.sh/chart: armosec-kubescape-operator-1.40.3_private.1
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
       name: node-agent-pod-delete
     rules:
       - apiGroups:
@@ -3784,6 +3796,18 @@ minimal capabilities:
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.3_private.1
+        helm.sh/chart: armosec-kubescape-operator-1.40.3_private.1
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
       name: node-agent-pod-delete
     roleRef:
       apiGroup: rbac.authorization.k8s.io
@@ -7567,6 +7591,18 @@ sbom scanner sidecar uses armosec node-agent image:
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.3_private.1
+        helm.sh/chart: armosec-kubescape-operator-1.40.3_private.1
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
       name: node-agent-pod-delete
     rules:
       - apiGroups:
@@ -7579,6 +7615,18 @@ sbom scanner sidecar uses armosec node-agent image:
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.3_private.1
+        helm.sh/chart: armosec-kubescape-operator-1.40.3_private.1
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
       name: node-agent-pod-delete
     roleRef:
       apiGroup: rbac.authorization.k8s.io

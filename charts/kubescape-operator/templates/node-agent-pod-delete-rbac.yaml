@@ -6,12 +6,18 @@
 # While the currently pinned subchart dependency (1.40.3) still includes this
 # permission, defining this additive RBAC ensures continuous compatibility
 # across upstream upgrades where it is removed.
-{{- $nodeAgentName := index .Values "kubescape-operator" "nodeAgent" "name" }}
-{{- $ksNamespace := index .Values "kubescape-operator" "ksNamespace" }}
+{{- $ksValues := index .Values "kubescape-operator" }}
+{{- $nodeAgentName := $ksValues.nodeAgent.name }}
+{{- $ksNamespace := $ksValues.ksNamespace }}
+{{- $chart := dict "Name" .Chart.Name "Version" (.Chart.Version | replace "+" "_") "AppVersion" (.Chart.AppVersion | replace "+" "_") }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ $nodeAgentName }}-pod-delete
+  annotations:
+    {{- include "kubescape-operator.annotations" (dict "Values" $ksValues) | nindent 4 }}
+  labels:
+    {{- include "kubescape-operator.labels" (dict "Chart" $chart "Release" .Release "Values" $ksValues "app" $nodeAgentName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
 rules:
 - apiGroups: [""]
   resources: ["pods"]
@@ -21,6 +27,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: {{ $nodeAgentName }}-pod-delete
+  annotations:
+    {{- include "kubescape-operator.annotations" (dict "Values" $ksValues) | nindent 4 }}
+  labels:
+    {{- include "kubescape-operator.labels" (dict "Chart" $chart "Release" .Release "Values" $ksValues "app" $nodeAgentName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
 subjects:
 - kind: ServiceAccount
   name: {{ $nodeAgentName }}
