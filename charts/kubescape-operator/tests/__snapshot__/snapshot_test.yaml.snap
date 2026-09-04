@@ -239,7 +239,7 @@ minimal capabilities:
                     - -path=v1/triggerAction
                     - -headers=Content-Type:application/json
                     - -path-body=/home/ks/request-body.json
-                  image: quay.io/kubescape/http-request:v0.2.20
+                  image: quay.io/kubescape/http-request:v0.2.23
                   imagePullPolicy: IfNotPresent
                   name: kubescape-scheduler
                   resources:
@@ -661,7 +661,7 @@ minimal capabilities:
                   value: "1500"
                 - name: KS_EXCLUDE_NAMESPACES
                   value: kubescape,kube-system,kube-public,kube-node-lease,kubeconfig,gmp-system,gmp-public,cortex-agent
-              image: quay.io/kubescape/kubescape:v4.0.12
+              image: quay.io/kubescape/kubescape:v4.0.13
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -940,7 +940,7 @@ minimal capabilities:
                     - -path=v1/triggerAction
                     - -headers=Content-Type:application/json
                     - -path-body=/home/ks/request-body.json
-                  image: quay.io/kubescape/http-request:v0.2.20
+                  image: quay.io/kubescape/http-request:v0.2.23
                   imagePullPolicy: IfNotPresent
                   name: kubevuln-scheduler
                   resources:
@@ -1115,7 +1115,7 @@ minimal capabilities:
                   value: 5Gi
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
-              image: quay.io/kubescape/kubevuln:v0.3.159
+              image: quay.io/kubescape/kubevuln:v0.3.430
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -1174,7 +1174,7 @@ minimal capabilities:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: sbom-scanner
-              image: quay.io/kubescape/kubevuln:v0.3.159
+              image: quay.io/kubescape/kubevuln:v0.3.430
               imagePullPolicy: IfNotPresent
               name: sbom-scanner
               resources:
@@ -1705,15 +1705,6 @@ minimal capabilities:
           - daemonsets
           - statefulsets
           - replicasets
-        verbs:
-          - get
-          - watch
-          - list
-      - apiGroups:
-          - spdx.softwarecomposition.kubescape.io
-        resources:
-          - applicationprofiles
-          - networkneighborhoods
         verbs:
           - get
           - watch
@@ -2530,7 +2521,7 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: kubescape-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.20"
+                    image: "quay.io/kubescape/http-request:v0.2.23"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
@@ -2617,7 +2608,7 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: kubevuln-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.20"
+                    image: "quay.io/kubescape/http-request:v0.2.23"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
@@ -2704,7 +2695,7 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: registry-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.20"
+                    image: "quay.io/kubescape/http-request:v0.2.23"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
@@ -3089,6 +3080,9 @@ minimal capabilities:
           "defaultMaxObjectSize": 400000,
           "queueManagerEnabled": true,
           "kindQueues": {"applicationprofiles":{"maxObjectSize":20000000,"queueLength":50,"workerCount":2},"containerprofiles":{"maxObjectSize":2500000,"queueLength":50,"workerCount":2},"networkneighborhoods":{"maxObjectSize":10000000,"queueLength":50,"workerCount":2},"openvulnerabilityexchangecontainers":{"maxObjectSize":500000,"queueLength":50,"workerCount":1},"sbomsyftfiltereds":{"maxObjectSize":50000000,"queueLength":50,"workerCount":1},"sbomsyfts":{"maxObjectSize":100000000,"queueLength":50,"workerCount":1},"vulnerabilitymanifests":{"maxObjectSize":50000000,"queueLength":50,"workerCount":1}},
+          "singleWriterEnabled": true,
+          "poolTimeout": "15s",
+          "sqliteBusyTimeout": "60s",
           "tlsClientCaFile": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt",
           "tlsServerCertFile": "/etc/storage-ca-certificates/tls.crt",
           "tlsServerKeyFile": "/etc/storage-ca-certificates/tls.key",
@@ -3143,7 +3137,7 @@ minimal capabilities:
         metadata:
           annotations:
             checksum/cloud-config: 4412fb00c4beca01a812d925460a5bd2a4fa14469527d28622d8b987f3649f46
-            checksum/storage-config: 5ef9efd40532900e9053245bd7d11836f4c2212e734885e4ae28983d9e2c84a4
+            checksum/storage-config: 3bb611086ab7fc5b5acbd122deb6ed76612809110a19007d5e686e45310a0979
           labels:
             app: storage
             app.kubernetes.io/component: storage
@@ -3169,7 +3163,7 @@ minimal capabilities:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/storage:v0.0.298
+              image: quay.io/kubescape/storage:v0.0.331
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -4103,7 +4097,7 @@ sbom scanner sidecar uses armosec node-agent image:
                     - -path=v1/triggerAction
                     - -headers=Content-Type:application/json
                     - -path-body=/home/ks/request-body.json
-                  image: quay.io/kubescape/http-request:v0.2.20
+                  image: quay.io/kubescape/http-request:v0.2.23
                   imagePullPolicy: IfNotPresent
                   name: kubescape-scheduler
                   resources:
@@ -4525,7 +4519,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: "1500"
                 - name: KS_EXCLUDE_NAMESPACES
                   value: kubescape,kube-system,kube-public,kube-node-lease,kubeconfig,gmp-system,gmp-public,cortex-agent
-              image: quay.io/kubescape/kubescape:v4.0.12
+              image: quay.io/kubescape/kubescape:v4.0.13
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -4804,7 +4798,7 @@ sbom scanner sidecar uses armosec node-agent image:
                     - -path=v1/triggerAction
                     - -headers=Content-Type:application/json
                     - -path-body=/home/ks/request-body.json
-                  image: quay.io/kubescape/http-request:v0.2.20
+                  image: quay.io/kubescape/http-request:v0.2.23
                   imagePullPolicy: IfNotPresent
                   name: kubevuln-scheduler
                   resources:
@@ -4979,7 +4973,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: 5Gi
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
-              image: quay.io/kubescape/kubevuln:v0.3.159
+              image: quay.io/kubescape/kubevuln:v0.3.430
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -5038,7 +5032,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: sbom-scanner
-              image: quay.io/kubescape/kubevuln:v0.3.159
+              image: quay.io/kubescape/kubevuln:v0.3.430
               imagePullPolicy: IfNotPresent
               name: sbom-scanner
               resources:
@@ -5569,15 +5563,6 @@ sbom scanner sidecar uses armosec node-agent image:
           - daemonsets
           - statefulsets
           - replicasets
-        verbs:
-          - get
-          - watch
-          - list
-      - apiGroups:
-          - spdx.softwarecomposition.kubescape.io
-        resources:
-          - applicationprofiles
-          - networkneighborhoods
         verbs:
           - get
           - watch
@@ -6394,7 +6379,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   - name: armosec-readonly
                   containers:
                   - name: kubescape-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.20"
+                    image: "quay.io/kubescape/http-request:v0.2.23"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
@@ -6481,7 +6466,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   - name: armosec-readonly
                   containers:
                   - name: kubevuln-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.20"
+                    image: "quay.io/kubescape/http-request:v0.2.23"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
@@ -6568,7 +6553,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   - name: armosec-readonly
                   containers:
                   - name: registry-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.20"
+                    image: "quay.io/kubescape/http-request:v0.2.23"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
@@ -6953,6 +6938,9 @@ sbom scanner sidecar uses armosec node-agent image:
           "defaultMaxObjectSize": 400000,
           "queueManagerEnabled": true,
           "kindQueues": {"applicationprofiles":{"maxObjectSize":20000000,"queueLength":50,"workerCount":2},"containerprofiles":{"maxObjectSize":2500000,"queueLength":50,"workerCount":2},"networkneighborhoods":{"maxObjectSize":10000000,"queueLength":50,"workerCount":2},"openvulnerabilityexchangecontainers":{"maxObjectSize":500000,"queueLength":50,"workerCount":1},"sbomsyftfiltereds":{"maxObjectSize":50000000,"queueLength":50,"workerCount":1},"sbomsyfts":{"maxObjectSize":100000000,"queueLength":50,"workerCount":1},"vulnerabilitymanifests":{"maxObjectSize":50000000,"queueLength":50,"workerCount":1}},
+          "singleWriterEnabled": true,
+          "poolTimeout": "15s",
+          "sqliteBusyTimeout": "60s",
           "tlsClientCaFile": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt",
           "tlsServerCertFile": "/etc/storage-ca-certificates/tls.crt",
           "tlsServerKeyFile": "/etc/storage-ca-certificates/tls.key",
@@ -7007,7 +6995,7 @@ sbom scanner sidecar uses armosec node-agent image:
         metadata:
           annotations:
             checksum/cloud-config: 4412fb00c4beca01a812d925460a5bd2a4fa14469527d28622d8b987f3649f46
-            checksum/storage-config: 5ef9efd40532900e9053245bd7d11836f4c2212e734885e4ae28983d9e2c84a4
+            checksum/storage-config: 3bb611086ab7fc5b5acbd122deb6ed76612809110a19007d5e686e45310a0979
           labels:
             app: storage
             app.kubernetes.io/component: storage
@@ -7033,7 +7021,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/storage:v0.0.298
+              image: quay.io/kubescape/storage:v0.0.331
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:

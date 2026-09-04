@@ -592,15 +592,6 @@ minimal capabilities:
           - watch
           - list
       - apiGroups:
-          - spdx.softwarecomposition.kubescape.io
-        resources:
-          - applicationprofiles
-          - networkneighborhoods
-        verbs:
-          - get
-          - watch
-          - list
-      - apiGroups:
           - kubescape.io
         resources:
           - seccompprofiles
@@ -1413,7 +1404,7 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: kubescape-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.20"
+                    image: "quay.io/kubescape/http-request:v0.2.23"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
@@ -1500,7 +1491,7 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: kubevuln-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.20"
+                    image: "quay.io/kubescape/http-request:v0.2.23"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
@@ -1587,7 +1578,7 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: registry-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.20"
+                    image: "quay.io/kubescape/http-request:v0.2.23"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
