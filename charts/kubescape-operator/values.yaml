@@ -32,8 +32,9 @@ kubescape-operator:
     autoscaler:
       enabled: true
     config:
-      hostMalwareSensor: disable
-      hostNetworkSensor: disable
+      extra:
+        hostMalwareSensorEnabled: false
+        hostNetworkSensorEnabled: false
     env:
       - name: IGNORERULEBINDINGS
         value: true
@@ -48,8 +49,6 @@ kubescape-operator:
       image:
         repository: quay.io/armosec/node-agent
   operator:
-    image:
-      tag: v0.2.161
     rulesUpdateConfig:
       enabled: true
       interval: 5m
