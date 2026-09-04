@@ -19,6 +19,18 @@ tests:
   - it: minimal capabilities
     asserts:
       - matchSnapshot: {}
+      - matchRegex:
+          path: data["config.json"]
+          pattern: '"backendStorageEnabled": true'
+        template: charts/kubescape-operator/templates/node-agent/configmap.yaml
+      - matchRegex:
+          path: data["config.json"]
+          pattern: '"hostMalwareSensorEnabled": false'
+        template: charts/kubescape-operator/templates/node-agent/configmap.yaml
+      - matchRegex:
+          path: data["config.json"]
+          pattern: '"hostNetworkSensorEnabled": false'
+        template: charts/kubescape-operator/templates/node-agent/configmap.yaml
     capabilities:
       apiVersions:
         - batch/v1

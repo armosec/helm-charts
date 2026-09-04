@@ -41,17 +41,15 @@ kubescape-operator:
       limits:
         memory: 1000Mi
   operator:
-    image:
-      tag: v0.2.161
     rulesUpdateConfig:
       enabled: true
       interval: 5m
   storage:
-    # Rapid7 uses backend-storage (capabilities.backend-storage=enable) and does not run the
-    # in-cluster storage aggregated APIServer. Base chart <=1.40.2 derived this implicitly
+    # Rapid7 uses backend-storage (nodeAgent.config.extra.backendStorageEnabled=true) and does not
+    # run the in-cluster storage aggregated APIServer. Base chart <=1.40.2 derived this implicitly
     # (storage.enabled = not backendStorageEnabled); 1.40.3 replaced that with an explicit
     # storage.enabled defaulting to true, so it must be pinned here to keep the R7 footprint
     # unchanged. The gate lives in the upstream dependency chart, not this repo -- see the
     # "components" define in charts/kubescape-operator/templates/_common.tpl at
-    # https://github.com/kubescape/helm-charts (tag kubescape-operator-1.40.3).
+    # https://github.com/kubescape/helm-charts.
     enabled: false
