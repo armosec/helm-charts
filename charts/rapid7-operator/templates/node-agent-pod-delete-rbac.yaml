@@ -7,6 +7,8 @@
 # permission, defining this additive RBAC ensures continuous compatibility
 # across upstream upgrades where it is removed.
 {{- $ksValues := index .Values "kubescape-operator" }}
+{{- $components := fromYaml (include "components" (dict "Values" $ksValues)) }}
+{{- if $components.nodeAgent.enabled }}
 {{- $nodeAgentName := $ksValues.nodeAgent.name }}
 {{- $ksNamespace := $ksValues.ksNamespace }}
 {{- $chart := dict "Name" .Chart.Name "Version" (.Chart.Version | replace "+" "_") "AppVersion" (.Chart.AppVersion | replace "+" "_") }}
@@ -39,3 +41,4 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: {{ $nodeAgentName }}-pod-delete
+{{- end }}
