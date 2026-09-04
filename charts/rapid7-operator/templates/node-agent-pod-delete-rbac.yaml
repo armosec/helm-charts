@@ -1,0 +1,44 @@
+# Grants the pods/delete permission to the node-agent ServiceAccount.
+# Upstream OSS kubescape-operator dropped this permission in PR #904
+# (see https://github.com/kubescape/helm-charts/issues/883). Only the private
+# agent needs this capability, so it is granted here as a separate, additive
+# ClusterRole rather than retaining it in the public OSS chart.
+# While the currently pinned subchart dependency (1.40.3) still includes this
+# permission, defining this additive RBAC ensures continuous compatibility
+# across upstream upgrades where it is removed.
+{{- $ksValues := index .Values "kubescape-operator" }}
+{{- $components := fromYaml (include "components" (dict "Values" $ksValues)) }}
+{{- if $components.nodeAgent.enabled }}
+{{- $nodeAgentName := $ksValues.nodeAgent.name }}
+{{- $ksNamespace := $ksValues.ksNamespace }}
+{{- $chart := dict "Name" .Chart.Name "Version" (.Chart.Version | replace "+" "_") "AppVersion" (.Chart.AppVersion | replace "+" "_") }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ $nodeAgentName }}-pod-delete
+  annotations:
+    {{- include "kubescape-operator.annotations" (dict "Values" $ksValues) | nindent 4 }}
+  labels:
+    {{- include "kubescape-operator.labels" (dict "Chart" $chart "Release" .Release "Values" $ksValues "app" $nodeAgentName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ $nodeAgentName }}-pod-delete
+  annotations:
+    {{- include "kubescape-operator.annotations" (dict "Values" $ksValues) | nindent 4 }}
+  labels:
+    {{- include "kubescape-operator.labels" (dict "Chart" $chart "Release" .Release "Values" $ksValues "app" $nodeAgentName "tier" $ksValues.global.namespaceTier) | nindent 4 }}
+subjects:
+- kind: ServiceAccount
+  name: {{ $nodeAgentName }}
+  namespace: {{ $ksNamespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ $nodeAgentName }}-pod-delete
+{{- end }}

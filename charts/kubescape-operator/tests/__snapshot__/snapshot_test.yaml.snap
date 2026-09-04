@@ -3768,6 +3768,55 @@ minimal capabilities:
           serviceAccountName: RELEASE-NAME-host-scanner-cleanup
           tolerations: null
       ttlSecondsAfterFinished: 60
+  72: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.3_private.1
+        helm.sh/chart: armosec-kubescape-operator-1.40.3_private.1
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-pod-delete
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - pods
+        verbs:
+          - delete
+  73: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.3_private.1
+        helm.sh/chart: armosec-kubescape-operator-1.40.3_private.1
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-pod-delete
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: node-agent-pod-delete
+    subjects:
+      - kind: ServiceAccount
+        name: node-agent
+        namespace: kubescape
 sbom scanner sidecar uses armosec node-agent image:
   1: |+
     raw: |+
@@ -7538,3 +7587,52 @@ sbom scanner sidecar uses armosec node-agent image:
           serviceAccountName: RELEASE-NAME-host-scanner-cleanup
           tolerations: null
       ttlSecondsAfterFinished: 60
+  72: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.3_private.1
+        helm.sh/chart: armosec-kubescape-operator-1.40.3_private.1
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-pod-delete
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - pods
+        verbs:
+          - delete
+  73: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.3_private.1
+        helm.sh/chart: armosec-kubescape-operator-1.40.3_private.1
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-pod-delete
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: node-agent-pod-delete
+    subjects:
+      - kind: ServiceAccount
+        name: node-agent
+        namespace: kubescape
