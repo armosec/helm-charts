@@ -31,6 +31,31 @@ kubescape-operator:
         backendStorageEnabled: true
         hostMalwareSensorEnabled: false
         hostNetworkSensorEnabled: false
+        # AI-Sandbox HTTP-capture tap, NA-3 workload scanner, and TLS tracing (ADR 0009:
+        # adrs/0009-node-agent-capture-config-rename-and-otel-filter.md in armosec/shared-designs-and-docs).
+        #
+        # Image tag notice: This chart pins nodeAgent.image.tag: v0.0.386, which predates
+        # the ADR 0009 rename. In v0.0.386, the active keys remain the legacy names:
+        #   sslTracingEnabled: true (also goTlsTracingEnabled, sslOffsetAttachEnabled)
+        #   httpCaptureConfigPollEnabled: true
+        # Once upgraded to an agent image containing ADR 0009, use the renamed keys below:
+        #
+        # - tlsTracingEnabled: Static, local-only switch (ADR 0009 §1). Setting this immediately
+        #   enables fleet-wide TLS decryption (attaches libssl gadget, Go TLS gadget, and
+        #   offset-attach path) at node-agent startup. Revocable only by node-agent rollout.
+        #
+        # - captureConfigPollEnabled: Dynamic backend-authorized switch (ADR 0009 §5 & §6).
+        #   Enables polling the backend to query whether HTTP capture tap and NA-3 workload
+        #   scanning are authorized. Requires OTEL_EVENTS_EXPORTER_ENDPOINT set in
+        #   nodeAgent.env. Fail-closed: if enabled and the backend is unreachable, it results
+        #   in deny-all.
+        #
+        # In this chart, pass them via nodeAgent.config.extra:
+        #   --set kubescape-operator.nodeAgent.config.extra.tlsTracingEnabled=true
+        #   --set kubescape-operator.nodeAgent.config.extra.captureConfigPollEnabled=true
+        #
+        # tlsTracingEnabled: true
+        # captureConfigPollEnabled: true
     env:
       - name: IGNORERULEBINDINGS
         value: true
