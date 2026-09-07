@@ -28,6 +28,9 @@ kubescape-operator:
       enabled: true
     config:
       extra:
+        # Rapid7 uses backend-storage. Note: nodeAgent.config.extra takes precedence over
+        # the legacy capabilities.backend-storage knob in the subchart; to disable backend
+        # storage on a cluster, set nodeAgent.config.extra.backendStorageEnabled=false.
         backendStorageEnabled: true
         hostMalwareSensorEnabled: false
         hostNetworkSensorEnabled: false
