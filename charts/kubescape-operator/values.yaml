@@ -35,12 +35,28 @@ kubescape-operator:
       extra:
         hostMalwareSensorEnabled: false
         hostNetworkSensorEnabled: false
+        # TLS decryption and HTTP capture / workload scan configuration:
+        #
+        # - tlsTracingEnabled: Enables TLS tracing and decryption at node-agent startup.
+        #
+        # - captureConfigPollEnabled: Enables startup polling to query backend authorization
+        #   for HTTP capture and workload scanning.
+        #   Requires OTEL_EVENTS_EXPORTER_ENDPOINT to be configured in nodeAgent.env
+        #   (e.g., nodeAgent.env: [{name: OTEL_EVENTS_EXPORTER_ENDPOINT, value: "..."}]).
+        #   Fail-closed: if enabled and the backend is unreachable, it defaults to deny-all.
+        #
+        # Pass custom keys via nodeAgent.config.extra:
+        #   --set kubescape-operator.nodeAgent.config.extra.tlsTracingEnabled=true
+        #   --set kubescape-operator.nodeAgent.config.extra.captureConfigPollEnabled=true
+        #
+        # tlsTracingEnabled: true
+        # captureConfigPollEnabled: true
     env:
       - name: IGNORERULEBINDINGS
         value: true
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.386
+      tag: v0.0.464
     resources:
       limits:
         memory: 1000Mi
