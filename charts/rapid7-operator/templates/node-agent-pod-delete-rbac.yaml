@@ -1,11 +1,8 @@
 # Grants the pods/delete permission to the node-agent ServiceAccount.
-# Upstream OSS kubescape-operator dropped this permission in PR #904
+# Upstream OSS kubescape-operator 1.40.4 dropped this permission in PR #904
 # (see https://github.com/kubescape/helm-charts/issues/883). Only the private
-# agent needs this capability, so it is granted here as a separate, additive
-# ClusterRole rather than retaining it in the public OSS chart.
-# While the currently pinned subchart dependency (1.40.3) still includes this
-# permission, defining this additive RBAC ensures continuous compatibility
-# across upstream upgrades where it is removed.
+# agent needs this capability for pod eviction, so it is granted here as a separate,
+# additive ClusterRole rather than retaining it in the public OSS chart.
 {{- $ksValues := index .Values "kubescape-operator" }}
 {{- $components := fromYaml (include "components" (dict "Values" $ksValues)) }}
 {{- if $components.nodeAgent.enabled }}
