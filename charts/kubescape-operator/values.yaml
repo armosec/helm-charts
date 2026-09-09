@@ -41,8 +41,6 @@ kubescape-operator:
         #
         # - captureConfigPollEnabled: Enables startup polling to query backend authorization
         #   for HTTP capture and workload scanning.
-        #   Requires OTEL_EVENTS_EXPORTER_ENDPOINT to be configured in nodeAgent.env
-        #   (e.g., nodeAgent.env: [{name: OTEL_EVENTS_EXPORTER_ENDPOINT, value: "..."}]).
         #   Fail-closed: if enabled and the backend is unreachable, it defaults to deny-all.
         #
         # Pass custom keys via nodeAgent.config.extra:
@@ -56,7 +54,7 @@ kubescape-operator:
         value: true
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.464
+      tag: v0.0.467
     resources:
       limits:
         memory: 1000Mi
