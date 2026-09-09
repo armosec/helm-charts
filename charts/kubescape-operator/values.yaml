@@ -66,3 +66,6 @@ kubescape-operator:
     rulesUpdateConfig:
       enabled: true
       interval: 5m
+  storage:
+    image:
+      tag: v0.0.335
