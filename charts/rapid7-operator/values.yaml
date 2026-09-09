@@ -71,3 +71,5 @@ kubescape-operator:
     # "components" define in charts/kubescape-operator/templates/_common.tpl at
     # https://github.com/kubescape/helm-charts.
     enabled: false
+    image:
+      tag: v0.0.335

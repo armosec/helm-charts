@@ -3163,7 +3163,7 @@ minimal capabilities:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/storage:v0.0.331
+              image: quay.io/kubescape/storage:v0.0.335
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -3669,8 +3669,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -3690,8 +3690,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -3719,8 +3719,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -3748,8 +3748,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -3764,8 +3764,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: armosec-kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.4-private.rc2
-            helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+            app.kubernetes.io/version: 1.40.4-private.rc3
+            helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
             kubescape.io/ignore: "true"
             tier: ks-control-plane
         spec:
@@ -3819,8 +3819,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -3843,8 +3843,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -7021,7 +7021,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/storage:v0.0.331
+              image: quay.io/kubescape/storage:v0.0.335
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -7527,8 +7527,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -7548,8 +7548,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -7577,8 +7577,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -7606,8 +7606,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: RELEASE-NAME-host-scanner-cleanup
@@ -7622,8 +7622,8 @@ sbom scanner sidecar uses armosec node-agent image:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: armosec-kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.4-private.rc2
-            helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+            app.kubernetes.io/version: 1.40.4-private.rc3
+            helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
             kubescape.io/ignore: "true"
             tier: ks-control-plane
         spec:
@@ -7677,8 +7677,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -7701,8 +7701,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.4-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc2
+        app.kubernetes.io/version: 1.40.4-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.40.4-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
