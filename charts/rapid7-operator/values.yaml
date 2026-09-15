@@ -59,6 +59,8 @@ kubescape-operator:
       limits:
         memory: 1000Mi
   operator:
+    image:
+      tag: v0.2.172
     rulesUpdateConfig:
       enabled: true
       interval: 5m
