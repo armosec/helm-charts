@@ -19,6 +19,9 @@ kubescape-operator:
     affinity: {}
     tolerations: []
     priorityClassName: ""
+  kubescape:
+    image:
+      tag: v4.0.14
   kubevuln:
     sbomScanner:
       enabled: true
