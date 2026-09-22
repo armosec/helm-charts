@@ -21,5 +21,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: 'v3.17.1'
+
+      - name: Install helm-unittest plugin
+        run: helm plugin install https://github.com/helm-unittest/helm-unittest.git --version v1.0.3
+
+      - name: Build chart dependencies
+        run: |
+          helm dependency build charts/kubescape-operator/
+          helm dependency build charts/rapid7-operator/
+
       - name: Run Helm Unittests
-        run: docker run --rm --name unittest --volume "$(pwd)":/apps helmunittest/helm-unittest:3.21.0-1.0.3 charts/kubescape-operator/ charts/rapid7-operator/
+        run: helm unittest charts/kubescape-operator/ charts/rapid7-operator/
