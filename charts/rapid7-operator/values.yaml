@@ -2,13 +2,14 @@ kubescape-operator:
   alertCRD:
     installDefault: false
   capabilities:
+    configurationScan: disable
     manageWorkloads: enable
     nodeProfileService: enable
     nodeSbomGeneration: disable
+    remediation: enable
     runtimeDetection: enable
-    configurationScan: disable
-    vulnerabilityScan: disable
     seccompProfileBackend: crd
+    vulnerabilityScan: disable
   excludeNamespaces: "kubescape,kube-system,kube-public,kube-node-lease,kubeconfig,gmp-system,gmp-public,cortex-agent"
   imagePullSecret:
     server: quay.io

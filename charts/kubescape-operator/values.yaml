@@ -4,6 +4,7 @@ kubescape-operator:
   capabilities:
     manageWorkloads: enable
     nodeProfileService: enable
+    remediation: enable
     runtimeDetection: enable
   excludeNamespaces: "kubescape,kube-system,kube-public,kube-node-lease,kubeconfig,gmp-system,gmp-public,cortex-agent"
   imagePullSecret:
