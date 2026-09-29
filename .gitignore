@@ -1,5 +1,6 @@
 # IDEs and Editors
 .vscode/
+.omc/
 .idea/
 *.swp
 *.swo

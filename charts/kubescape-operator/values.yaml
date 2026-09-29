@@ -75,3 +75,6 @@ kubescape-operator:
   storage:
     image:
       tag: v0.0.345
+  synchronizer:
+    image:
+      tag: v0.0.166
