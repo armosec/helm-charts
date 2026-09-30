@@ -3187,7 +3187,7 @@ minimal capabilities:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/storage:v0.0.345
+              image: quay.io/kubescape/storage:v0.0.346
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -7069,7 +7069,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/storage:v0.0.345
+              image: quay.io/kubescape/storage:v0.0.346
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -10953,7 +10953,7 @@ synchronizer enabled when server is configured:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/storage:v0.0.345
+              image: quay.io/kubescape/storage:v0.0.346
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:

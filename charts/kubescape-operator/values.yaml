@@ -74,7 +74,7 @@ kubescape-operator:
       interval: 5m
   storage:
     image:
-      tag: v0.0.345
+      tag: v0.0.346
   synchronizer:
     image:
       tag: v0.0.166
