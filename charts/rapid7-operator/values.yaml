@@ -58,7 +58,7 @@ kubescape-operator:
         value: true
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.487
+      tag: v0.0.515
     resources:
       limits:
         memory: 1000Mi
@@ -77,3 +77,6 @@ kubescape-operator:
     # "components" define in charts/kubescape-operator/templates/_common.tpl at
     # https://github.com/kubescape/helm-charts.
     enabled: false
+  synchronizer:
+    image:
+      tag: v0.0.166

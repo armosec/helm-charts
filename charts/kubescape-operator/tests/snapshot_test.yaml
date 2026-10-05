@@ -61,3 +61,22 @@ tests:
         nodeAgent:
           sbomScanner:
             enabled: true
+
+  - it: synchronizer enabled when server is configured
+    asserts:
+      - matchSnapshot: {}
+      - matchRegex:
+          path: spec.template.spec.containers[0].image
+          pattern: '^quay\.io/kubescape/synchronizer:.*$'
+        template: charts/kubescape-operator/templates/synchronizer/deployment.yaml
+    capabilities:
+      apiVersions:
+        - batch/v1
+    set:
+      kubescape-operator:
+        account: 9e6c0c2c-6bd0-4919-815b-55030de7c9a0
+        accessKey: f304d73b-d43c-412b-82ea-e4c859493ce6
+        server: api.armosec.io
+        unittest: true
+        clusterName: kind-kind
+
