@@ -20,9 +20,6 @@ kubescape-operator:
     affinity: {}
     tolerations: []
     priorityClassName: ""
-  kubescape:
-    image:
-      tag: v4.0.14
   kubevuln:
     sbomScanner:
       enabled: true
@@ -58,7 +55,7 @@ kubescape-operator:
         value: true
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.515
+      tag: v0.0.525
     resources:
       limits:
         memory: 1000Mi
@@ -67,14 +64,9 @@ kubescape-operator:
       image:
         repository: quay.io/armosec/node-agent
   operator:
-    image:
-      tag: v0.2.172
     rulesUpdateConfig:
       enabled: true
       interval: 5m
-  storage:
-    image:
-      tag: v0.0.348
   synchronizer:
     image:
-      tag: v0.0.166
+      tag: v0.0.167
