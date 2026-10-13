@@ -92,10 +92,14 @@ def resolve_digest(image):
 
 
 def extract_allowlist_tags(allowlist_path):
-    """Parse comments under containerImageDigests to find known image tags per container."""
+    """Parse comments under containerImageDigests to find known image tags per container.
+    A tag comment is only recorded if it is immediately followed by a valid 64-character hex digest.
+    """
     tags_by_container = {}
     current_container = None
+    pending_tag = None
     in_digests = False
+    digest_re = re.compile(r"^-\s+[0-9a-fA-F]{64}$")
     with open(allowlist_path) as f:
         for line in f:
             line_str = line.strip()
@@ -108,11 +112,20 @@ def extract_allowlist_tags(allowlist_path):
             if m_c:
                 current_container = m_c.group(1)
                 tags_by_container[current_container] = set()
+                pending_tag = None
                 continue
-            if current_container and line_str.startswith("#"):
-                comment = line_str.lstrip("#").strip()
-                if ":" in comment:
-                    tags_by_container[current_container].add(comment)
+            if current_container:
+                if line_str.startswith("#"):
+                    comment = line_str.lstrip("#").strip()
+                    if ":" in comment:
+                        pending_tag = comment
+                    else:
+                        pending_tag = None
+                elif pending_tag and digest_re.match(line_str):
+                    tags_by_container[current_container].add(pending_tag)
+                    pending_tag = None
+                elif line_str:
+                    pending_tag = None
     return tags_by_container
 
 
