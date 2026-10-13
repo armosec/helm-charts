@@ -12,13 +12,13 @@ chart-release pipeline can classify each release without a cluster:
                 NOT present in the allowlist -> a NEW allowlist version is required
                 (Tier-2 gate should block the release until one is approved)
 
-Exit code: 0 for no-op/digest-only, 2 for spec-drift (CI-gate friendly).
+Exit code: 0 for no-op, 2 for spec-drift / missing-digests (CI-gate friendly).
 
 Usage:
   allowlist-drift.py --chart <path> --allowlist <yaml> [--values f.yaml ...]
                      [--set k=v ...] [--wrapper] [--check-digests]
 """
-import argparse, re, subprocess, sys
+import argparse, re, shutil, subprocess, sys
 import yaml
 
 
@@ -100,6 +100,9 @@ def main():
                     help="resolve running image digests via skopeo (network)")
     args = ap.parse_args()
 
+    if args.check_digests and shutil.which("skopeo") is None:
+        sys.exit("error: skopeo is not installed (needed to resolve image digests).")
+
     wl = workload_projection(render_node_agent(args.chart, args.values, args.sets, args.wrapper))
     al = allowlist_projection(yaml.safe_load(open(args.allowlist)))
 
@@ -135,7 +138,9 @@ def main():
     if args.check_digests:
         for name, wc in wl["containers"].items():
             d = resolve_digest(wc["image"])
-            if d and d not in al["digests"].get(name, set()):
+            if d is None:
+                digests_missing.append(f"{name}: could not resolve digest for {wc['image']}")
+            elif d not in al["digests"].get(name, set()):
                 digests_missing.append(f"{name}: {wc['image']} -> sha256:{d[:16]}… not in containerImageDigests")
 
     print(f"# drift report: {args.chart}")
@@ -144,12 +149,12 @@ def main():
         print("CLASS: spec-drift  (NEW allowlist version required)")
         for d in drift:
             print(f"  - {d}")
-        sys.exit(2)
     if digests_missing:
         print("CLASS: digest-only  (append digests to existing allowlist)")
         for d in digests_missing:
             print(f"  - {d}")
-        sys.exit(0)
+    if drift or digests_missing:
+        sys.exit(2)
     print("CLASS: no-op  (workload covered by approved allowlist)")
     sys.exit(0)
 

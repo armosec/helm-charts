@@ -63,6 +63,9 @@ kubescape-operator:
     resources:
       limits:
         memory: 1000Mi
+    sbomScanner:
+      image:
+        tag: v0.3.147
   operator:
     image:
       tag: v0.2.181
