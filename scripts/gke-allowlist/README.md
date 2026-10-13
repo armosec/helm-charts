@@ -27,9 +27,13 @@ gradual rollout). The release drift gate (below) catches that before release.
 ## Run the drift check locally
 
 ```bash
-# public kubescape chart
+# private kubescape wrapper chart
 scripts/gke-allowlist/check-drift.sh charts/kubescape-operator \
-  gke-allowlist/armo-kubescape-node-agent-1.40-v2.yaml
+  gke-allowlist/armo-private-node-agent-1.40-v2.yaml --wrapper --check-digests
+
+# rapid7 wrapper chart
+scripts/gke-allowlist/check-drift.sh charts/rapid7-operator \
+  gke-allowlist/armo-rapid7-node-agent-1.40-v2.yaml --wrapper --check-digests
 ```
 Exit 0 = covered; exit 2 = drift (the render needs something the allowlist lacks — the output names
 each missing env/mount/container/digest).
@@ -38,7 +42,7 @@ each missing env/mount/container/digest).
 
 ### If the failure is digest-only (`CLASS: digest-only`)
 `containerImageDigests` is mutable on approved allowlists, so no new allowlist version is required:
-1. Run `scripts/gke-allowlist/refresh-digests.py --apply` to append the new digests to the existing allowlist.
+1. Run `scripts/gke-allowlist/refresh-digests.py --apply gke-allowlist/*.yaml` (or point `$GKE_ALLOWLIST_REPO` to your allowlist checkout) to append the new digests.
 2. Push the updated allowlist to Gerrit (`refs/for/main`) and update the vendored copy under `gke-allowlist/`.
 
 ### If the failure is spec drift (`CLASS: spec-drift`)

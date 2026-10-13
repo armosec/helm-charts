@@ -83,8 +83,11 @@ def repo(image):
 def resolve_digest(image):
     if shutil.which("skopeo") is None:
         return None
-    out = subprocess.run(["skopeo", "inspect", f"docker://{image}"],
-                         capture_output=True, text=True)
+    try:
+        out = subprocess.run(["skopeo", "inspect", f"docker://{image}"],
+                             capture_output=True, text=True, timeout=30)
+    except (subprocess.TimeoutExpired, OSError):
+        return None
     if out.returncode != 0:
         return None
     import json
