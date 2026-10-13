@@ -3882,6 +3882,55 @@ minimal capabilities:
       - kind: ServiceAccount
         name: node-agent
         namespace: kubescape
+  74: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      annotations: null
+      labels:
+        app: storage
+        app.kubernetes.io/component: storage
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.5-private.rc2
+        helm.sh/chart: armosec-kubescape-operator-1.40.5-private.rc2
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: storage-node-discovery
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - nodes
+        verbs:
+          - list
+  75: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: storage
+        app.kubernetes.io/component: storage
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.5-private.rc2
+        helm.sh/chart: armosec-kubescape-operator-1.40.5-private.rc2
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: storage-node-discovery
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: storage-node-discovery
+    subjects:
+      - kind: ServiceAccount
+        name: storage
+        namespace: kubescape
 sbom scanner sidecar uses armosec node-agent image:
   1: |+
     raw: |+
@@ -7765,6 +7814,55 @@ sbom scanner sidecar uses armosec node-agent image:
     subjects:
       - kind: ServiceAccount
         name: node-agent
+        namespace: kubescape
+  74: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      annotations: null
+      labels:
+        app: storage
+        app.kubernetes.io/component: storage
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.5-private.rc2
+        helm.sh/chart: armosec-kubescape-operator-1.40.5-private.rc2
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: storage-node-discovery
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - nodes
+        verbs:
+          - list
+  75: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: storage
+        app.kubernetes.io/component: storage
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.5-private.rc2
+        helm.sh/chart: armosec-kubescape-operator-1.40.5-private.rc2
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: storage-node-discovery
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: storage-node-discovery
+    subjects:
+      - kind: ServiceAccount
+        name: storage
         namespace: kubescape
 synchronizer enabled when server is configured:
   1: |+
@@ -12439,4 +12537,53 @@ synchronizer enabled when server is configured:
     subjects:
       - kind: ServiceAccount
         name: node-agent
+        namespace: kubescape
+  82: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      annotations: null
+      labels:
+        app: storage
+        app.kubernetes.io/component: storage
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.5-private.rc2
+        helm.sh/chart: armosec-kubescape-operator-1.40.5-private.rc2
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: storage-node-discovery
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - nodes
+        verbs:
+          - list
+  83: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: storage
+        app.kubernetes.io/component: storage
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: armosec-kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.40.5-private.rc2
+        helm.sh/chart: armosec-kubescape-operator-1.40.5-private.rc2
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: storage-node-discovery
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: storage-node-discovery
+    subjects:
+      - kind: ServiceAccount
+        name: storage
         namespace: kubescape
