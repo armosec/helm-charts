@@ -110,8 +110,8 @@ jobs:
             if [ "$rc" -eq 2 ]; then drift=1
             elif [ "$rc" -ne 0 ]; then crash=1; fi
           }
-          check charts/kubescape-operator gke-allowlist/armo-private-node-agent-1.40-v2.yaml --wrapper
-          check charts/rapid7-operator   gke-allowlist/armo-rapid7-node-agent-1.40-v2.yaml  --wrapper
+          check charts/kubescape-operator gke-allowlist/armo-private-node-agent-1.40-v2.yaml --wrapper --check-digests
+          check charts/rapid7-operator   gke-allowlist/armo-rapid7-node-agent-1.40-v2.yaml  --wrapper --check-digests
           if [ "$crash" -ne 0 ]; then
             echo "::error::allowlist drift check failed to run — not a drift result, so BYPASS_ALLOWLIST_DRIFT does not apply. Fix the check."
             exit 1

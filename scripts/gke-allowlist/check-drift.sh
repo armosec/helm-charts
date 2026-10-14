@@ -3,7 +3,7 @@
 # Autopilot WorkloadAllowlist. Used by the release CI drift gate and runnable locally.
 #
 # Usage:
-#   check-drift.sh <chart-dir> <allowlist-yaml> [--wrapper]
+#   check-drift.sh <chart-dir> <allowlist-yaml> [--wrapper] [--check-digests]
 #
 # --wrapper : the chart wraps the public kubescape-operator subchart, so values are
 #             nested under the `kubescape-operator.` key.
@@ -16,16 +16,26 @@ set -euo pipefail
 
 CHART="${1:?chart dir required}"
 ALLOWLIST="${2:?allowlist yaml required}"
-WRAPPER="${3:-}"
-HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+shift 2
 
+extra_args=()
 prefix=""
-[ "$WRAPPER" = "--wrapper" ] && prefix="kubescape-operator."
+for arg in "$@"; do
+  if [ "$arg" = "--wrapper" ]; then
+    prefix="kubescape-operator."
+    extra_args+=("--wrapper")
+  else
+    extra_args+=("$arg")
+  fi
+done
+
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 helm dependency build "$CHART" >/dev/null
 
 exec python3 "$HERE/allowlist-drift.py" \
-  --chart "$CHART" --allowlist "$ALLOWLIST" ${WRAPPER:+$WRAPPER} \
+  --chart "$CHART" --allowlist "$ALLOWLIST" \
+  "${extra_args[@]}" \
   --set "${prefix}server=api.example.com" \
   --set "${prefix}accessKey=00000000-0000-0000-0000-000000000000" \
   --set "${prefix}capabilities.malwareDetection=enable" \

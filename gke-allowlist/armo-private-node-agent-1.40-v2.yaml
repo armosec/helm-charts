@@ -194,6 +194,10 @@ matchingCriteria:
 containerImageDigests:
   - containerName: node-agent
     imageDigests:
+      # quay.io/armosec/node-agent:v0.0.542
+      - 92bf9dbe413ae8dd2b0e428c6d89cbf26da888b110f153e3374476e3c1608e7b
+      # quay.io/armosec/node-agent:v0.0.541
+      - 31cdc33a3e08971a7c64920b0566c987f2020fd2e4141e0e915e58288748be00
       # quay.io/armosec/node-agent:v0.0.334
       - ea34a70afde3138fb340dc7c24dbf3f49c2e478ae3af1585a088cd7754403535
       # quay.io/armosec/node-agent:v0.0.330
@@ -240,6 +244,10 @@ containerImageDigests:
       - 05893fbe2ae88b9f42867551c9d2577551773a7fcdc536f8dfa21e451077c928
   - containerName: sbom-scanner
     imageDigests:
+      # quay.io/armosec/node-agent:v0.0.542
+      - 92bf9dbe413ae8dd2b0e428c6d89cbf26da888b110f153e3374476e3c1608e7b
+      # quay.io/armosec/node-agent:v0.0.541
+      - 31cdc33a3e08971a7c64920b0566c987f2020fd2e4141e0e915e58288748be00
       # quay.io/armosec/node-agent:v0.0.334
       - ea34a70afde3138fb340dc7c24dbf3f49c2e478ae3af1585a088cd7754403535
       # quay.io/armosec/node-agent:v0.0.330

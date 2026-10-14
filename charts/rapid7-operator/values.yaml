@@ -16,6 +16,10 @@ kubescape-operator:
     username: armosec+armosec_ro
   imagePullSecrets: armosec-readonly
   kubevuln:
+    config:
+      maxSBOMSize: 33554432
+    image:
+      tag: v0.3.546
     sbomScanner:
       enabled: true
   nodeAgent:
@@ -55,11 +59,16 @@ kubescape-operator:
         value: true
     image:
       repository: quay.io/armosec/node-agent
-      tag: v0.0.525
+      tag: v0.0.542
     resources:
       limits:
         memory: 1000Mi
+    sbomScanner:
+      image:
+        tag: v0.3.147
   operator:
+    image:
+      tag: v0.2.181
     rulesUpdateConfig:
       enabled: true
       interval: 5m
@@ -72,3 +81,6 @@ kubescape-operator:
     # "components" define in charts/kubescape-operator/templates/_common.tpl at
     # https://github.com/kubescape/helm-charts.
     enabled: false
+  synchronizer:
+    image:
+      tag: v0.0.167

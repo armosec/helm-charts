@@ -12,13 +12,13 @@ chart-release pipeline can classify each release without a cluster:
                 NOT present in the allowlist -> a NEW allowlist version is required
                 (Tier-2 gate should block the release until one is approved)
 
-Exit code: 0 for no-op/digest-only, 2 for spec-drift (CI-gate friendly).
+Exit code: 0 for no-op, 2 for spec-drift / missing-digests (CI-gate friendly).
 
 Usage:
   allowlist-drift.py --chart <path> --allowlist <yaml> [--values f.yaml ...]
                      [--set k=v ...] [--wrapper] [--check-digests]
 """
-import argparse, re, subprocess, sys
+import argparse, re, shutil, subprocess, sys
 import yaml
 
 
@@ -81,12 +81,55 @@ def repo(image):
 
 
 def resolve_digest(image):
-    out = subprocess.run(["skopeo", "inspect", f"docker://{image}"],
-                         capture_output=True, text=True)
+    if shutil.which("skopeo") is None:
+        return None
+    try:
+        out = subprocess.run(["skopeo", "inspect", f"docker://{image}"],
+                             capture_output=True, text=True, timeout=30)
+    except (subprocess.TimeoutExpired, OSError):
+        return None
     if out.returncode != 0:
         return None
     import json
     return json.loads(out.stdout).get("Digest", "").replace("sha256:", "")
+
+
+def extract_allowlist_tags(allowlist_path):
+    """Parse comments under containerImageDigests to find known image tags per container.
+    A tag comment is only recorded if it is immediately followed by a valid 64-character hex digest.
+    """
+    tags_by_container = {}
+    current_container = None
+    pending_tag = None
+    in_digests = False
+    digest_re = re.compile(r"^-\s+[0-9a-fA-F]{64}$")
+    with open(allowlist_path) as f:
+        for line in f:
+            line_str = line.strip()
+            if line_str.startswith("containerImageDigests:"):
+                in_digests = True
+                continue
+            if not in_digests:
+                continue
+            m_c = re.match(r"^-\s+containerName:\s*(\S+)", line_str)
+            if m_c:
+                current_container = m_c.group(1)
+                tags_by_container[current_container] = set()
+                pending_tag = None
+                continue
+            if current_container:
+                if line_str.startswith("#"):
+                    comment = line_str.lstrip("#").strip()
+                    if ":" in comment:
+                        pending_tag = comment
+                    else:
+                        pending_tag = None
+                elif pending_tag and digest_re.match(line_str):
+                    tags_by_container[current_container].add(pending_tag)
+                    pending_tag = None
+                elif line_str:
+                    pending_tag = None
+    return tags_by_container
 
 
 def main():
@@ -133,10 +176,17 @@ def main():
             drift.append(f"hostPath '{name}': workload path {path} != allowlist {al['hostpaths'][name]}")
 
     if args.check_digests:
+        al_tags = extract_allowlist_tags(args.allowlist)
         for name, wc in wl["containers"].items():
             d = resolve_digest(wc["image"])
-            if d and d not in al["digests"].get(name, set()):
-                digests_missing.append(f"{name}: {wc['image']} -> sha256:{d[:16]}… not in containerImageDigests")
+            if d:
+                if d not in al["digests"].get(name, set()):
+                    digests_missing.append(f"{name}: {wc['image']} -> sha256:{d[:16]}… not in containerImageDigests")
+            else:
+                # If skopeo cannot resolve the digest (e.g. private image without registry auth in CI),
+                # verify that the image tag is annotated in the allowlist containerImageDigests comments.
+                if wc["image"] not in al_tags.get(name, set()):
+                    digests_missing.append(f"{name}: {wc['image']} -> digest entry not found in containerImageDigests")
 
     print(f"# drift report: {args.chart}")
     print(f"#   allowlist: {args.allowlist}")
@@ -144,12 +194,12 @@ def main():
         print("CLASS: spec-drift  (NEW allowlist version required)")
         for d in drift:
             print(f"  - {d}")
-        sys.exit(2)
     if digests_missing:
         print("CLASS: digest-only  (append digests to existing allowlist)")
         for d in digests_missing:
             print(f"  - {d}")
-        sys.exit(0)
+    if drift or digests_missing:
+        sys.exit(2)
     print("CLASS: no-op  (workload covered by approved allowlist)")
     sys.exit(0)
 

@@ -19,7 +19,7 @@ gradual rollout). The release drift gate (below) catches that before release.
 
 | Script | Purpose |
 |--------|---------|
-| `allowlist-drift.py` | Classify a chart render vs an allowlist as `no-op` / `digest-only` / `spec-drift`. Exit 2 on spec-drift (CI-gate friendly). |
+| `allowlist-drift.py` | Classify a chart render vs an allowlist as `no-op` / `digest-only` / `spec-drift`. Exit 2 on spec-drift or missing digests (CI-gate friendly). |
 | `check-drift.sh` | Wrapper script the release CI calls: renders the node-agent with all optional features on and runs `allowlist-drift.py`. |
 | `build-allowlists.py` | (allowlist-repo side) Assemble final WorkloadAllowlist files from GKE-generated baselines + value overlays + image digests. |
 | `refresh-digests.py` | (allowlist-repo side) Append newly-released node-agent image SHA-256 digests to an approved allowlist's mutable `containerImageDigests` field. |
@@ -27,21 +27,31 @@ gradual rollout). The release drift gate (below) catches that before release.
 ## Run the drift check locally
 
 ```bash
-# public kubescape chart
+# private kubescape wrapper chart
 scripts/gke-allowlist/check-drift.sh charts/kubescape-operator \
-  gke-allowlist/armo-kubescape-node-agent-1.40-v2.yaml
+  gke-allowlist/armo-private-node-agent-1.40-v2.yaml --wrapper --check-digests
+
+# rapid7 wrapper chart
+scripts/gke-allowlist/check-drift.sh charts/rapid7-operator \
+  gke-allowlist/armo-rapid7-node-agent-1.40-v2.yaml --wrapper --check-digests
 ```
 Exit 0 = covered; exit 2 = drift (the render needs something the allowlist lacks — the output names
-each missing env/mount/container).
+each missing env/mount/container/digest).
 
 ## When the drift gate fails on a release
 
-1. The node-agent's privileged surface changed and needs a **new allowlist version**.
-2. Create it in the `ARMO` allowlist repo (see `build-allowlists.py` / the process runbook), open a
+### If the failure is digest-only (`CLASS: digest-only`)
+`containerImageDigests` is mutable on approved allowlists, so no new allowlist version is required:
+1. Run `scripts/gke-allowlist/refresh-digests.py --apply gke-allowlist/*.yaml` (or point `$GKE_ALLOWLIST_REPO` to your allowlist checkout) to append the new digests.
+2. Push the updated allowlist to Gerrit (`refs/for/main`) and update the vendored copy under `gke-allowlist/`.
+
+### If the failure is spec drift (`CLASS: spec-drift`)
+The node-agent's privileged surface changed and needs a **new allowlist version**:
+1. Create it in the `ARMO` allowlist repo (see `build-allowlists.py` / the process runbook), open a
    Gerrit change, and get it approved.
-3. Update the vendored copy under `gke-allowlist/` to match, and bump the chart's
+2. Update the vendored copy under `gke-allowlist/` to match, and bump the chart's
    `nodeAgent.gke.allowlist.name` default.
-4. Re-run the release with the **`BYPASS_ALLOWLIST_DRIFT`** input set to `true` ("set as pass after
+3. Re-run the release with the **`BYPASS_ALLOWLIST_DRIFT`** input set to `true` ("set as pass after
    you opened Gerrit to allowlist") while the new allowlist works through approval + rollout.
 
 ## Limitation
