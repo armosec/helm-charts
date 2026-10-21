@@ -84,7 +84,7 @@ def resolve_digest(image):
     if shutil.which("skopeo") is None:
         return None
     try:
-        out = subprocess.run(["skopeo", "inspect", f"docker://{image}"],
+        out = subprocess.run(["skopeo", "inspect", "--no-tags", f"docker://{image}"],
                              capture_output=True, text=True, timeout=30)
     except (subprocess.TimeoutExpired, OSError):
         return None

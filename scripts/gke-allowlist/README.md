@@ -42,7 +42,7 @@ each missing env/mount/container/digest).
 
 ### If the failure is digest-only (`CLASS: digest-only`)
 `containerImageDigests` is mutable on approved allowlists, so no new allowlist version is required:
-1. Run `scripts/gke-allowlist/refresh-digests.py --apply gke-allowlist/*.yaml` (or point `$GKE_ALLOWLIST_REPO` to your allowlist checkout) to append the new digests.
+1. Run `scripts/gke-allowlist/refresh-digests.py -t <tag> --apply gke-allowlist/*.yaml` (e.g. `-t v0.0.572`; omit `-t` to discover recent releases, or point `$GKE_ALLOWLIST_REPO` to your allowlist checkout) to append the new digests.
 2. Push the updated allowlist to Gerrit (`refs/for/main`) and update the vendored copy under `gke-allowlist/`.
 
 ### If the failure is spec drift (`CLASS: spec-drift`)
