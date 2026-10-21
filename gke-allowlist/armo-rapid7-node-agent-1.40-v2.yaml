@@ -194,6 +194,8 @@ matchingCriteria:
 containerImageDigests:
   - containerName: node-agent
     imageDigests:
+      # quay.io/armosec/node-agent:v0.0.572
+      - 6043b8754e44f2a03cffce29f64c25f8f071811f4838378133715849751b6191
       # quay.io/armosec/node-agent:v0.0.542
       - 92bf9dbe413ae8dd2b0e428c6d89cbf26da888b110f153e3374476e3c1608e7b
       # quay.io/armosec/node-agent:v0.0.541
