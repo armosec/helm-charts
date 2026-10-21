@@ -25,19 +25,30 @@ from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 
 # Repo root of the ARMO allowlist checkout. Override with $GKE_ALLOWLIST_REPO; falls back to the
-# path used during development or vendored gke-allowlist/*.yaml in the helm-charts repo.
-REPO = os.environ.get(
-    "GKE_ALLOWLIST_REPO",
-    os.path.expanduser("~/projects/workspace-gke-autopilot-approval/gke-allow-list/ARMO"),
-)
-DEFAULT_FILES = sorted(glob.glob(f"{REPO}/*/1.40/*-1.40.yaml"))
-if not DEFAULT_FILES:
+# vendored gke-allowlist/*.yaml in the helm-charts repo or dev path when unset.
+REPO_ENV = os.environ.get("GKE_ALLOWLIST_REPO")
+if REPO_ENV:
+    DEFAULT_FILES = sorted(glob.glob(f"{REPO_ENV}/*/1.40/*-1.40.yaml"))
+    if not DEFAULT_FILES:
+        sys.exit(f"error: $GKE_ALLOWLIST_REPO is set to '{REPO_ENV}' but no 1.40 allowlist files were found.")
+else:
     script_dir = os.path.dirname(os.path.abspath(__file__))
     repo_root = os.path.abspath(os.path.join(script_dir, "../.."))
     DEFAULT_FILES = sorted(glob.glob(os.path.join(repo_root, "gke-allowlist", "*.yaml")))
+    if not DEFAULT_FILES:
+        dev_path = os.path.expanduser("~/projects/workspace-gke-autopilot-approval/gke-allow-list/ARMO")
+        DEFAULT_FILES = sorted(glob.glob(f"{dev_path}/*/1.40/*-1.40.yaml"))
 
 TAG_RE = re.compile(r"^v\d+\.\d+\.\d+$")
 REG_RE = re.compile(r"quay\.io/(armosec|kubescape)/node-agent")
+DIGEST_RE = re.compile(r"^\s*-\s+([0-9a-fA-F]{64})\s*$")
+
+
+def semver_sort_key(tag):
+    m = TAG_RE.match(tag)
+    if m:
+        return [int(x) for x in tag[1:].split(".")]
+    return [0, 0, 0]
 
 
 def _skopeo(*args):
@@ -53,7 +64,7 @@ def get_digest(repo, tag):
     if ins.returncode == 0:
         d = json.loads(ins.stdout).get("Digest", "").replace("sha256:", "")
         if d:
-            return d
+            return d.lower()
     return None
 
 
@@ -65,7 +76,7 @@ def fetch_tags(registry):
     if tags.returncode != 0:
         sys.exit(f"skopeo list-tags failed for {repo}:\n{tags.stderr}")
     all_tags = [t for t in json.loads(tags.stdout)["Tags"] if TAG_RE.match(t)]
-    all_tags.sort(key=lambda t: [int(x) for x in t[1:].split(".")], reverse=True)
+    all_tags.sort(key=semver_sort_key, reverse=True)
     return all_tags
 
 
@@ -89,21 +100,31 @@ def process(path, maxn, apply, explicit_tags=None):
             indent = len(lines[i]) - len(lines[i].lstrip())
             j = i + 1
             existing_digests, existing_tags, reg = set(), set(), None
+            pending_tag = None
             while j < len(lines):
                 ln = lines[j]
                 # block ends when indentation drops to <= the imageDigests indent on a non-blank, non-deeper line
                 if ln.strip() and (len(ln) - len(ln.lstrip())) <= indent:
                     break
-                m = re.match(r"\s*-\s+([0-9a-f]{64})\s*$", ln)
-                if m:
-                    existing_digests.add(m.group(1))
-                rm = REG_RE.search(ln)
-                if rm:
-                    if reg is None:
-                        reg = rm.group(1)
-                    tm = re.search(r":(" + TAG_RE.pattern[1:-1] + r")", ln)
-                    if tm:
-                        existing_tags.add(tm.group(1))
+                dm = DIGEST_RE.match(ln)
+                if dm:
+                    digest_val = dm.group(1).lower()
+                    existing_digests.add(digest_val)
+                    if pending_tag:
+                        existing_tags.add(pending_tag)
+                        pending_tag = None
+                else:
+                    rm = REG_RE.search(ln)
+                    if rm:
+                        if reg is None:
+                            reg = rm.group(1)
+                        tm = re.search(r":(" + TAG_RE.pattern[1:-1] + r")", ln)
+                        if tm:
+                            pending_tag = tm.group(1)
+                        else:
+                            pending_tag = None
+                    elif ln.strip():
+                        pending_tag = None
                 j += 1
             blocks.append([i, j, reg, existing_digests, existing_tags])
             i = j
@@ -119,6 +140,9 @@ def process(path, maxn, apply, explicit_tags=None):
         if explicit_tags:
             candidate_tags = [t for t in explicit_tags if t not in existing_tags]
             resolved = resolve_tags(reg, candidate_tags)
+            for t in candidate_tags:
+                if t not in dict(resolved):
+                    report.append(f"  ! could not resolve digest for {reg}/node-agent:{t} (tag missing or inspect failed)")
             missing = [(t, d) for (t, d) in resolved if d not in existing_digests]
         else:
             all_tags = fetch_tags(reg)
@@ -126,7 +150,7 @@ def process(path, maxn, apply, explicit_tags=None):
             resolved = resolve_tags(reg, candidate_tags)
             missing = [(t, d) for (t, d) in resolved if d not in existing_digests]
 
-        missing.sort(key=lambda item: [int(x) for x in item[0][1:].split(".")], reverse=True)
+        missing.sort(key=lambda item: semver_sort_key(item[0]), reverse=True)
 
         report.append(f"  block@L{insert_after+1} [{reg}/node-agent]: "
                       f"{len(existing_digests)} present, {len(missing)} new")
@@ -160,12 +184,12 @@ def main():
     ap.add_argument("files", nargs="*", default=DEFAULT_FILES)
     ap.add_argument("--apply", action="store_true", help="write changes in place")
     ap.add_argument("-t", "--tag", action="append", dest="tags",
-                    help="specific tag(s) to fetch and append (skips slow list-tags, e.g. -t v0.0.572)")
+                    help="specific release tag(s) to fetch and append (skips slow list-tags, e.g. -t v0.0.572)")
     ap.add_argument("--max", type=int, default=20, help="latest N release tags per registry (discovery mode)")
     args = ap.parse_args()
     files = args.files or DEFAULT_FILES
     if not files:
-        sys.exit(f"error: no allowlist files given and none found under {REPO} "
+        sys.exit(f"error: no allowlist files given and none found under {REPO_ENV or 'default paths'} "
                  f"(set $GKE_ALLOWLIST_REPO or pass file paths).")
     missing = [f for f in files if not os.path.isfile(f)]
     if missing:
@@ -173,7 +197,15 @@ def main():
 
     explicit_tags = None
     if args.tags:
-        explicit_tags = [t if t.startswith("v") else f"v{t}" for t in args.tags]
+        seen = set()
+        explicit_tags = []
+        for raw in args.tags:
+            t = raw if raw.startswith("v") else f"v{raw}"
+            if not TAG_RE.match(t):
+                sys.exit(f"error: invalid release tag '{raw}'. Tags must match {TAG_RE.pattern} (e.g. v0.0.572)")
+            if t not in seen:
+                seen.add(t)
+                explicit_tags.append(t)
 
     total = sum(process(f, args.max, args.apply, explicit_tags=explicit_tags) for f in files)
     print(f"\nTotal new digests {'applied' if args.apply else 'available'}: {total}")
