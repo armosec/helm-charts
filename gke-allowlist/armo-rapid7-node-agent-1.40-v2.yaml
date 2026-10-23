@@ -194,6 +194,40 @@ matchingCriteria:
 containerImageDigests:
   - containerName: node-agent
     imageDigests:
+      # quay.io/armosec/node-agent:v0.0.578
+      - f047c666f43c2de6a08b9a79d75369e8af694e9ef389588e79833d3586ebc659
+      # quay.io/armosec/node-agent:v0.0.567
+      - 853a80dd46056677740e22fd15870d71bc40ae0dd8a86befdfb1e78243e22c45
+      # quay.io/armosec/node-agent:v0.0.525
+      - 1777c2fae1698581c8d4050cd590bac52bb4410d5fd4f5ba7523ba04793fe6f7
+      # quay.io/armosec/node-agent:v0.0.518
+      - d99fdbbd2523a976b27cb8c58f7558c040fb2384350d5d6994d59d101adf50da
+      # quay.io/armosec/node-agent:v0.0.515
+      - 21030674e5efe735722e4317e9b0f67d5f2d07f1f3e2f7c647670bf64e2b43c0
+      # quay.io/armosec/node-agent:v0.0.507
+      - 793ad079956bcf554d984be5a625b72e7d57e396daac498fac01a48ad5f55955
+      # quay.io/armosec/node-agent:v0.0.506
+      - a958fd3cdc38db51390d701fa777b06e748c7981d0c4eb833fff0a4cc59afb93
+      # quay.io/armosec/node-agent:v0.0.498
+      - e07113b037258dceba57290fbd477746a348053ee0fcdbf22848777f14987a2d
+      # quay.io/armosec/node-agent:v0.0.497
+      - eea0271e8653108f7ed5ac576bc5f505884747458bf24bf925cf53cbcfbf3dc5
+      # quay.io/armosec/node-agent:v0.0.491
+      - c1a2ea8d9eb6f9ef7145808a91b07247edcc6e131fefb666a1269875693d621b
+      # quay.io/armosec/node-agent:v0.0.487
+      - f73bd008ad166ca50e90de8760bd86c73c4a952584b2c53820f0e4d65768c49d
+      # quay.io/armosec/node-agent:v0.0.479
+      - 15a17699f02d13c644001e4574b2928d7aa56437ea590f986f8edc2ae9cd5fbd
+      # quay.io/armosec/node-agent:v0.0.476
+      - 890b080da292844684054e0c15b83f9392d10d3937d9c1c70181fe10851c81ad
+      # quay.io/armosec/node-agent:v0.0.471
+      - 550ca40a029c812b412d204c3fa7e102d9ce6d3b2b232cf585c45a40b796c888
+      # quay.io/armosec/node-agent:v0.0.467
+      - 2e11351fcc9c2e6f45b919ea1c1506045977906e27de6d236e8efe91bae25750
+      # quay.io/armosec/node-agent:v0.0.464
+      - 8bee8ca010c52c03d579430acc63391cdaec99a68cbda284d0dbd60030ba08cd
+      # quay.io/armosec/node-agent:v0.0.436
+      - 8245f51d0e196ba18c65ee895dd147428b5d0d0fec59213fac8ff65b47b3c9f6
       # quay.io/armosec/node-agent:v0.0.572
       - 6043b8754e44f2a03cffce29f64c25f8f071811f4838378133715849751b6191
       # quay.io/armosec/node-agent:v0.0.542
@@ -246,6 +280,46 @@ containerImageDigests:
       - 05893fbe2ae88b9f42867551c9d2577551773a7fcdc536f8dfa21e451077c928
   - containerName: sbom-scanner
     imageDigests:
+      # quay.io/kubescape/node-agent:v0.3.285
+      - d3a194834a71e7e6eb42500312726d778b63d181413cc194a49ac69d63595b95
+      # quay.io/kubescape/node-agent:v0.3.280
+      - 14b30c6ae87c7474c005816a0ea7f95cf86a63928e15786abca4c6f06cb90638
+      # quay.io/kubescape/node-agent:v0.3.279
+      - cb94361ca9929977a7764cdac91a642d909f5ea6f992d73a3ded429c9f498b0e
+      # quay.io/kubescape/node-agent:v0.3.278
+      - b09a583c53619bcee7d1381837646b4bd2d442d4528a16125b257520fb51954d
+      # quay.io/kubescape/node-agent:v0.3.277
+      - 90e0ac1bfb69fb0a7268907d4a5f343831828e225b0985693b80d23c6c144c3b
+      # quay.io/kubescape/node-agent:v0.3.276
+      - c37d421a86bfa6c23d8f8ba7bc4741cd66c2ca1c154ae670a948a5b9c1baaec4
+      # quay.io/kubescape/node-agent:v0.3.275
+      - f1f4aa3d03db555eeee9a17719867730682817d0dc7ba609246aef969e5bc4c5
+      # quay.io/kubescape/node-agent:v0.3.273
+      - 9b59aa89a88dcc9fc453f82435e748e019501f04b6709dfb6a23df1662960010
+      # quay.io/kubescape/node-agent:v0.3.258
+      - e3017006d8f52d5a065195a65cbdc251e88d9c78e891f4a0fa9099667df4be27
+      # quay.io/kubescape/node-agent:v0.3.254
+      - 4d9c757d10b1565489cb65c7957adaa79a4c948c48c24dcaf2539e614722e6af
+      # quay.io/kubescape/node-agent:v0.3.251
+      - 59e4ebfe3576beca7379f5fc185f25c9bbfc244afc1801ab2d3362299a249c6f
+      # quay.io/kubescape/node-agent:v0.3.249
+      - b411d4a312fc3f0040658ca82809786955f0b5e5d168d2d87d80768e5a293ced
+      # quay.io/kubescape/node-agent:v0.3.246
+      - c300edc422c2ed029a77389f2970342c9882fbc6c02604a2e33af611069480cf
+      # quay.io/kubescape/node-agent:v0.3.244
+      - 9505a1c8c5d7b9a0fffcf0429e9ce35cc0ca1c4eef7965ee7b50778754a07450
+      # quay.io/kubescape/node-agent:v0.3.241
+      - 57c3cd20542ddda5d0cec0024f3a12069d016e44a567da7151eaae51059fab4b
+      # quay.io/kubescape/node-agent:v0.3.238
+      - 37edab34774f046614480cb1c2767641a17f050f3dbb14ae9309648cdbf3c011
+      # quay.io/kubescape/node-agent:v0.3.231
+      - 33b35bf298701326f08c7a26ac50bdcfbf1f140d5f40cd4f275f94a2722e72b9
+      # quay.io/kubescape/node-agent:v0.3.226
+      - 75e0dfb4572c4376b2821d69a1edca34e2b053f3c1981ebc95a26faa941faa74
+      # quay.io/kubescape/node-agent:v0.3.219
+      - 2044ed750f5e20a7c5150479963e2b33108c304a40d526c0de7ed412495467c6
+      # quay.io/kubescape/node-agent:v0.3.218
+      - ac98b02f9c003220b55fefdb2c71872cd484f308d63ab3c12f62f3c7b424f541
       # quay.io/kubescape/node-agent:v0.3.147
       - a457e95a15d7031ca2cb496a8e5f55a586b5c89cbfa53a3f104dde07b22ec72d
       # quay.io/kubescape/node-agent:v0.3.146
