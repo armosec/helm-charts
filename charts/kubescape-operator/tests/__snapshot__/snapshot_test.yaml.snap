@@ -1115,7 +1115,9 @@ minimal capabilities:
                   value: 5Gi
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
-              image: quay.io/kubescape/kubevuln:v0.3.571
+                - name: KS_API_AUTH_DISABLED
+                  value: "true"
+              image: quay.io/kubescape/kubevuln:v0.3.580
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -1174,7 +1176,7 @@ minimal capabilities:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: sbom-scanner
-              image: quay.io/kubescape/kubevuln:v0.3.571
+              image: quay.io/kubescape/kubevuln:v0.3.580
               imagePullPolicy: IfNotPresent
               name: sbom-scanner
               resources:
@@ -2399,7 +2401,9 @@ minimal capabilities:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/operator:v0.2.181
+                - name: KS_API_AUTH_DISABLED
+                  value: "true"
+              image: quay.io/kubescape/operator:v0.2.208
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -5048,7 +5052,9 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: 5Gi
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
-              image: quay.io/kubescape/kubevuln:v0.3.571
+                - name: KS_API_AUTH_DISABLED
+                  value: "true"
+              image: quay.io/kubescape/kubevuln:v0.3.580
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -5107,7 +5113,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: sbom-scanner
-              image: quay.io/kubescape/kubevuln:v0.3.571
+              image: quay.io/kubescape/kubevuln:v0.3.580
               imagePullPolicy: IfNotPresent
               name: sbom-scanner
               resources:
@@ -6332,7 +6338,9 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/operator:v0.2.181
+                - name: KS_API_AUTH_DISABLED
+                  value: "true"
+              image: quay.io/kubescape/operator:v0.2.208
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -8981,7 +8989,9 @@ synchronizer enabled when server is configured:
                   value: https://api.armosec.io
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
-              image: quay.io/kubescape/kubevuln:v0.3.571
+                - name: KS_API_AUTH_DISABLED
+                  value: "true"
+              image: quay.io/kubescape/kubevuln:v0.3.580
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -9040,7 +9050,7 @@ synchronizer enabled when server is configured:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: sbom-scanner
-              image: quay.io/kubescape/kubevuln:v0.3.571
+              image: quay.io/kubescape/kubevuln:v0.3.580
               imagePullPolicy: IfNotPresent
               name: sbom-scanner
               resources:
@@ -10267,7 +10277,9 @@ synchronizer enabled when server is configured:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/operator:v0.2.181
+                - name: KS_API_AUTH_DISABLED
+                  value: "true"
+              image: quay.io/kubescape/operator:v0.2.208
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
