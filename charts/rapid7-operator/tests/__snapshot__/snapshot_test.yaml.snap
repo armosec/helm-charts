@@ -1282,7 +1282,9 @@ minimal capabilities:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/operator:v0.2.181
+                - name: KS_API_AUTH_DISABLED
+                  value: "true"
+              image: quay.io/kubescape/operator:v0.2.208
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -3487,7 +3489,9 @@ synchronizer enabled when server is configured:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-              image: quay.io/kubescape/operator:v0.2.181
+                - name: KS_API_AUTH_DISABLED
+                  value: "true"
+              image: quay.io/kubescape/operator:v0.2.208
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:

@@ -18,8 +18,16 @@ kubescape-operator:
   kubevuln:
     config:
       maxSBOMSize: 33554432
+    env:
+      # chart default, kept because this list replaces it
+      - name: CA_MAX_VULN_SCAN_ROUTINES
+        value: "1"
+      # kubevuln >= v0.3.580 requires API auth wiring (POD_NAMESPACE, token RBAC)
+      # that the 1.40.5 chart does not render yet
+      - name: KS_API_AUTH_DISABLED
+        value: "true"
     image:
-      tag: v0.3.571
+      tag: v0.3.580
     sbomScanner:
       enabled: true
   nodeAgent:
@@ -67,8 +75,13 @@ kubescape-operator:
       image:
         tag: v0.3.147
   operator:
+    env:
+      # operator >= v0.2.208 requires API auth wiring (POD_NAMESPACE, auth-delegator RBAC)
+      # that the 1.40.5 chart does not render yet
+      - name: KS_API_AUTH_DISABLED
+        value: "true"
     image:
-      tag: v0.2.181
+      tag: v0.2.208
     rulesUpdateConfig:
       enabled: true
       interval: 5m
