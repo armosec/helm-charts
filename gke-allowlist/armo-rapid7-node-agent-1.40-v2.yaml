@@ -194,6 +194,12 @@ matchingCriteria:
 containerImageDigests:
   - containerName: node-agent
     imageDigests:
+      # quay.io/armosec/node-agent:v0.0.598
+      - 6f68ffb3caf5d2d1a5234d3554f3c31acc6d250f9a9ad9ccf18a15da0605195f
+      # quay.io/armosec/node-agent:v0.0.591
+      - 8bccbaa9254d88b0da7a5e79bdffb35b70c4d177ca7d07991973623379d74e04
+      # quay.io/armosec/node-agent:v0.0.585
+      - 00dbe28dbed8f631bdbd63ebdfb88215f8ca7c97250ebe385316a8126381b844
       # quay.io/armosec/node-agent:v0.0.578
       - f047c666f43c2de6a08b9a79d75369e8af694e9ef389588e79833d3586ebc659
       # quay.io/armosec/node-agent:v0.0.567
@@ -280,6 +286,16 @@ containerImageDigests:
       - 05893fbe2ae88b9f42867551c9d2577551773a7fcdc536f8dfa21e451077c928
   - containerName: sbom-scanner
     imageDigests:
+      # quay.io/kubescape/node-agent:v0.3.310
+      - 99152dbefd07e524418f682882ad300cb74821aaa4e42e6477c42a9fa4686e60
+      # quay.io/kubescape/node-agent:v0.3.308
+      - 790d14cccb5790f3f0879021f8f31fa7669daeefcc8f943c6e7ff7c61d60c3f8
+      # quay.io/kubescape/node-agent:v0.3.307
+      - 85ef62507c3ad1e3110b3a49edc332de6da51ecf258ab77b8f07a10bb4832dbb
+      # quay.io/kubescape/node-agent:v0.3.299
+      - 1a40363136c33685a8ca131ab6c1661259ce3b0ce20c68c62b5b1e0ddc1bdfc6
+      # quay.io/kubescape/node-agent:v0.3.293
+      - 16c20ea9c66543506735a8737e4782bb41e9cbf8555ee2150c1b9696f9971eed
       # quay.io/kubescape/node-agent:v0.3.285
       - d3a194834a71e7e6eb42500312726d778b63d181413cc194a49ac69d63595b95
       # quay.io/kubescape/node-agent:v0.3.280
