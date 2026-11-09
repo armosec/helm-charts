@@ -75,10 +75,15 @@ kubescape-operator:
       image:
         tag: v0.3.147
   operator:
+    # The upstream chart defaults operator.env to {} (a map) and its template only
+    # ranges over it, reading .name and .value from each entry. A list here makes
+    # Helm print "cannot overwrite table with non table" on every install/upgrade,
+    # so entries are keyed by an arbitrary name instead.
     env:
       # operator >= v0.2.208 requires API auth wiring (POD_NAMESPACE, auth-delegator RBAC)
       # that the 1.40.5 chart does not render yet
-      - name: KS_API_AUTH_DISABLED
+      apiAuthDisabled:
+        name: KS_API_AUTH_DISABLED
         value: "true"
     image:
       tag: v0.2.208
