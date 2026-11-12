@@ -15,9 +15,6 @@ minimal capabilities:
       WARNING: capabilities.nodeProfileService=enable but the backend is not configured (.Values.server is empty / submit is disabled). This capability requires the synchronizer, which is only enabled when connected to a backend, so nodeProfileServiceEnabled renders as FALSE in the node-agent configmap and node profiles will NOT be generated. To use it, set .Values.server (requires account and accessKey, or an existing credentials.cloudSecret).
 
       WARNING: capabilities.networkEventsStreaming=enable but the backend is not configured (.Values.server is empty / submit is disabled). This capability requires submitting data to a backend, so networkStreamingEnabled renders as FALSE in the node-agent configmap and network events will NOT be streamed. To use it, set .Values.server (requires account and accessKey, or an existing credentials.cloudSecret).
-
-      NetworkPolicies restrict ingress to the kubescape components (global.networkPolicy.enabled).
-      See https://github.com/kubescape/helm-charts/blob/main/docs/features/network-policies.md
   2: |
     apiVersion: v1
     data:
@@ -1662,36 +1659,6 @@ minimal capabilities:
       name: kubevuln-cronjob-template
       namespace: kubescape
   35: |
-    apiVersion: networking.k8s.io/v1
-    kind: NetworkPolicy
-    metadata:
-      annotations: null
-      labels:
-        app: operator
-        app.kubernetes.io/component: operator
-        app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: kubescape-operator
-        app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0
-        helm.sh/chart: kubescape-operator-1.42.0
-        kubescape.io/ignore: "true"
-        tier: ks-control-plane
-      name: operator
-      namespace: kubescape
-    spec:
-      ingress:
-        - ports:
-            - port: admission-port
-              protocol: TCP
-      podSelector:
-        matchLabels:
-          app.kubernetes.io/component: operator
-          app.kubernetes.io/instance: RELEASE-NAME
-          app.kubernetes.io/name: kubescape-operator
-      policyTypes:
-        - Ingress
-  36: |
     apiVersion: v1
     data:
       cronjobTemplate: |-
@@ -1788,7 +1755,7 @@ minimal capabilities:
         tier: ks-control-plane
       name: registry-scan-cronjob-template
       namespace: kubescape
-  37: |
+  36: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
@@ -1851,7 +1818,7 @@ minimal capabilities:
           - update
           - delete
           - patch
-  38: |
+  37: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
@@ -1877,7 +1844,7 @@ minimal capabilities:
       - kind: ServiceAccount
         name: operator
         namespace: kubescape
-  39: |
+  38: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -1905,7 +1872,7 @@ minimal capabilities:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  40: |
+  39: |
     apiVersion: v1
     automountServiceAccountToken: false
     kind: ServiceAccount
@@ -1924,7 +1891,7 @@ minimal capabilities:
         tier: ks-control-plane
       name: operator
       namespace: kubescape
-  41: |
+  40: |
     apiVersion: v1
     data:
       tls.crt: bW9jay1jYS1jZXJ0
@@ -1947,7 +1914,7 @@ minimal capabilities:
       name: storage-tls-ca
       namespace: kubescape
     type: kubernetes.io/tls
-  42: |
+  41: |
     apiVersion: v1
     data:
       ca.crt: bW9jay1jYS1jZXJ0
@@ -1970,7 +1937,7 @@ minimal capabilities:
       name: storage-tls
       namespace: kubescape
     type: kubernetes.io/tls
-  43: |
+  42: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -2293,7 +2260,7 @@ minimal capabilities:
           storage: true
           subresources:
             status: {}
-  44: |
+  43: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -2317,7 +2284,7 @@ minimal capabilities:
           - pods
         verbs:
           - delete
-  45: |
+  44: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -2355,9 +2322,6 @@ synchronizer enabled when server is configured:
 
       kubescape-operator generates suggested network policies. To view them:
       > kubectl get generatednetworkpolicies -n <namespace>
-
-      NetworkPolicies restrict ingress to the kubescape components (global.networkPolicy.enabled).
-      See https://github.com/kubescape/helm-charts/blob/main/docs/features/network-policies.md
   2: |
     apiVersion: v1
     data:
@@ -4004,36 +3968,6 @@ synchronizer enabled when server is configured:
       name: kubevuln-cronjob-template
       namespace: kubescape
   35: |
-    apiVersion: networking.k8s.io/v1
-    kind: NetworkPolicy
-    metadata:
-      annotations: null
-      labels:
-        app: operator
-        app.kubernetes.io/component: operator
-        app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: kubescape-operator
-        app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0
-        helm.sh/chart: kubescape-operator-1.42.0
-        kubescape.io/ignore: "true"
-        tier: ks-control-plane
-      name: operator
-      namespace: kubescape
-    spec:
-      ingress:
-        - ports:
-            - port: admission-port
-              protocol: TCP
-      podSelector:
-        matchLabels:
-          app.kubernetes.io/component: operator
-          app.kubernetes.io/instance: RELEASE-NAME
-          app.kubernetes.io/name: kubescape-operator
-      policyTypes:
-        - Ingress
-  36: |
     apiVersion: v1
     data:
       cronjobTemplate: |-
@@ -4130,7 +4064,7 @@ synchronizer enabled when server is configured:
         tier: ks-control-plane
       name: registry-scan-cronjob-template
       namespace: kubescape
-  37: |
+  36: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
@@ -4193,7 +4127,7 @@ synchronizer enabled when server is configured:
           - update
           - delete
           - patch
-  38: |
+  37: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
@@ -4219,7 +4153,7 @@ synchronizer enabled when server is configured:
       - kind: ServiceAccount
         name: operator
         namespace: kubescape
-  39: |
+  38: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -4247,7 +4181,7 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  40: |
+  39: |
     apiVersion: v1
     automountServiceAccountToken: false
     kind: ServiceAccount
@@ -4266,7 +4200,7 @@ synchronizer enabled when server is configured:
         tier: ks-control-plane
       name: operator
       namespace: kubescape
-  41: |
+  40: |
     apiVersion: v1
     data:
       tls.crt: bW9jay1jYS1jZXJ0
@@ -4289,7 +4223,7 @@ synchronizer enabled when server is configured:
       name: storage-tls-ca
       namespace: kubescape
     type: kubernetes.io/tls
-  42: |
+  41: |
     apiVersion: v1
     data:
       ca.crt: bW9jay1jYS1jZXJ0
@@ -4312,7 +4246,7 @@ synchronizer enabled when server is configured:
       name: storage-tls
       namespace: kubescape
     type: kubernetes.io/tls
-  43: |
+  42: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -4635,7 +4569,7 @@ synchronizer enabled when server is configured:
           storage: true
           subresources:
             status: {}
-  44: |
+  43: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -4852,7 +4786,7 @@ synchronizer enabled when server is configured:
         verbs:
           - update
           - patch
-  45: |
+  44: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -4876,7 +4810,7 @@ synchronizer enabled when server is configured:
       - kind: ServiceAccount
         name: synchronizer
         namespace: kubescape
-  46: |
+  45: |
     apiVersion: v1
     data:
       config.json: |
@@ -5155,7 +5089,7 @@ synchronizer enabled when server is configured:
         tier: ks-control-plane
       name: synchronizer
       namespace: kubescape
-  47: |
+  46: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -5291,48 +5225,7 @@ synchronizer enabled when server is configured:
                     path: config.json
                 name: synchronizer
               name: config
-  48: |
-    apiVersion: networking.k8s.io/v1
-    kind: NetworkPolicy
-    metadata:
-      annotations: null
-      labels:
-        app: synchronizer
-        app.kubernetes.io/component: synchronizer
-        app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: kubescape-operator
-        app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0
-        helm.sh/chart: kubescape-operator-1.42.0
-        kubescape.io/ignore: "true"
-        tier: ks-control-plane
-      name: synchronizer
-      namespace: kubescape
-    spec:
-      ingress:
-        - from:
-            - podSelector:
-                matchLabels:
-                  app.kubernetes.io/component: node-agent
-                  app.kubernetes.io/instance: RELEASE-NAME
-                  app.kubernetes.io/name: kubescape-operator
-            - podSelector:
-                matchLabels:
-                  app.kubernetes.io/component: operator
-                  app.kubernetes.io/instance: RELEASE-NAME
-                  app.kubernetes.io/name: kubescape-operator
-          ports:
-            - port: 8089
-              protocol: TCP
-      podSelector:
-        matchLabels:
-          app.kubernetes.io/component: synchronizer
-          app.kubernetes.io/instance: RELEASE-NAME
-          app.kubernetes.io/name: kubescape-operator
-      policyTypes:
-        - Ingress
-  49: |
+  47: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
@@ -5374,7 +5267,7 @@ synchronizer enabled when server is configured:
           - list
           - patch
           - delete
-  50: |
+  48: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
@@ -5399,7 +5292,7 @@ synchronizer enabled when server is configured:
       - kind: ServiceAccount
         name: synchronizer
         namespace: kubescape
-  51: |
+  49: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -5426,7 +5319,7 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  52: |
+  50: |
     apiVersion: v1
     automountServiceAccountToken: false
     kind: ServiceAccount
@@ -5444,7 +5337,7 @@ synchronizer enabled when server is configured:
         tier: ks-control-plane
       name: synchronizer
       namespace: kubescape
-  53: |
+  51: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -5468,7 +5361,7 @@ synchronizer enabled when server is configured:
           - pods
         verbs:
           - delete
-  54: |
+  52: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:

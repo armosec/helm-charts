@@ -6,6 +6,10 @@ kubescape-operator:
       # alerts. With this off, the 1.42 chart renders KS_API_AUTH_DISABLED on the servers
       # and no token volume on the callers, matching the 1.40.x behaviour. See SUB-9843.
       enabled: false
+    networkPolicy:
+      # Upstream 1.42.0 turned these on by default (1.40.x had them off). Keep them off in the
+      # private chart until we have validated them on our clusters and design partners' CNIs.
+      enabled: false
   alertCRD:
     installDefault: false
   capabilities:
