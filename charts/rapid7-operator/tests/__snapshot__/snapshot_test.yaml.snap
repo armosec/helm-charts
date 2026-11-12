@@ -1,9 +1,11 @@
 minimal capabilities:
-  1: |+
-    raw: |+
-      Thank you for installing kubescape-operator version 1.40.5.
+  1: |
+    raw: |
+      Thank you for installing kubescape-operator version 1.42.0.
 
 
+
+      The in-cluster Kubescape APIs require a service-account token (audience kubescape.io) authorized by RBAC; set global.apiAuth.enabled=false to turn this off. External callers should create OperatorCommand objects instead of calling the APIs (kubescape CLI v4.0.19 and later do).
 
 
 
@@ -14,7 +16,157 @@ minimal capabilities:
 
       WARNING: capabilities.networkEventsStreaming=enable but the backend is not configured (.Values.server is empty / submit is disabled). This capability requires submitting data to a backend, so networkStreamingEnabled renders as FALSE in the node-agent configmap and network events will NOT be streamed. To use it, set .Values.server (requires account and accessKey, or an existing credentials.cloudSecret).
 
+      NetworkPolicies restrict ingress to the kubescape components (global.networkPolicy.enabled).
+      See https://github.com/kubescape/helm-charts/blob/main/docs/features/network-policies.md
   2: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: operator
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: operator:system:auth-delegator
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: system:auth-delegator
+    subjects:
+      - kind: ServiceAccount
+        name: operator
+        namespace: kubescape
+  3: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      annotations: null
+      labels:
+        app: operator
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: operator-api-caller
+      namespace: kubescape
+    rules:
+      - apiGroups:
+          - kubescape.io
+        resources:
+          - scans
+          - scanresults
+        verbs:
+          - create
+          - get
+          - delete
+      - apiGroups:
+          - kubescape.io
+        resources:
+          - vulnerabilityscans
+        verbs:
+          - create
+          - get
+      - apiGroups:
+          - kubescape.io
+        resources:
+          - runtimealerts
+          - registrystatuses
+        verbs:
+          - create
+  4: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: operator
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: operator-api-caller
+      namespace: kubescape
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: Role
+      name: operator-api-caller
+    subjects:
+      - kind: ServiceAccount
+        name: operator
+        namespace: kubescape
+  5: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-api-caller
+      namespace: kubescape
+    rules:
+      - apiGroups:
+          - kubescape.io
+        resources:
+          - networkstreams
+          - nodeprofiles
+          - runtimealerts
+          - registrystatuses
+          - aisandboxheartbeats
+        verbs:
+          - create
+  6: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-api-caller
+      namespace: kubescape
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: Role
+      name: node-agent-api-caller
+    subjects:
+      - kind: ServiceAccount
+        name: node-agent
+        namespace: kubescape
+  7: |
     apiVersion: v1
     data:
       accessKey: ZjMwNGQ3M2ItZDQzYy00MTJiLTgyZWEtZTRjODU5NDkzY2U2
@@ -29,15 +181,15 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/infra: credentials
         tier: ks-control-plane
       name: cloud-secret
       namespace: kubescape
     type: Opaque
-  3: |
+  8: |
     apiVersion: v1
     data:
       clusterData: |
@@ -76,20 +228,20 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/infra: config
         kubescape.io/tier: core
         tier: ks-control-plane
       name: ks-cloud-config
       namespace: kubescape
-  4: |
+  9: |
     apiVersion: v1
     data:
       capabilities: |
         {
-          "capabilities":{"admissionController":"enable","agentRuntimePosture":"disable","autoUpgrading":"disable","configurationScan":"disable","continuousScan":"disable","httpDetection":"enable","kubescapeOffline":"disable","malwareDetection":"disable","manageWorkloads":"enable","networkEventsStreaming":"enable","networkPolicyService":"enable","nodeProfileService":"enable","nodeSbomGeneration":"disable","nodeScan":"enable","operator":"enable","prometheusExporter":"disable","relevancy":"enable","remediation":"enable","riskAcceptance":"disable","runtimeDetection":"enable","runtimeObservability":"enable","scanEmbeddedSBOMs":"disable","seccompProfileBackend":"crd","seccompProfileService":"enable","syncSBOM":"disable","testing":{"nodeAgentMultiplication":{"enabled":false,"replicas":5}},"vexGeneration":"disable","vulnerabilityScan":"disable"},
+          "capabilities":{"admissionController":"enable","agentRuntimePosture":"disable","autoUpgrading":"disable","configurationScan":"disable","continuousScan":"disable","httpDetection":"enable","kubescapeOffline":"disable","malwareDetection":"disable","manageWorkloads":"enable","networkEventsStreaming":"enable","networkPolicyService":"enable","nodeProfileService":"enable","nodeSbomGeneration":"disable","nodeScan":"enable","operator":"enable","prometheusExporter":"disable","relevancy":"enable","remediation":"enable","riskAcceptance":"disable","runtimeDetection":"enable","runtimeObservability":"enable","sandboxSeccomp":"disable","scanEmbeddedSBOMs":"disable","seccompProfileBackend":"crd","seccompProfileService":"enable","syncSBOM":"disable","testing":{"nodeAgentMultiplication":{"enabled":false,"replicas":5}},"vexGeneration":"disable","vulnerabilityScan":"disable"},
           "effectiveCapabilities":{"configurationScan":"disable","httpDetection":"enable","malwareDetection":"disable","networkEventsStreaming":"disable","nodeProfileService":"disable","nodeScan":"backend","vulnerabilityScan":"disable"},
           "capabilityWarnings":["capabilities.nodeProfileService=enable but the backend is not configured (.Values.server is empty / submit is disabled). This capability requires the synchronizer, which is only enabled when connected to a backend, so nodeProfileServiceEnabled renders as FALSE in the node-agent configmap and node profiles will NOT be generated. To use it, set .Values.server (requires account and accessKey, or an existing credentials.cloudSecret).","capabilities.networkEventsStreaming=enable but the backend is not configured (.Values.server is empty / submit is disabled). This capability requires submitting data to a backend, so networkStreamingEnabled renders as FALSE in the node-agent configmap and network events will NOT be streamed. To use it, set .Values.server (requires account and accessKey, or an existing credentials.cloudSecret)."],
           "components":{"autoUpdater":{"enabled":false},"cloudSecret":{"create":true,"name":"cloud-secret"},"customCaCertificates":{"name":"custom-ca-certificates"},"kubescape":{"enabled":false},"kubescapeScheduler":{"enabled":false},"kubevuln":{"enabled":false},"kubevulnScheduler":{"enabled":false},"nodeAgent":{"enabled":true},"operator":{"enabled":true},"prometheusExporter":{"enabled":false},"sbomScanner":{"enabled":false},"serviceDiscovery":{"enabled":false},"storage":{"enabled":false},"synchronizer":{"enabled":false}},
@@ -106,14 +258,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: ks-capabilities
       namespace: kubescape
-  5: |
+  10: |
     apiVersion: v1
     data:
       matchingRules.json: |
@@ -128,14 +280,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: cs-matching-rules
       namespace: kubescape
-  6: |
+  11: |
     apiVersion: scheduling.k8s.io/v1
     description: This priority class is for node-agent daemonset pods
     globalDefault: false
@@ -149,13 +301,13 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-critical
     value: 1.000001e+08
-  7: |
+  12: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -189,7 +341,7 @@ minimal capabilities:
               type: object
           served: true
           storage: true
-  8: |
+  13: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -223,7 +375,7 @@ minimal capabilities:
               type: object
           served: true
           storage: true
-  9: |
+  14: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -257,7 +409,7 @@ minimal capabilities:
               type: object
           served: true
           storage: true
-  10: |
+  15: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -291,7 +443,7 @@ minimal capabilities:
               type: object
           served: true
           storage: true
-  11: |
+  16: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -325,7 +477,7 @@ minimal capabilities:
               type: object
           served: true
           storage: true
-  12: |
+  17: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -359,7 +511,7 @@ minimal capabilities:
               type: object
           served: true
           storage: true
-  13: |
+  18: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -393,7 +545,7 @@ minimal capabilities:
               type: object
           served: true
           storage: true
-  14: |
+  19: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -427,7 +579,7 @@ minimal capabilities:
               type: object
           served: true
           storage: true
-  15: |
+  20: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -461,7 +613,7 @@ minimal capabilities:
               type: object
           served: true
           storage: true
-  16: |
+  21: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -524,7 +676,7 @@ minimal capabilities:
               type: object
           served: true
           storage: true
-  17: |
+  22: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -536,8 +688,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -671,7 +823,8 @@ minimal capabilities:
           - patch
           - list
           - watch
-  18: |
+          - delete
+  23: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -683,8 +836,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -696,7 +849,7 @@ minimal capabilities:
       - kind: ServiceAccount
         name: node-agent
         namespace: kubescape
-  19: |
+  24: |
     apiVersion: v1
     data:
       config.json: |
@@ -714,10 +867,12 @@ minimal capabilities:
             "networkStreamingEnabled": false,
             "maxImageSize": 5.36870912e+09,
             "maxSBOMSize": 3.3554432e+07,
+            "maxTsProfileSize": 2.097152e+06,
             "sbomGenerationEnabled": false,
             "enableEmbeddedSBOMs": false,
             "seccompServiceEnabled": true,
             "seccompProfileBackend": "crd",
+            "sandboxSeccompEnabled": false,
             "initialDelay": "2m",
             "updateDataPeriod": "10m",
             "nodeProfileInterval": "10m",
@@ -772,14 +927,74 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: node-agent
       namespace: kubescape
-  20: |
+  25: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-hostdata-gc
+      namespace: kubescape
+    rules:
+      - apiGroups:
+          - coordination.k8s.io
+        resourceNames:
+          - kubescape-hostdata-gc
+        resources:
+          - leases
+        verbs:
+          - get
+          - update
+      - apiGroups:
+          - coordination.k8s.io
+        resources:
+          - leases
+        verbs:
+          - create
+  26: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-hostdata-gc
+      namespace: kubescape
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: Role
+      name: node-agent-hostdata-gc
+    subjects:
+      - kind: ServiceAccount
+        name: node-agent
+        namespace: kubescape
+  27: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -791,8 +1006,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -807,7 +1022,7 @@ minimal capabilities:
         app.kubernetes.io/component: node-agent
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
-  21: |
+  28: |
     apiVersion: v1
     kind: ServiceAccount
     metadata:
@@ -819,16 +1034,16 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
       namespace: kubescape
-  22: |
+  29: |
     apiVersion: v1
     data:
-      daemonset-template.yaml: "apiVersion: apps/v1\nkind: DaemonSet\nmetadata:\n  name: \"{{ .Name }}\"\n  namespace: kubescape\n  annotations:\n    \n  labels:\n    helm.sh/chart: kubescape-operator-1.40.5\n    app.kubernetes.io/name: kubescape-operator\n    app.kubernetes.io/instance: RELEASE-NAME\n    app.kubernetes.io/component: node-agent\n    app.kubernetes.io/version: \"1.40.5\"\n    app.kubernetes.io/managed-by: Helm\n    app.kubernetes.io/part-of: kubescape\n    app: node-agent\n    tier: ks-control-plane\n    kubescape.io/ignore: \"true\"\n    kubescape.io/tier: \"core\"\n    kubescape.io/managed-by: operator-autoscaler\n    kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\nspec:\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: kubescape-operator\n      app.kubernetes.io/instance: RELEASE-NAME\n      app.kubernetes.io/component: node-agent\n      kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n  template:\n    metadata:\n      annotations:\n        \n        checksum/node-agent-config: 82704999044f5f89289e940278a0bc49db6dca78034ab8c3c2e090c54b45d1fd\n        checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424\n        checksum/cloud-config: 647220e45fe9b71261b153cab1778b0e9af6b5588bca55320606c7279c32b578\n        container.apparmor.security.beta.kubernetes.io/node-agent: unconfined\n      labels:\n        helm.sh/chart: kubescape-operator-1.40.5\n        app.kubernetes.io/name: kubescape-operator\n        app.kubernetes.io/instance: RELEASE-NAME\n        app.kubernetes.io/component: node-agent\n        app.kubernetes.io/version: \"1.40.5\"\n        app.kubernetes.io/managed-by: Helm\n        app.kubernetes.io/part-of: kubescape\n        app: node-agent\n        tier: ks-control-plane\n        kubescape.io/ignore: \"true\"\n        kubescape.io/tier: \"core\"\n        kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n    spec:\n      securityContext:\n      imagePullSecrets:\n      - name: armosec-readonly\n      priorityClassName: kubescape-critical\n      serviceAccountName: node-agent\n      automountServiceAccountToken: true\n      hostPID: true\n      volumes:\n      \n      - hostPath:\n          path: /\n        name: host\n      - hostPath:\n          path: /var/lib/kubelet\n        name: kubeletdir\n      - hostPath:\n          path: /run\n        name: run\n      - hostPath:\n          path: /var\n        name: var\n      - hostPath:\n          path: /sys/fs/cgroup\n        name: cgroup\n      - hostPath:\n          path: /lib/modules\n        name: modules\n      - hostPath:\n          path: /sys/fs/bpf\n        name: bpffs\n      - hostPath:\n          path: /sys/kernel/debug\n        name: debugfs\n      - hostPath:\n          path: /boot\n        name: boot\n      - emptyDir: null\n        name: data\n      - emptyDir: null\n        name: profiles\n      - hostPath:\n          path: /\n          type: Directory\n        name: host-filesystem\n      - name: cloud-secret\n        secret:\n          secretName: cloud-secret\n      - name: ks-cloud-config\n        configMap:\n          name: ks-cloud-config\n          items:\n            - key: \"clusterData\"\n              path: \"clusterData.json\"\n      - name: config\n        configMap:\n          name: node-agent\n          items:\n            - key: \"config.json\"\n              path: \"config.json\"\n      containers:\n      \n      - name: node-agent\n        image: \"quay.io/armosec/node-agent:v0.0.598\"\n        imagePullPolicy: IfNotPresent\n        livenessProbe:\n          httpGet:\n            path: /livez\n            port: 7888\n          periodSeconds: 3\n        readinessProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 3\n        startupProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 10\n          failureThreshold: 30\n          timeoutSeconds: 1\n        resources:\n          \n          requests:\n            cpu: \"{{ .Resources.Requests.CPU }}\"\n            memory: \"{{ .Resources.Requests.Memory }}\"\n          limits:\n            cpu: \"{{ .Resources.Limits.CPU }}\"\n            memory: \"{{ .Resources.Limits.Memory }}\"\n        env:\n          \n          - name: GOMEMLIMIT\n            value: \"{{ .GoMemLimit }}\"\n          - name: HOST_ROOT\n            value: \"/host\"\n          - name: KS_LOGGER_LEVEL\n            value: \"info\"\n          - name: KS_LOGGER_NAME\n            value: \"zap\"\n          - name: NODE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: spec.nodeName\n          - name: POD_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.name\n          - name: NAMESPACE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.namespace\n          - name: KUBELET_ROOT\n            value: \"/var/lib/kubelet\"\n          - name: AGENT_VERSION\n            value: \"v0.0.598\"\n          - name: IGNORERULEBINDINGS\n            value: \"true\"\n        securityContext:\n          runAsUser: 0\n          privileged: false\n          capabilities:\n            add:\n              - SYS_ADMIN\n              - SYS_PTRACE\n              - NET_ADMIN\n              - SYSLOG\n              - SYS_RESOURCE\n              - IPC_LOCK\n              - NET_RAW\n          seLinuxOptions:\n            type: \"{{ .SELinuxType }}\"\n        volumeMounts:\n          \n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /var/lib/kubelet\n            name: kubeletdir\n          - mountPath: /run\n            name: run\n          - mountPath: /var\n            name: var\n            readOnly: true\n          - mountPath: /lib/modules\n            name: modules\n            readOnly: true\n          - mountPath: /sys/kernel/debug\n            name: debugfs\n          - mountPath: /sys/fs/cgroup\n            name: cgroup\n            readOnly: true\n          - mountPath: /sys/fs/bpf\n            name: bpffs\n          - mountPath: /data\n            name: data\n          - mountPath: /profiles\n            name: profiles\n          - mountPath: /boot\n            name: boot\n            readOnly: true\n          - name: cloud-secret\n            mountPath: /etc/credentials\n            readOnly: true\n          - name: ks-cloud-config\n            mountPath: /etc/config/clusterData.json\n            readOnly: true\n            subPath: \"clusterData.json\"\n          - name: config\n            mountPath: /etc/config/config.json\n            readOnly: true\n            subPath: \"config.json\"\n      nodeSelector:\n        kubernetes.io/os: linux\n      {{- if not .IsDefaultGroup }}\n        {{ .NodeGroupLabelKey }}: \"{{ .NodeGroupLabel }}\"\n      {{- end }}\n      affinity:\n      {{- if .IsDefaultGroup }}\n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: {{ .NodeGroupLabelKey }}\n                operator: DoesNotExist\n      {{- else }}\n      \n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: kubernetes.io/os\n                operator: In\n                values:\n                - linux\n      {{- end }}\n      tolerations:\n"
+      daemonset-template.yaml: "apiVersion: apps/v1\nkind: DaemonSet\nmetadata:\n  name: \"{{ .Name }}\"\n  namespace: kubescape\n  annotations:\n    \n  labels:\n    helm.sh/chart: kubescape-operator-1.42.0\n    app.kubernetes.io/name: kubescape-operator\n    app.kubernetes.io/instance: RELEASE-NAME\n    app.kubernetes.io/component: node-agent\n    app.kubernetes.io/version: \"1.42.0\"\n    app.kubernetes.io/managed-by: Helm\n    app.kubernetes.io/part-of: kubescape\n    app: node-agent\n    tier: ks-control-plane\n    kubescape.io/ignore: \"true\"\n    kubescape.io/tier: \"core\"\n    kubescape.io/managed-by: operator-autoscaler\n    kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\nspec:\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: kubescape-operator\n      app.kubernetes.io/instance: RELEASE-NAME\n      app.kubernetes.io/component: node-agent\n      kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n  template:\n    metadata:\n      annotations:\n        \n        checksum/node-agent-config: 3a968347e0ac1eb921b3322aa80a155f1f08931c89fd62fc56c0d2fae4ad5102\n        checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424\n        checksum/cloud-config: 647220e45fe9b71261b153cab1778b0e9af6b5588bca55320606c7279c32b578\n        container.apparmor.security.beta.kubernetes.io/node-agent: unconfined\n      labels:\n        helm.sh/chart: kubescape-operator-1.42.0\n        app.kubernetes.io/name: kubescape-operator\n        app.kubernetes.io/instance: RELEASE-NAME\n        app.kubernetes.io/component: node-agent\n        app.kubernetes.io/version: \"1.42.0\"\n        app.kubernetes.io/managed-by: Helm\n        app.kubernetes.io/part-of: kubescape\n        app: node-agent\n        tier: ks-control-plane\n        kubescape.io/ignore: \"true\"\n        kubescape.io/tier: \"core\"\n        kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n    spec:\n      securityContext:\n      imagePullSecrets:\n      - name: armosec-readonly\n      priorityClassName: kubescape-critical\n      serviceAccountName: node-agent\n      automountServiceAccountToken: true\n      hostPID: true\n      volumes:\n      \n      - name: kubescape-api-token\n        projected:\n          sources:\n            - serviceAccountToken:\n                audience: \"kubescape.io\"\n                expirationSeconds: 3600\n                path: token\n      - hostPath:\n          path: /\n        name: host\n      - hostPath:\n          path: /var/lib/kubelet\n        name: kubeletdir\n      - hostPath:\n          path: /run\n        name: run\n      - hostPath:\n          path: /var\n        name: var\n      - hostPath:\n          path: /sys/fs/cgroup\n        name: cgroup\n      - hostPath:\n          path: /lib/modules\n        name: modules\n      - hostPath:\n          path: /sys/fs/bpf\n        name: bpffs\n      - hostPath:\n          path: /sys/kernel/debug\n        name: debugfs\n      - hostPath:\n          path: /boot\n        name: boot\n      - emptyDir: null\n        name: data\n      - emptyDir: null\n        name: profiles\n      - hostPath:\n          path: /\n          type: Directory\n        name: host-filesystem\n      - name: cloud-secret\n        secret:\n          secretName: cloud-secret\n      - name: ks-cloud-config\n        configMap:\n          name: ks-cloud-config\n          items:\n            - key: \"clusterData\"\n              path: \"clusterData.json\"\n      - name: config\n        configMap:\n          name: node-agent\n          items:\n            - key: \"config.json\"\n              path: \"config.json\"\n      containers:\n      \n      - name: node-agent\n        image: \"quay.io/armosec/node-agent:v0.0.598\"\n        imagePullPolicy: IfNotPresent\n        livenessProbe:\n          httpGet:\n            path: /livez\n            port: 7888\n          periodSeconds: 3\n        readinessProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 3\n        startupProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 10\n          failureThreshold: 30\n          timeoutSeconds: 1\n        resources:\n          \n          requests:\n            cpu: \"{{ .Resources.Requests.CPU }}\"\n            memory: \"{{ .Resources.Requests.Memory }}\"\n          limits:\n            cpu: \"{{ .Resources.Limits.CPU }}\"\n            memory: \"{{ .Resources.Limits.Memory }}\"\n        env:\n          \n          - name: GOMEMLIMIT\n            value: \"{{ .GoMemLimit }}\"\n          - name: HOST_ROOT\n            value: \"/host\"\n          - name: KS_LOGGER_LEVEL\n            value: \"info\"\n          - name: KS_LOGGER_NAME\n            value: \"zap\"\n          - name: NODE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: spec.nodeName\n          - name: POD_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.name\n          - name: NAMESPACE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.namespace\n          - name: KUBELET_ROOT\n            value: \"/var/lib/kubelet\"\n          - name: AGENT_VERSION\n            value: \"v0.0.598\"\n          - name: IGNORERULEBINDINGS\n            value: \"true\"\n        securityContext:\n          runAsUser: 0\n          privileged: false\n          capabilities:\n            add:\n              - SYS_ADMIN\n              - SYS_PTRACE\n              - NET_ADMIN\n              - SYSLOG\n              - SYS_RESOURCE\n              - IPC_LOCK\n              - NET_RAW\n          seLinuxOptions:\n            type: \"{{ .SELinuxType }}\"\n        volumeMounts:\n          - name: kubescape-api-token\n            mountPath: /var/run/secrets/kubescape.io/api-token\n            readOnly: true\n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /var/lib/kubelet\n            name: kubeletdir\n          - mountPath: /run\n            name: run\n          - mountPath: /var\n            name: var\n            readOnly: true\n          - mountPath: /lib/modules\n            name: modules\n            readOnly: true\n          - mountPath: /sys/kernel/debug\n            name: debugfs\n          - mountPath: /sys/fs/cgroup\n            name: cgroup\n            readOnly: true\n          - mountPath: /sys/fs/bpf\n            name: bpffs\n          - mountPath: /data\n            name: data\n          - mountPath: /profiles\n            name: profiles\n          - mountPath: /boot\n            name: boot\n            readOnly: true\n          - name: cloud-secret\n            mountPath: /etc/credentials\n            readOnly: true\n          - name: ks-cloud-config\n            mountPath: /etc/config/clusterData.json\n            readOnly: true\n            subPath: \"clusterData.json\"\n          - name: config\n            mountPath: /etc/config/config.json\n            readOnly: true\n            subPath: \"config.json\"\n      nodeSelector:\n        kubernetes.io/os: linux\n      {{- if not .IsDefaultGroup }}\n        {{ .NodeGroupLabelKey }}: \"{{ .NodeGroupLabel }}\"\n      {{- end }}\n      affinity:\n      {{- if .IsDefaultGroup }}\n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: {{ .NodeGroupLabelKey }}\n                operator: DoesNotExist\n      {{- else }}\n      \n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: kubernetes.io/os\n                operator: In\n                values:\n                - linux\n      {{- end }}\n      tolerations:\n"
     kind: ConfigMap
     metadata:
       annotations: null
@@ -839,14 +1054,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: node-agent-daemonset-template
       namespace: kubescape
-  23: |
+  30: |
     apiVersion: v1
     data:
       tls.crt: bW9jay1jYS1jZXJ0
@@ -862,14 +1077,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook-ca
       namespace: kubescape
     type: kubernetes.io/tls
-  24: |
+  31: |
     apiVersion: v1
     data:
       ca.crt: bW9jay1jYS1jZXJ0
@@ -885,14 +1100,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook-tls
       namespace: kubescape
     type: kubernetes.io/tls
-  25: |
+  32: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -904,8 +1119,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook
@@ -919,7 +1134,7 @@ minimal capabilities:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  26: |
+  33: |
     apiVersion: admissionregistration.k8s.io/v1
     kind: ValidatingWebhookConfiguration
     metadata:
@@ -931,8 +1146,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook
@@ -978,7 +1193,7 @@ minimal capabilities:
               - networkpolicies
             scope: '*'
         sideEffects: None
-  27: |
+  34: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -990,8 +1205,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -1032,10 +1247,6 @@ minimal capabilities:
           - get
           - watch
           - list
-          - create
-          - update
-          - delete
-          - patch
       - apiGroups:
           - apps
         resources:
@@ -1116,7 +1327,6 @@ minimal capabilities:
           - ""
         resources:
           - pods
-          - nodes
         verbs:
           - patch
       - apiGroups:
@@ -1128,7 +1338,8 @@ minimal capabilities:
           - delete
           - get
           - list
-  28: |
+          - update
+  35: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -1140,8 +1351,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -1153,7 +1364,7 @@ minimal capabilities:
       - kind: ServiceAccount
         name: operator
         namespace: kubescape
-  29: |
+  36: |
     apiVersion: v1
     data:
       config.json: |
@@ -1203,14 +1414,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: operator
       namespace: kubescape
-  30: |
+  37: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -1222,8 +1433,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -1245,7 +1456,7 @@ minimal capabilities:
       template:
         metadata:
           annotations:
-            checksum/capabilities-config: 654ed91f7913e1516ae17d2e8de7d494c77f936f01dd019df362bc2f1f2386a2
+            checksum/capabilities-config: 5fbce5daf1c1ecc6793ca4b444f5d6d6cf0a871361474f5d7ccab1beee15ffe6
             checksum/cloud-config: 647220e45fe9b71261b153cab1778b0e9af6b5588bca55320606c7279c32b578
             checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424
             checksum/matching-rules-config: c81857b415602f6b161db3199a16461c5acd8ba44ec7572189441f4f294a3614
@@ -1257,8 +1468,8 @@ minimal capabilities:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.5
-            helm.sh/chart: kubescape-operator-1.40.5
+            app.kubernetes.io/version: 1.42.0
+            helm.sh/chart: kubescape-operator-1.42.0
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -1267,24 +1478,27 @@ minimal capabilities:
           automountServiceAccountToken: true
           containers:
             - env:
+                - name: KS_API_AUDIENCE
+                  value: kubescape.io
+                - name: POD_NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.namespace
+                - name: KS_API_TOKEN_FILE
+                  value: /var/run/secrets/kubescape.io/api-token/token
                 - name: NODE_NAME
                   valueFrom:
                     fieldRef:
                       fieldPath: spec.nodeName
                 - name: HELM_RELEASE
-                  value: kubescape-operator-1.40.5
+                  value: kubescape-operator-1.42.0
                 - name: GOMEMLIMIT
-                  valueFrom:
-                    resourceFieldRef:
-                      divisor: "1"
-                      resource: limits.memory
+                  value: 240MiB
                 - name: KS_LOGGER_LEVEL
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-                - name: KS_API_AUTH_DISABLED
-                  value: "true"
-              image: quay.io/kubescape/operator:v0.2.208
+              image: quay.io/kubescape/operator:v0.2.209
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -1324,6 +1538,9 @@ minimal capabilities:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
               volumeMounts:
+                - mountPath: /var/run/secrets/kubescape.io/api-token
+                  name: kubescape-api-token
+                  readOnly: true
                 - mountPath: /etc/credentials
                   name: cloud-secret
                   readOnly: true
@@ -1364,6 +1581,13 @@ minimal capabilities:
           serviceAccountName: operator
           tolerations: null
           volumes:
+            - name: kubescape-api-token
+              projected:
+                sources:
+                  - serviceAccountToken:
+                      audience: kubescape.io
+                      expirationSeconds: 3600
+                      path: token
             - name: cloud-secret
               secret:
                 secretName: cloud-secret
@@ -1399,7 +1623,7 @@ minimal capabilities:
             - configMap:
                 name: node-agent-daemonset-template
               name: node-agent-template
-  31: |
+  38: |
     apiVersion: v1
     data:
       cronjobTemplate: |-
@@ -1432,27 +1656,37 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: kubescape-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.23"
+                    image: "quay.io/kubescape/kubescape-ops-tool:0.2.0-r1"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
                       readOnlyRootFilesystem: true
                       runAsNonRoot: true
-                      runAsUser: 100
+                      runAsUser: 65532
+                      runAsGroup: 65532
+                      capabilities:
+                        drop:
+                          - ALL
                     resources:
                       limits:
-                        cpu: 10m
-                        memory: 20Mi
+                        cpu: 100m
+                        memory: 128Mi
                       requests:
-                        cpu: 1m
-                        memory: 10Mi
+                        cpu: 10m
+                        memory: 32Mi
+                    command: ["/usr/bin/kubescape-ops-tool", "create-operator-command"]
                     args:
-                      - -method=post
-                      - -scheme=http
-                      - -host=operator:4002
-                      - -path=v1/triggerAction
-                      - -headers=Content-Type:application/json
-                      - -path-body=/home/ks/request-body.json
+                      - --namespace
+                      - kubescape
+                      - --request-body
+                      - /home/ks/request-body.json
+                      - --generate-name
+                      - kubescape-scheduler-
+                    env:
+                      - name: JOB_NAME
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.labels['batch.kubernetes.io/job-name']
                     volumeMounts:
                       - name: "request-body-volume"
                         mountPath: /home/ks/request-body.json
@@ -1460,7 +1694,7 @@ minimal capabilities:
                         readOnly: true
                   restartPolicy: Never
                   serviceAccountName: kubescape
-                  automountServiceAccountToken: false
+                  automountServiceAccountToken: true
                   nodeSelector:
                     kubernetes.io/os: linux
                   affinity:
@@ -1479,14 +1713,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: kubescape-cronjob-template
       namespace: kubescape
-  32: |
+  39: |
     apiVersion: v1
     data:
       cronjobTemplate: |-
@@ -1519,27 +1753,37 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: kubevuln-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.23"
+                    image: "quay.io/kubescape/kubescape-ops-tool:0.2.0-r1"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
                       readOnlyRootFilesystem: true
                       runAsNonRoot: true
-                      runAsUser: 100
+                      runAsUser: 65532
+                      runAsGroup: 65532
+                      capabilities:
+                        drop:
+                          - ALL
                     resources:
                       limits:
-                        cpu: 10m
-                        memory: 20Mi
+                        cpu: 100m
+                        memory: 128Mi
                       requests:
-                        cpu: 1m
-                        memory: 10Mi
+                        cpu: 10m
+                        memory: 32Mi
+                    command: ["/usr/bin/kubescape-ops-tool", "create-operator-command"]
                     args:
-                      - -method=post
-                      - -scheme=http
-                      - -host=operator:4002
-                      - -path=v1/triggerAction
-                      - -headers=Content-Type:application/json
-                      - -path-body=/home/ks/request-body.json
+                      - --namespace
+                      - kubescape
+                      - --request-body
+                      - /home/ks/request-body.json
+                      - --generate-name
+                      - kubevuln-scheduler-
+                    env:
+                      - name: JOB_NAME
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.labels['batch.kubernetes.io/job-name']
                     volumeMounts:
                       - name: "request-body-volume"
                         mountPath: /home/ks/request-body.json
@@ -1547,7 +1791,7 @@ minimal capabilities:
                         readOnly: true
                   restartPolicy: Never
                   serviceAccountName: kubevuln
-                  automountServiceAccountToken: false
+                  automountServiceAccountToken: true
                   nodeSelector:
                     kubernetes.io/os: linux
                   affinity:
@@ -1566,14 +1810,44 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: kubevuln-cronjob-template
       namespace: kubescape
-  33: |
+  40: |
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+      annotations: null
+      labels:
+        app: operator
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: operator
+      namespace: kubescape
+    spec:
+      ingress:
+        - ports:
+            - port: admission-port
+              protocol: TCP
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/component: operator
+          app.kubernetes.io/instance: RELEASE-NAME
+          app.kubernetes.io/name: kubescape-operator
+      policyTypes:
+        - Ingress
+  41: |
     apiVersion: v1
     data:
       cronjobTemplate: |-
@@ -1606,27 +1880,37 @@ minimal capabilities:
                   - name: armosec-readonly
                   containers:
                   - name: registry-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.23"
+                    image: "quay.io/kubescape/kubescape-ops-tool:0.2.0-r1"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
                       readOnlyRootFilesystem: true
                       runAsNonRoot: true
-                      runAsUser: 100
+                      runAsUser: 65532
+                      runAsGroup: 65532
+                      capabilities:
+                        drop:
+                          - ALL
                     resources:
                       limits:
-                        cpu: 10m
-                        memory: 20Mi
+                        cpu: 100m
+                        memory: 128Mi
                       requests:
-                        cpu: 1m
-                        memory: 10Mi
+                        cpu: 10m
+                        memory: 32Mi
+                    command: ["/usr/bin/kubescape-ops-tool", "create-operator-command"]
                     args:
-                      - -method=post
-                      - -scheme=http
-                      - -host=operator:4002
-                      - -path=v1/triggerAction
-                      - -headers=Content-Type:application/json
-                      - -path-body=/home/ks/request-body.json
+                      - --namespace
+                      - kubescape
+                      - --request-body
+                      - /home/ks/request-body.json
+                      - --generate-name
+                      - registry-scheduler-
+                    env:
+                      - name: JOB_NAME
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.labels['batch.kubernetes.io/job-name']
                     volumeMounts:
                       - name: "request-body-volume"
                         mountPath: /home/ks/request-body.json
@@ -1634,7 +1918,7 @@ minimal capabilities:
                         readOnly: true
                   restartPolicy: Never
                   serviceAccountName: kubevuln
-                  automountServiceAccountToken: false
+                  automountServiceAccountToken: true
                   nodeSelector:
                     kubernetes.io/os: linux
                   affinity:
@@ -1653,14 +1937,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: registry-scan-cronjob-template
       namespace: kubescape
-  34: |
+  42: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
@@ -1672,8 +1956,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -1683,7 +1967,6 @@ minimal capabilities:
           - ""
         resources:
           - configmaps
-          - secrets
         verbs:
           - create
           - get
@@ -1705,6 +1988,14 @@ minimal capabilities:
           - patch
           - delete
       - apiGroups:
+          - batch
+        resources:
+          - jobs
+        verbs:
+          - create
+          - patch
+          - delete
+      - apiGroups:
           - apps
         resources:
           - daemonsets
@@ -1716,7 +2007,7 @@ minimal capabilities:
           - update
           - delete
           - patch
-  35: |
+  43: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
@@ -1728,8 +2019,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -1742,7 +2033,7 @@ minimal capabilities:
       - kind: ServiceAccount
         name: operator
         namespace: kubescape
-  36: |
+  44: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -1754,8 +2045,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -1770,7 +2061,7 @@ minimal capabilities:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  37: |
+  45: |
     apiVersion: v1
     automountServiceAccountToken: false
     kind: ServiceAccount
@@ -1783,13 +2074,13 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
       namespace: kubescape
-  38: |
+  46: |
     apiVersion: v1
     data:
       tls.crt: bW9jay1jYS1jZXJ0
@@ -1805,14 +2096,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-tls-ca
       namespace: kubescape
     type: kubernetes.io/tls
-  39: |
+  47: |
     apiVersion: v1
     data:
       ca.crt: bW9jay1jYS1jZXJ0
@@ -1828,14 +2119,14 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-tls
       namespace: kubescape
     type: kubernetes.io/tls
-  40: |
+  48: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -1846,8 +2137,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: seccompprofiles.kubescape.io
@@ -2158,7 +2449,7 @@ minimal capabilities:
           storage: true
           subresources:
             status: {}
-  41: |
+  49: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -2170,8 +2461,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: rapid7-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5-private.rc4
-        helm.sh/chart: rapid7-operator-1.40.5-private.rc4
+        app.kubernetes.io/version: 1.42.0-private.rc1
+        helm.sh/chart: rapid7-operator-1.42.0-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -2182,7 +2473,7 @@ minimal capabilities:
           - pods
         verbs:
           - delete
-  42: |
+  50: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -2194,8 +2485,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: rapid7-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5-private.rc4
-        helm.sh/chart: rapid7-operator-1.40.5-private.rc4
+        app.kubernetes.io/version: 1.42.0-private.rc1
+        helm.sh/chart: rapid7-operator-1.42.0-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -2208,18 +2499,195 @@ minimal capabilities:
         name: node-agent
         namespace: kubescape
 synchronizer enabled when server is configured:
-  1: |+
-    raw: |+
-      Thank you for installing kubescape-operator version 1.40.5.
+  1: |
+    raw: |
+      Thank you for installing kubescape-operator version 1.42.0.
 
 
+
+      The in-cluster Kubescape APIs require a service-account token (audience kubescape.io) authorized by RBAC; set global.apiAuth.enabled=false to turn this off. External callers should create OperatorCommand objects instead of calling the APIs (kubescape CLI v4.0.19 and later do).
 
 
 
       kubescape-operator generates suggested network policies. To view them:
       > kubectl get generatednetworkpolicies -n <namespace>
 
+      NetworkPolicies restrict ingress to the kubescape components (global.networkPolicy.enabled).
+      See https://github.com/kubescape/helm-charts/blob/main/docs/features/network-policies.md
   2: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: synchronizer
+        app.kubernetes.io/component: synchronizer
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: synchronizer:system:auth-delegator
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: system:auth-delegator
+    subjects:
+      - kind: ServiceAccount
+        name: synchronizer
+        namespace: kubescape
+  3: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: operator
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: operator:system:auth-delegator
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: system:auth-delegator
+    subjects:
+      - kind: ServiceAccount
+        name: operator
+        namespace: kubescape
+  4: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      annotations: null
+      labels:
+        app: operator
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: operator-api-caller
+      namespace: kubescape
+    rules:
+      - apiGroups:
+          - kubescape.io
+        resources:
+          - scans
+          - scanresults
+        verbs:
+          - create
+          - get
+          - delete
+      - apiGroups:
+          - kubescape.io
+        resources:
+          - vulnerabilityscans
+        verbs:
+          - create
+          - get
+      - apiGroups:
+          - kubescape.io
+        resources:
+          - runtimealerts
+          - registrystatuses
+        verbs:
+          - create
+  5: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: operator
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: operator-api-caller
+      namespace: kubescape
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: Role
+      name: operator-api-caller
+    subjects:
+      - kind: ServiceAccount
+        name: operator
+        namespace: kubescape
+  6: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-api-caller
+      namespace: kubescape
+    rules:
+      - apiGroups:
+          - kubescape.io
+        resources:
+          - networkstreams
+          - nodeprofiles
+          - runtimealerts
+          - registrystatuses
+          - aisandboxheartbeats
+        verbs:
+          - create
+  7: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-api-caller
+      namespace: kubescape
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: Role
+      name: node-agent-api-caller
+    subjects:
+      - kind: ServiceAccount
+        name: node-agent
+        namespace: kubescape
+  8: |
     apiVersion: v1
     data:
       accessKey: ZjMwNGQ3M2ItZDQzYy00MTJiLTgyZWEtZTRjODU5NDkzY2U2
@@ -2234,15 +2702,15 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/infra: credentials
         tier: ks-control-plane
       name: cloud-secret
       namespace: kubescape
     type: Opaque
-  3: |
+  9: |
     apiVersion: v1
     data:
       clusterData: |
@@ -2281,20 +2749,20 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/infra: config
         kubescape.io/tier: core
         tier: ks-control-plane
       name: ks-cloud-config
       namespace: kubescape
-  4: |
+  10: |
     apiVersion: v1
     data:
       capabilities: |
         {
-          "capabilities":{"admissionController":"enable","agentRuntimePosture":"disable","autoUpgrading":"disable","configurationScan":"disable","continuousScan":"disable","httpDetection":"enable","kubescapeOffline":"disable","malwareDetection":"disable","manageWorkloads":"enable","networkEventsStreaming":"enable","networkPolicyService":"enable","nodeProfileService":"enable","nodeSbomGeneration":"disable","nodeScan":"enable","operator":"enable","prometheusExporter":"disable","relevancy":"enable","remediation":"enable","riskAcceptance":"disable","runtimeDetection":"enable","runtimeObservability":"enable","scanEmbeddedSBOMs":"disable","seccompProfileBackend":"crd","seccompProfileService":"enable","syncSBOM":"disable","testing":{"nodeAgentMultiplication":{"enabled":false,"replicas":5}},"vexGeneration":"disable","vulnerabilityScan":"disable"},
+          "capabilities":{"admissionController":"enable","agentRuntimePosture":"disable","autoUpgrading":"disable","configurationScan":"disable","continuousScan":"disable","httpDetection":"enable","kubescapeOffline":"disable","malwareDetection":"disable","manageWorkloads":"enable","networkEventsStreaming":"enable","networkPolicyService":"enable","nodeProfileService":"enable","nodeSbomGeneration":"disable","nodeScan":"enable","operator":"enable","prometheusExporter":"disable","relevancy":"enable","remediation":"enable","riskAcceptance":"disable","runtimeDetection":"enable","runtimeObservability":"enable","sandboxSeccomp":"disable","scanEmbeddedSBOMs":"disable","seccompProfileBackend":"crd","seccompProfileService":"enable","syncSBOM":"disable","testing":{"nodeAgentMultiplication":{"enabled":false,"replicas":5}},"vexGeneration":"disable","vulnerabilityScan":"disable"},
           "effectiveCapabilities":{"configurationScan":"disable","httpDetection":"enable","malwareDetection":"disable","networkEventsStreaming":"enable","nodeProfileService":"enable","nodeScan":"backend","vulnerabilityScan":"disable"},
           "capabilityWarnings":[],
           "components":{"autoUpdater":{"enabled":false},"cloudSecret":{"create":true,"name":"cloud-secret"},"customCaCertificates":{"name":"custom-ca-certificates"},"kubescape":{"enabled":false},"kubescapeScheduler":{"enabled":false},"kubevuln":{"enabled":false},"kubevulnScheduler":{"enabled":false},"nodeAgent":{"enabled":true},"operator":{"enabled":true},"prometheusExporter":{"enabled":false},"sbomScanner":{"enabled":false},"serviceDiscovery":{"enabled":true},"storage":{"enabled":false},"synchronizer":{"enabled":true}},
@@ -2311,14 +2779,14 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: ks-capabilities
       namespace: kubescape
-  5: |
+  11: |
     apiVersion: v1
     data:
       matchingRules.json: |
@@ -2333,14 +2801,14 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: cs-matching-rules
       namespace: kubescape
-  6: |
+  12: |
     apiVersion: scheduling.k8s.io/v1
     description: This priority class is for node-agent daemonset pods
     globalDefault: false
@@ -2354,13 +2822,13 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-critical
     value: 1.000001e+08
-  7: |
+  13: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -2394,7 +2862,7 @@ synchronizer enabled when server is configured:
               type: object
           served: true
           storage: true
-  8: |
+  14: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -2428,7 +2896,7 @@ synchronizer enabled when server is configured:
               type: object
           served: true
           storage: true
-  9: |
+  15: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -2462,7 +2930,7 @@ synchronizer enabled when server is configured:
               type: object
           served: true
           storage: true
-  10: |
+  16: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -2496,7 +2964,7 @@ synchronizer enabled when server is configured:
               type: object
           served: true
           storage: true
-  11: |
+  17: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -2530,7 +2998,7 @@ synchronizer enabled when server is configured:
               type: object
           served: true
           storage: true
-  12: |
+  18: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -2564,7 +3032,7 @@ synchronizer enabled when server is configured:
               type: object
           served: true
           storage: true
-  13: |
+  19: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -2598,7 +3066,7 @@ synchronizer enabled when server is configured:
               type: object
           served: true
           storage: true
-  14: |
+  20: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -2632,7 +3100,7 @@ synchronizer enabled when server is configured:
               type: object
           served: true
           storage: true
-  15: |
+  21: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -2666,7 +3134,7 @@ synchronizer enabled when server is configured:
               type: object
           served: true
           storage: true
-  16: |
+  22: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -2729,7 +3197,7 @@ synchronizer enabled when server is configured:
               type: object
           served: true
           storage: true
-  17: |
+  23: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -2741,8 +3209,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -2876,7 +3344,8 @@ synchronizer enabled when server is configured:
           - patch
           - list
           - watch
-  18: |
+          - delete
+  24: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -2888,8 +3357,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -2901,7 +3370,7 @@ synchronizer enabled when server is configured:
       - kind: ServiceAccount
         name: node-agent
         namespace: kubescape
-  19: |
+  25: |
     apiVersion: v1
     data:
       config.json: |
@@ -2919,10 +3388,12 @@ synchronizer enabled when server is configured:
             "networkStreamingEnabled": true,
             "maxImageSize": 5.36870912e+09,
             "maxSBOMSize": 3.3554432e+07,
+            "maxTsProfileSize": 2.097152e+06,
             "sbomGenerationEnabled": false,
             "enableEmbeddedSBOMs": false,
             "seccompServiceEnabled": true,
             "seccompProfileBackend": "crd",
+            "sandboxSeccompEnabled": false,
             "initialDelay": "2m",
             "updateDataPeriod": "10m",
             "nodeProfileInterval": "10m",
@@ -2931,7 +3402,7 @@ synchronizer enabled when server is configured:
             "excludeNamespaces": "kubescape,kube-system,kube-public,kube-node-lease,kubeconfig,gmp-system,gmp-public,cortex-agent",
             "excludeLabels":null,
             "exporters": {
-              "httpExporterConfig":{"maxAlertsPerMinute":1000,"method":"POST","url":"http://synchronizer:8089/apis/v1/kubescape.io"},
+              "httpExporterConfig":{"maxAlertsPerMinute":1000,"method":"POST","tokenFile":"/var/run/secrets/kubescape.io/api-token/token","url":"http://synchronizer:8089/apis/v1/kubescape.io"},
               "alertManagerExporterUrls":[],
               "stdoutExporter":true,
               "syslogExporterURL": ""
@@ -2978,14 +3449,74 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: node-agent
       namespace: kubescape
-  20: |
+  26: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-hostdata-gc
+      namespace: kubescape
+    rules:
+      - apiGroups:
+          - coordination.k8s.io
+        resourceNames:
+          - kubescape-hostdata-gc
+        resources:
+          - leases
+        verbs:
+          - get
+          - update
+      - apiGroups:
+          - coordination.k8s.io
+        resources:
+          - leases
+        verbs:
+          - create
+  27: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      annotations: null
+      labels:
+        app: node-agent
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: node-agent-hostdata-gc
+      namespace: kubescape
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: Role
+      name: node-agent-hostdata-gc
+    subjects:
+      - kind: ServiceAccount
+        name: node-agent
+        namespace: kubescape
+  28: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -2997,8 +3528,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
@@ -3013,7 +3544,7 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/component: node-agent
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
-  21: |
+  29: |
     apiVersion: v1
     kind: ServiceAccount
     metadata:
@@ -3025,16 +3556,16 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent
       namespace: kubescape
-  22: |
+  30: |
     apiVersion: v1
     data:
-      daemonset-template.yaml: "apiVersion: apps/v1\nkind: DaemonSet\nmetadata:\n  name: \"{{ .Name }}\"\n  namespace: kubescape\n  annotations:\n    \n  labels:\n    helm.sh/chart: kubescape-operator-1.40.5\n    app.kubernetes.io/name: kubescape-operator\n    app.kubernetes.io/instance: RELEASE-NAME\n    app.kubernetes.io/component: node-agent\n    app.kubernetes.io/version: \"1.40.5\"\n    app.kubernetes.io/managed-by: Helm\n    app.kubernetes.io/part-of: kubescape\n    app: node-agent\n    tier: ks-control-plane\n    kubescape.io/ignore: \"true\"\n    kubescape.io/tier: \"core\"\n    kubescape.io/managed-by: operator-autoscaler\n    kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\nspec:\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: kubescape-operator\n      app.kubernetes.io/instance: RELEASE-NAME\n      app.kubernetes.io/component: node-agent\n      kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n  template:\n    metadata:\n      annotations:\n        \n        checksum/node-agent-config: dd082afd5a09b639925f07f1608002143754222e87e60af34086bc1d559e7762\n        checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424\n        checksum/cloud-config: 184eb6cd10a819701abb595544fece2c2e888e6e0b59ec85e3af4a253584392d\n        container.apparmor.security.beta.kubernetes.io/node-agent: unconfined\n      labels:\n        helm.sh/chart: kubescape-operator-1.40.5\n        app.kubernetes.io/name: kubescape-operator\n        app.kubernetes.io/instance: RELEASE-NAME\n        app.kubernetes.io/component: node-agent\n        app.kubernetes.io/version: \"1.40.5\"\n        app.kubernetes.io/managed-by: Helm\n        app.kubernetes.io/part-of: kubescape\n        app: node-agent\n        tier: ks-control-plane\n        kubescape.io/ignore: \"true\"\n        kubescape.io/tier: \"core\"\n        kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n    spec:\n      securityContext:\n      imagePullSecrets:\n      - name: armosec-readonly\n      priorityClassName: kubescape-critical\n      serviceAccountName: node-agent\n      automountServiceAccountToken: true\n      hostPID: true\n      volumes:\n      \n      - hostPath:\n          path: /\n        name: host\n      - hostPath:\n          path: /var/lib/kubelet\n        name: kubeletdir\n      - hostPath:\n          path: /run\n        name: run\n      - hostPath:\n          path: /var\n        name: var\n      - hostPath:\n          path: /sys/fs/cgroup\n        name: cgroup\n      - hostPath:\n          path: /lib/modules\n        name: modules\n      - hostPath:\n          path: /sys/fs/bpf\n        name: bpffs\n      - hostPath:\n          path: /sys/kernel/debug\n        name: debugfs\n      - hostPath:\n          path: /boot\n        name: boot\n      - emptyDir: null\n        name: data\n      - emptyDir: null\n        name: profiles\n      - hostPath:\n          path: /\n          type: Directory\n        name: host-filesystem\n      - name: cloud-secret\n        secret:\n          secretName: cloud-secret\n      - name: ks-cloud-config\n        configMap:\n          name: ks-cloud-config\n          items:\n            - key: \"clusterData\"\n              path: \"clusterData.json\"\n      - name: config\n        configMap:\n          name: node-agent\n          items:\n            - key: \"config.json\"\n              path: \"config.json\"\n      containers:\n      \n      - name: node-agent\n        image: \"quay.io/armosec/node-agent:v0.0.598\"\n        imagePullPolicy: IfNotPresent\n        livenessProbe:\n          httpGet:\n            path: /livez\n            port: 7888\n          periodSeconds: 3\n        readinessProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 3\n        startupProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 10\n          failureThreshold: 30\n          timeoutSeconds: 1\n        resources:\n          \n          requests:\n            cpu: \"{{ .Resources.Requests.CPU }}\"\n            memory: \"{{ .Resources.Requests.Memory }}\"\n          limits:\n            cpu: \"{{ .Resources.Limits.CPU }}\"\n            memory: \"{{ .Resources.Limits.Memory }}\"\n        env:\n          \n          - name: GOMEMLIMIT\n            value: \"{{ .GoMemLimit }}\"\n          - name: HOST_ROOT\n            value: \"/host\"\n          - name: KS_LOGGER_LEVEL\n            value: \"info\"\n          - name: KS_LOGGER_NAME\n            value: \"zap\"\n          - name: NODE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: spec.nodeName\n          - name: POD_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.name\n          - name: NAMESPACE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.namespace\n          - name: KUBELET_ROOT\n            value: \"/var/lib/kubelet\"\n          - name: AGENT_VERSION\n            value: \"v0.0.598\"\n          - name: API_URL\n            value: \"https://api.armosec.io\"\n          - name: IGNORERULEBINDINGS\n            value: \"true\"\n        securityContext:\n          runAsUser: 0\n          privileged: false\n          capabilities:\n            add:\n              - SYS_ADMIN\n              - SYS_PTRACE\n              - NET_ADMIN\n              - SYSLOG\n              - SYS_RESOURCE\n              - IPC_LOCK\n              - NET_RAW\n          seLinuxOptions:\n            type: \"{{ .SELinuxType }}\"\n        volumeMounts:\n          \n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /var/lib/kubelet\n            name: kubeletdir\n          - mountPath: /run\n            name: run\n          - mountPath: /var\n            name: var\n            readOnly: true\n          - mountPath: /lib/modules\n            name: modules\n            readOnly: true\n          - mountPath: /sys/kernel/debug\n            name: debugfs\n          - mountPath: /sys/fs/cgroup\n            name: cgroup\n            readOnly: true\n          - mountPath: /sys/fs/bpf\n            name: bpffs\n          - mountPath: /data\n            name: data\n          - mountPath: /profiles\n            name: profiles\n          - mountPath: /boot\n            name: boot\n            readOnly: true\n          - name: cloud-secret\n            mountPath: /etc/credentials\n            readOnly: true\n          - name: ks-cloud-config\n            mountPath: /etc/config/clusterData.json\n            readOnly: true\n            subPath: \"clusterData.json\"\n          - name: config\n            mountPath: /etc/config/config.json\n            readOnly: true\n            subPath: \"config.json\"\n      nodeSelector:\n        kubernetes.io/os: linux\n      {{- if not .IsDefaultGroup }}\n        {{ .NodeGroupLabelKey }}: \"{{ .NodeGroupLabel }}\"\n      {{- end }}\n      affinity:\n      {{- if .IsDefaultGroup }}\n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: {{ .NodeGroupLabelKey }}\n                operator: DoesNotExist\n      {{- else }}\n      \n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: kubernetes.io/os\n                operator: In\n                values:\n                - linux\n      {{- end }}\n      tolerations:\n"
+      daemonset-template.yaml: "apiVersion: apps/v1\nkind: DaemonSet\nmetadata:\n  name: \"{{ .Name }}\"\n  namespace: kubescape\n  annotations:\n    \n  labels:\n    helm.sh/chart: kubescape-operator-1.42.0\n    app.kubernetes.io/name: kubescape-operator\n    app.kubernetes.io/instance: RELEASE-NAME\n    app.kubernetes.io/component: node-agent\n    app.kubernetes.io/version: \"1.42.0\"\n    app.kubernetes.io/managed-by: Helm\n    app.kubernetes.io/part-of: kubescape\n    app: node-agent\n    tier: ks-control-plane\n    kubescape.io/ignore: \"true\"\n    kubescape.io/tier: \"core\"\n    kubescape.io/managed-by: operator-autoscaler\n    kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\nspec:\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: kubescape-operator\n      app.kubernetes.io/instance: RELEASE-NAME\n      app.kubernetes.io/component: node-agent\n      kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n  template:\n    metadata:\n      annotations:\n        \n        checksum/node-agent-config: ea39365fa04b9f374702e7ac32bc499fd5fc16fea383efc07f8b44427142480d\n        checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424\n        checksum/cloud-config: 184eb6cd10a819701abb595544fece2c2e888e6e0b59ec85e3af4a253584392d\n        container.apparmor.security.beta.kubernetes.io/node-agent: unconfined\n      labels:\n        helm.sh/chart: kubescape-operator-1.42.0\n        app.kubernetes.io/name: kubescape-operator\n        app.kubernetes.io/instance: RELEASE-NAME\n        app.kubernetes.io/component: node-agent\n        app.kubernetes.io/version: \"1.42.0\"\n        app.kubernetes.io/managed-by: Helm\n        app.kubernetes.io/part-of: kubescape\n        app: node-agent\n        tier: ks-control-plane\n        kubescape.io/ignore: \"true\"\n        kubescape.io/tier: \"core\"\n        kubescape.io/node-group: \"{{ .NodeGroupLabel }}\"\n    spec:\n      securityContext:\n      imagePullSecrets:\n      - name: armosec-readonly\n      priorityClassName: kubescape-critical\n      serviceAccountName: node-agent\n      automountServiceAccountToken: true\n      hostPID: true\n      volumes:\n      \n      - name: kubescape-api-token\n        projected:\n          sources:\n            - serviceAccountToken:\n                audience: \"kubescape.io\"\n                expirationSeconds: 3600\n                path: token\n      - hostPath:\n          path: /\n        name: host\n      - hostPath:\n          path: /var/lib/kubelet\n        name: kubeletdir\n      - hostPath:\n          path: /run\n        name: run\n      - hostPath:\n          path: /var\n        name: var\n      - hostPath:\n          path: /sys/fs/cgroup\n        name: cgroup\n      - hostPath:\n          path: /lib/modules\n        name: modules\n      - hostPath:\n          path: /sys/fs/bpf\n        name: bpffs\n      - hostPath:\n          path: /sys/kernel/debug\n        name: debugfs\n      - hostPath:\n          path: /boot\n        name: boot\n      - emptyDir: null\n        name: data\n      - emptyDir: null\n        name: profiles\n      - hostPath:\n          path: /\n          type: Directory\n        name: host-filesystem\n      - name: cloud-secret\n        secret:\n          secretName: cloud-secret\n      - name: ks-cloud-config\n        configMap:\n          name: ks-cloud-config\n          items:\n            - key: \"clusterData\"\n              path: \"clusterData.json\"\n      - name: config\n        configMap:\n          name: node-agent\n          items:\n            - key: \"config.json\"\n              path: \"config.json\"\n      containers:\n      \n      - name: node-agent\n        image: \"quay.io/armosec/node-agent:v0.0.598\"\n        imagePullPolicy: IfNotPresent\n        livenessProbe:\n          httpGet:\n            path: /livez\n            port: 7888\n          periodSeconds: 3\n        readinessProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 3\n        startupProbe:\n          httpGet:\n            path: /readyz\n            port: 7888\n          periodSeconds: 10\n          failureThreshold: 30\n          timeoutSeconds: 1\n        resources:\n          \n          requests:\n            cpu: \"{{ .Resources.Requests.CPU }}\"\n            memory: \"{{ .Resources.Requests.Memory }}\"\n          limits:\n            cpu: \"{{ .Resources.Limits.CPU }}\"\n            memory: \"{{ .Resources.Limits.Memory }}\"\n        env:\n          \n          - name: GOMEMLIMIT\n            value: \"{{ .GoMemLimit }}\"\n          - name: HOST_ROOT\n            value: \"/host\"\n          - name: KS_LOGGER_LEVEL\n            value: \"info\"\n          - name: KS_LOGGER_NAME\n            value: \"zap\"\n          - name: NODE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: spec.nodeName\n          - name: POD_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.name\n          - name: NAMESPACE_NAME\n            valueFrom:\n              fieldRef:\n                fieldPath: metadata.namespace\n          - name: KUBELET_ROOT\n            value: \"/var/lib/kubelet\"\n          - name: AGENT_VERSION\n            value: \"v0.0.598\"\n          - name: API_URL\n            value: \"https://api.armosec.io\"\n          - name: IGNORERULEBINDINGS\n            value: \"true\"\n        securityContext:\n          runAsUser: 0\n          privileged: false\n          capabilities:\n            add:\n              - SYS_ADMIN\n              - SYS_PTRACE\n              - NET_ADMIN\n              - SYSLOG\n              - SYS_RESOURCE\n              - IPC_LOCK\n              - NET_RAW\n          seLinuxOptions:\n            type: \"{{ .SELinuxType }}\"\n        volumeMounts:\n          - name: kubescape-api-token\n            mountPath: /var/run/secrets/kubescape.io/api-token\n            readOnly: true\n          - mountPath: /host\n            name: host\n            readOnly: true\n          - mountPath: /var/lib/kubelet\n            name: kubeletdir\n          - mountPath: /run\n            name: run\n          - mountPath: /var\n            name: var\n            readOnly: true\n          - mountPath: /lib/modules\n            name: modules\n            readOnly: true\n          - mountPath: /sys/kernel/debug\n            name: debugfs\n          - mountPath: /sys/fs/cgroup\n            name: cgroup\n            readOnly: true\n          - mountPath: /sys/fs/bpf\n            name: bpffs\n          - mountPath: /data\n            name: data\n          - mountPath: /profiles\n            name: profiles\n          - mountPath: /boot\n            name: boot\n            readOnly: true\n          - name: cloud-secret\n            mountPath: /etc/credentials\n            readOnly: true\n          - name: ks-cloud-config\n            mountPath: /etc/config/clusterData.json\n            readOnly: true\n            subPath: \"clusterData.json\"\n          - name: config\n            mountPath: /etc/config/config.json\n            readOnly: true\n            subPath: \"config.json\"\n      nodeSelector:\n        kubernetes.io/os: linux\n      {{- if not .IsDefaultGroup }}\n        {{ .NodeGroupLabelKey }}: \"{{ .NodeGroupLabel }}\"\n      {{- end }}\n      affinity:\n      {{- if .IsDefaultGroup }}\n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: {{ .NodeGroupLabelKey }}\n                operator: DoesNotExist\n      {{- else }}\n      \n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: kubernetes.io/os\n                operator: In\n                values:\n                - linux\n      {{- end }}\n      tolerations:\n"
     kind: ConfigMap
     metadata:
       annotations: null
@@ -3045,14 +3576,14 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: node-agent-daemonset-template
       namespace: kubescape
-  23: |
+  31: |
     apiVersion: v1
     data:
       tls.crt: bW9jay1jYS1jZXJ0
@@ -3068,14 +3599,14 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook-ca
       namespace: kubescape
     type: kubernetes.io/tls
-  24: |
+  32: |
     apiVersion: v1
     data:
       ca.crt: bW9jay1jYS1jZXJ0
@@ -3091,14 +3622,14 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook-tls
       namespace: kubescape
     type: kubernetes.io/tls
-  25: |
+  33: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -3110,8 +3641,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook
@@ -3125,7 +3656,7 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  26: |
+  34: |
     apiVersion: admissionregistration.k8s.io/v1
     kind: ValidatingWebhookConfiguration
     metadata:
@@ -3137,8 +3668,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: kubescape-admission-webhook
@@ -3184,7 +3715,7 @@ synchronizer enabled when server is configured:
               - networkpolicies
             scope: '*'
         sideEffects: None
-  27: |
+  35: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -3196,8 +3727,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -3238,10 +3769,6 @@ synchronizer enabled when server is configured:
           - get
           - watch
           - list
-          - create
-          - update
-          - delete
-          - patch
       - apiGroups:
           - apps
         resources:
@@ -3322,7 +3849,6 @@ synchronizer enabled when server is configured:
           - ""
         resources:
           - pods
-          - nodes
         verbs:
           - patch
       - apiGroups:
@@ -3334,7 +3860,8 @@ synchronizer enabled when server is configured:
           - delete
           - get
           - list
-  28: |
+          - update
+  36: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -3346,8 +3873,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -3359,7 +3886,7 @@ synchronizer enabled when server is configured:
       - kind: ServiceAccount
         name: operator
         namespace: kubescape
-  29: |
+  37: |
     apiVersion: v1
     data:
       config.json: |
@@ -3374,7 +3901,7 @@ synchronizer enabled when server is configured:
             "Interval": "5m",
             "Namespace": "kubescape"
           },
-          "httpExporterConfig":{"maxAlertsPerMinute":1000,"method":"POST","url":"http://synchronizer:8089/apis/v1/kubescape.io"},
+          "httpExporterConfig":{"maxAlertsPerMinute":1000,"method":"POST","tokenFile":"/var/run/secrets/kubescape.io/api-token/token","url":"http://synchronizer:8089/apis/v1/kubescape.io"},
           "nodeAgentAutoscaler": {
             "enabled": true,
             "nodeGroupLabel": "node.kubernetes.io/instance-type",
@@ -3410,14 +3937,14 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: operator
       namespace: kubescape
-  30: |
+  38: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -3429,8 +3956,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -3452,11 +3979,11 @@ synchronizer enabled when server is configured:
       template:
         metadata:
           annotations:
-            checksum/capabilities-config: 4a6e50dba74209ee708e90f6868d1649744b3a96fe442e48272d48a6d2d1ddc3
+            checksum/capabilities-config: 1e8cabf34ae912121661759cee9d7e5f385a7118ddd1416116c33ad3aadcc4a1
             checksum/cloud-config: 184eb6cd10a819701abb595544fece2c2e888e6e0b59ec85e3af4a253584392d
             checksum/cloud-secret: 435193bc039d949c849ba4b141adeb4836e4d0fdcc4bf0b9588d0e36de86c424
             checksum/matching-rules-config: c81857b415602f6b161db3199a16461c5acd8ba44ec7572189441f4f294a3614
-            checksum/operator-config: e93e70a8ec932e461410f6bedd6dc3f378e7772c904b7da4268b7351e8e1a503
+            checksum/operator-config: 6b90e640a57fac60d7406a07faed487fe668643c02e7a6d74a0babdc3e51c9ff
           labels:
             app: operator
             app.kubernetes.io/component: operator
@@ -3464,8 +3991,8 @@ synchronizer enabled when server is configured:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.5
-            helm.sh/chart: kubescape-operator-1.40.5
+            app.kubernetes.io/version: 1.42.0
+            helm.sh/chart: kubescape-operator-1.42.0
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -3474,24 +4001,27 @@ synchronizer enabled when server is configured:
           automountServiceAccountToken: true
           containers:
             - env:
+                - name: KS_API_AUDIENCE
+                  value: kubescape.io
+                - name: POD_NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.namespace
+                - name: KS_API_TOKEN_FILE
+                  value: /var/run/secrets/kubescape.io/api-token/token
                 - name: NODE_NAME
                   valueFrom:
                     fieldRef:
                       fieldPath: spec.nodeName
                 - name: HELM_RELEASE
-                  value: kubescape-operator-1.40.5
+                  value: kubescape-operator-1.42.0
                 - name: GOMEMLIMIT
-                  valueFrom:
-                    resourceFieldRef:
-                      divisor: "1"
-                      resource: limits.memory
+                  value: 240MiB
                 - name: KS_LOGGER_LEVEL
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
-                - name: KS_API_AUTH_DISABLED
-                  value: "true"
-              image: quay.io/kubescape/operator:v0.2.208
+              image: quay.io/kubescape/operator:v0.2.209
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -3531,6 +4061,9 @@ synchronizer enabled when server is configured:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
               volumeMounts:
+                - mountPath: /var/run/secrets/kubescape.io/api-token
+                  name: kubescape-api-token
+                  readOnly: true
                 - mountPath: /etc/credentials
                   name: cloud-secret
                   readOnly: true
@@ -3571,6 +4104,13 @@ synchronizer enabled when server is configured:
           serviceAccountName: operator
           tolerations: null
           volumes:
+            - name: kubescape-api-token
+              projected:
+                sources:
+                  - serviceAccountToken:
+                      audience: kubescape.io
+                      expirationSeconds: 3600
+                      path: token
             - name: cloud-secret
               secret:
                 secretName: cloud-secret
@@ -3606,7 +4146,7 @@ synchronizer enabled when server is configured:
             - configMap:
                 name: node-agent-daemonset-template
               name: node-agent-template
-  31: |
+  39: |
     apiVersion: v1
     data:
       cronjobTemplate: |-
@@ -3639,27 +4179,37 @@ synchronizer enabled when server is configured:
                   - name: armosec-readonly
                   containers:
                   - name: kubescape-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.23"
+                    image: "quay.io/kubescape/kubescape-ops-tool:0.2.0-r1"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
                       readOnlyRootFilesystem: true
                       runAsNonRoot: true
-                      runAsUser: 100
+                      runAsUser: 65532
+                      runAsGroup: 65532
+                      capabilities:
+                        drop:
+                          - ALL
                     resources:
                       limits:
-                        cpu: 10m
-                        memory: 20Mi
+                        cpu: 100m
+                        memory: 128Mi
                       requests:
-                        cpu: 1m
-                        memory: 10Mi
+                        cpu: 10m
+                        memory: 32Mi
+                    command: ["/usr/bin/kubescape-ops-tool", "create-operator-command"]
                     args:
-                      - -method=post
-                      - -scheme=http
-                      - -host=operator:4002
-                      - -path=v1/triggerAction
-                      - -headers=Content-Type:application/json
-                      - -path-body=/home/ks/request-body.json
+                      - --namespace
+                      - kubescape
+                      - --request-body
+                      - /home/ks/request-body.json
+                      - --generate-name
+                      - kubescape-scheduler-
+                    env:
+                      - name: JOB_NAME
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.labels['batch.kubernetes.io/job-name']
                     volumeMounts:
                       - name: "request-body-volume"
                         mountPath: /home/ks/request-body.json
@@ -3667,7 +4217,7 @@ synchronizer enabled when server is configured:
                         readOnly: true
                   restartPolicy: Never
                   serviceAccountName: kubescape
-                  automountServiceAccountToken: false
+                  automountServiceAccountToken: true
                   nodeSelector:
                     kubernetes.io/os: linux
                   affinity:
@@ -3686,14 +4236,14 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: kubescape-cronjob-template
       namespace: kubescape
-  32: |
+  40: |
     apiVersion: v1
     data:
       cronjobTemplate: |-
@@ -3726,27 +4276,37 @@ synchronizer enabled when server is configured:
                   - name: armosec-readonly
                   containers:
                   - name: kubevuln-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.23"
+                    image: "quay.io/kubescape/kubescape-ops-tool:0.2.0-r1"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
                       readOnlyRootFilesystem: true
                       runAsNonRoot: true
-                      runAsUser: 100
+                      runAsUser: 65532
+                      runAsGroup: 65532
+                      capabilities:
+                        drop:
+                          - ALL
                     resources:
                       limits:
-                        cpu: 10m
-                        memory: 20Mi
+                        cpu: 100m
+                        memory: 128Mi
                       requests:
-                        cpu: 1m
-                        memory: 10Mi
+                        cpu: 10m
+                        memory: 32Mi
+                    command: ["/usr/bin/kubescape-ops-tool", "create-operator-command"]
                     args:
-                      - -method=post
-                      - -scheme=http
-                      - -host=operator:4002
-                      - -path=v1/triggerAction
-                      - -headers=Content-Type:application/json
-                      - -path-body=/home/ks/request-body.json
+                      - --namespace
+                      - kubescape
+                      - --request-body
+                      - /home/ks/request-body.json
+                      - --generate-name
+                      - kubevuln-scheduler-
+                    env:
+                      - name: JOB_NAME
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.labels['batch.kubernetes.io/job-name']
                     volumeMounts:
                       - name: "request-body-volume"
                         mountPath: /home/ks/request-body.json
@@ -3754,7 +4314,7 @@ synchronizer enabled when server is configured:
                         readOnly: true
                   restartPolicy: Never
                   serviceAccountName: kubevuln
-                  automountServiceAccountToken: false
+                  automountServiceAccountToken: true
                   nodeSelector:
                     kubernetes.io/os: linux
                   affinity:
@@ -3773,14 +4333,44 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: kubevuln-cronjob-template
       namespace: kubescape
-  33: |
+  41: |
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+      annotations: null
+      labels:
+        app: operator
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: operator
+      namespace: kubescape
+    spec:
+      ingress:
+        - ports:
+            - port: admission-port
+              protocol: TCP
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/component: operator
+          app.kubernetes.io/instance: RELEASE-NAME
+          app.kubernetes.io/name: kubescape-operator
+      policyTypes:
+        - Ingress
+  42: |
     apiVersion: v1
     data:
       cronjobTemplate: |-
@@ -3813,27 +4403,37 @@ synchronizer enabled when server is configured:
                   - name: armosec-readonly
                   containers:
                   - name: registry-scheduler
-                    image: "quay.io/kubescape/http-request:v0.2.23"
+                    image: "quay.io/kubescape/kubescape-ops-tool:0.2.0-r1"
                     imagePullPolicy: IfNotPresent
                     securityContext:
                       allowPrivilegeEscalation: false
                       readOnlyRootFilesystem: true
                       runAsNonRoot: true
-                      runAsUser: 100
+                      runAsUser: 65532
+                      runAsGroup: 65532
+                      capabilities:
+                        drop:
+                          - ALL
                     resources:
                       limits:
-                        cpu: 10m
-                        memory: 20Mi
+                        cpu: 100m
+                        memory: 128Mi
                       requests:
-                        cpu: 1m
-                        memory: 10Mi
+                        cpu: 10m
+                        memory: 32Mi
+                    command: ["/usr/bin/kubescape-ops-tool", "create-operator-command"]
                     args:
-                      - -method=post
-                      - -scheme=http
-                      - -host=operator:4002
-                      - -path=v1/triggerAction
-                      - -headers=Content-Type:application/json
-                      - -path-body=/home/ks/request-body.json
+                      - --namespace
+                      - kubescape
+                      - --request-body
+                      - /home/ks/request-body.json
+                      - --generate-name
+                      - registry-scheduler-
+                    env:
+                      - name: JOB_NAME
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.labels['batch.kubernetes.io/job-name']
                     volumeMounts:
                       - name: "request-body-volume"
                         mountPath: /home/ks/request-body.json
@@ -3841,7 +4441,7 @@ synchronizer enabled when server is configured:
                         readOnly: true
                   restartPolicy: Never
                   serviceAccountName: kubevuln
-                  automountServiceAccountToken: false
+                  automountServiceAccountToken: true
                   nodeSelector:
                     kubernetes.io/os: linux
                   affinity:
@@ -3860,14 +4460,14 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: registry-scan-cronjob-template
       namespace: kubescape
-  34: |
+  43: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
@@ -3879,8 +4479,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -3890,7 +4490,6 @@ synchronizer enabled when server is configured:
           - ""
         resources:
           - configmaps
-          - secrets
         verbs:
           - create
           - get
@@ -3912,6 +4511,14 @@ synchronizer enabled when server is configured:
           - patch
           - delete
       - apiGroups:
+          - batch
+        resources:
+          - jobs
+        verbs:
+          - create
+          - patch
+          - delete
+      - apiGroups:
           - apps
         resources:
           - daemonsets
@@ -3923,7 +4530,7 @@ synchronizer enabled when server is configured:
           - update
           - delete
           - patch
-  35: |
+  44: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
@@ -3935,8 +4542,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -3949,7 +4556,7 @@ synchronizer enabled when server is configured:
       - kind: ServiceAccount
         name: operator
         namespace: kubescape
-  36: |
+  45: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -3961,8 +4568,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
@@ -3977,7 +4584,7 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  37: |
+  46: |
     apiVersion: v1
     automountServiceAccountToken: false
     kind: ServiceAccount
@@ -3990,13 +4597,13 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: operator
       namespace: kubescape
-  38: |
+  47: |
     apiVersion: v1
     data:
       tls.crt: bW9jay1jYS1jZXJ0
@@ -4012,14 +4619,14 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-tls-ca
       namespace: kubescape
     type: kubernetes.io/tls
-  39: |
+  48: |
     apiVersion: v1
     data:
       ca.crt: bW9jay1jYS1jZXJ0
@@ -4035,14 +4642,14 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: storage-tls
       namespace: kubescape
     type: kubernetes.io/tls
-  40: |
+  49: |
     apiVersion: apiextensions.k8s.io/v1
     kind: CustomResourceDefinition
     metadata:
@@ -4053,8 +4660,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: seccompprofiles.kubescape.io
@@ -4365,7 +4972,7 @@ synchronizer enabled when server is configured:
           storage: true
           subresources:
             status: {}
-  41: |
+  50: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -4377,8 +4984,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: synchronizer
@@ -4582,7 +5189,7 @@ synchronizer enabled when server is configured:
         verbs:
           - update
           - patch
-  42: |
+  51: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -4593,8 +5200,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: synchronizer
@@ -4606,7 +5213,7 @@ synchronizer enabled when server is configured:
       - kind: ServiceAccount
         name: synchronizer
         namespace: kubescape
-  43: |
+  52: |
     apiVersion: v1
     data:
       config.json: |
@@ -4878,14 +5485,14 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
       name: synchronizer
       namespace: kubescape
-  44: |
+  53: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -4897,8 +5504,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         kubescape.io/tier: core
         tier: ks-control-plane
@@ -4927,8 +5534,8 @@ synchronizer enabled when server is configured:
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: kubescape-operator
             app.kubernetes.io/part-of: kubescape
-            app.kubernetes.io/version: 1.40.5
-            helm.sh/chart: kubescape-operator-1.40.5
+            app.kubernetes.io/version: 1.42.0
+            helm.sh/chart: kubescape-operator-1.42.0
             kubescape.io/ignore: "true"
             kubescape.io/tier: core
             tier: ks-control-plane
@@ -4939,20 +5546,23 @@ synchronizer enabled when server is configured:
             - command:
                 - /usr/bin/client
               env:
-                - name: HELM_RELEASE
-                  value: kubescape-operator-1.40.5
-                - name: GOMEMLIMIT
+                - name: KS_API_AUDIENCE
+                  value: kubescape.io
+                - name: POD_NAMESPACE
                   valueFrom:
-                    resourceFieldRef:
-                      divisor: "1"
-                      resource: limits.memory
+                    fieldRef:
+                      fieldPath: metadata.namespace
+                - name: HELM_RELEASE
+                  value: kubescape-operator-1.42.0
+                - name: GOMEMLIMIT
+                  value: 400MiB
                 - name: KS_LOGGER_LEVEL
                   value: info
                 - name: KS_LOGGER_NAME
                   value: zap
                 - name: API_URL
                   value: https://api.armosec.io
-              image: quay.io/kubescape/synchronizer:v0.0.167
+              image: quay.io/kubescape/synchronizer:v0.0.175
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -5016,7 +5626,48 @@ synchronizer enabled when server is configured:
                     path: config.json
                 name: synchronizer
               name: config
-  45: |
+  54: |
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+      annotations: null
+      labels:
+        app: synchronizer
+        app.kubernetes.io/component: synchronizer
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kubescape-operator
+        app.kubernetes.io/part-of: kubescape
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
+        kubescape.io/ignore: "true"
+        tier: ks-control-plane
+      name: synchronizer
+      namespace: kubescape
+    spec:
+      ingress:
+        - from:
+            - podSelector:
+                matchLabels:
+                  app.kubernetes.io/component: node-agent
+                  app.kubernetes.io/instance: RELEASE-NAME
+                  app.kubernetes.io/name: kubescape-operator
+            - podSelector:
+                matchLabels:
+                  app.kubernetes.io/component: operator
+                  app.kubernetes.io/instance: RELEASE-NAME
+                  app.kubernetes.io/name: kubescape-operator
+          ports:
+            - port: 8089
+              protocol: TCP
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/component: synchronizer
+          app.kubernetes.io/instance: RELEASE-NAME
+          app.kubernetes.io/name: kubescape-operator
+      policyTypes:
+        - Ingress
+  55: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
@@ -5027,8 +5678,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: synchronizer
@@ -5038,7 +5689,6 @@ synchronizer enabled when server is configured:
           - ""
         resources:
           - configmaps
-          - secrets
         verbs:
           - create
           - get
@@ -5059,7 +5709,7 @@ synchronizer enabled when server is configured:
           - list
           - patch
           - delete
-  46: |
+  56: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
@@ -5070,8 +5720,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: synchronizer
@@ -5084,7 +5734,7 @@ synchronizer enabled when server is configured:
       - kind: ServiceAccount
         name: synchronizer
         namespace: kubescape
-  47: |
+  57: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -5095,8 +5745,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: synchronizer
@@ -5111,7 +5761,7 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: kubescape-operator
       type: ClusterIP
-  48: |
+  58: |
     apiVersion: v1
     automountServiceAccountToken: false
     kind: ServiceAccount
@@ -5123,13 +5773,13 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5
-        helm.sh/chart: kubescape-operator-1.40.5
+        app.kubernetes.io/version: 1.42.0
+        helm.sh/chart: kubescape-operator-1.42.0
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: synchronizer
       namespace: kubescape
-  49: |
+  59: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -5141,8 +5791,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: rapid7-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5-private.rc4
-        helm.sh/chart: rapid7-operator-1.40.5-private.rc4
+        app.kubernetes.io/version: 1.42.0-private.rc1
+        helm.sh/chart: rapid7-operator-1.42.0-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -5153,7 +5803,7 @@ synchronizer enabled when server is configured:
           - pods
         verbs:
           - delete
-  50: |
+  60: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -5165,8 +5815,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: rapid7-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.40.5-private.rc4
-        helm.sh/chart: rapid7-operator-1.40.5-private.rc4
+        app.kubernetes.io/version: 1.42.0-private.rc1
+        helm.sh/chart: rapid7-operator-1.42.0-private.rc1
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
