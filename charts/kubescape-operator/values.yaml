@@ -21,7 +21,7 @@ kubescape-operator:
   hostScannerCleanup:
     image:
       repository: quay.io/kubescape/kubectl
-      tag: 1.36.1
+      tag: 1.37.2
       pullPolicy: IfNotPresent
     nodeSelector: {}
     affinity: {}

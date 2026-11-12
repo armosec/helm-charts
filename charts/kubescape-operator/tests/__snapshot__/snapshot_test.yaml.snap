@@ -4173,7 +4173,7 @@ minimal capabilities:
               command:
                 - /bin/sh
                 - -c
-              image: quay.io/kubescape/kubectl:1.36.1
+              image: quay.io/kubescape/kubectl:1.37.2
               imagePullPolicy: IfNotPresent
               name: host-scanner-cleanup
               resources:
@@ -8427,7 +8427,7 @@ sbom scanner sidecar uses armosec node-agent image:
               command:
                 - /bin/sh
                 - -c
-              image: quay.io/kubescape/kubectl:1.36.1
+              image: quay.io/kubescape/kubectl:1.37.2
               imagePullPolicy: IfNotPresent
               name: host-scanner-cleanup
               resources:
@@ -13516,7 +13516,7 @@ synchronizer enabled when server is configured:
               command:
                 - /bin/sh
                 - -c
-              image: quay.io/kubescape/kubectl:1.36.1
+              image: quay.io/kubescape/kubectl:1.37.2
               imagePullPolicy: IfNotPresent
               name: host-scanner-cleanup
               resources:
