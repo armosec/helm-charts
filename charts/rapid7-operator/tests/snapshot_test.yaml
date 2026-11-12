@@ -53,6 +53,13 @@ tests:
           path: spec.template.spec.containers[0].image
           pattern: '^quay\.io/kubescape/synchronizer:.*$'
         template: charts/kubescape-operator/templates/synchronizer/deployment.yaml
+      # global.apiAuth stays off until the private node-agent sends its token (SUB-9843)
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: KS_API_AUTH_DISABLED
+            value: "true"
+        template: charts/kubescape-operator/templates/synchronizer/deployment.yaml
     capabilities:
       apiVersions:
         - batch/v1

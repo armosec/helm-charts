@@ -1,4 +1,11 @@
 kubescape-operator:
+  global:
+    apiAuth:
+      # Off until armosec/private-node-agent ports kubescape/node-agent#1070 (bearer token
+      # from the projected tokenFile): without it, synchronizer would reject node-agent's
+      # alerts. With this off, the 1.42 chart renders KS_API_AUTH_DISABLED on the servers
+      # and no token volume on the callers, matching the 1.40.x behaviour. See SUB-9843.
+      enabled: false
   alertCRD:
     installDefault: false
   capabilities:
