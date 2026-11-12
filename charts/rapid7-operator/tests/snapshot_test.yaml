@@ -53,6 +53,19 @@ tests:
           path: spec.template.spec.containers[0].image
           pattern: '^quay\.io/kubescape/synchronizer:.*$'
         template: charts/kubescape-operator/templates/synchronizer/deployment.yaml
+      # global.apiAuth stays off until the private node-agent sends its token (SUB-9844)
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: KS_API_AUTH_DISABLED
+            value: "true"
+        template: charts/kubescape-operator/templates/synchronizer/deployment.yaml
+      # The actual failure mode: node-agent handed a projected API token it cannot read. With
+      # nodeAgent.autoscaler on, the operator stamps node-agent DaemonSets from this template.
+      - notMatchRegex:
+          path: data["daemonset-template.yaml"]
+          pattern: kubescape-api-token
+        template: charts/kubescape-operator/templates/node-agent/template-configmap.yaml
     capabilities:
       apiVersions:
         - batch/v1

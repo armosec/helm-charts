@@ -1,6 +1,6 @@
 suite: Storage RBAC tests
 templates:
-  - templates/storage-node-discovery-rbac.yaml
+  - charts/kubescape-operator/templates/storage/clusterrole.yaml
 tests:
   - it: allows listing nodes to retain host resources while their nodes exist
     set:
@@ -14,4 +14,3 @@ tests:
             apiGroups: [""]
             resources: ["nodes"]
             verbs: ["list"]
-        documentIndex: 0
