@@ -4,11 +4,12 @@ kubescape-operator:
       # Off until armosec/private-node-agent ports kubescape/node-agent#1070 (bearer token
       # from the projected tokenFile): without it, synchronizer would reject node-agent's
       # alerts. With this off, the 1.42 chart renders KS_API_AUTH_DISABLED on the servers
-      # and no token volume on the callers, matching the 1.40.x behaviour. See SUB-9843.
+      # and no token volume on the callers, matching the 1.40.x behaviour. Drop once SUB-9844 lands.
       enabled: false
     networkPolicy:
       # Upstream 1.42.0 turned these on by default (1.40.x had them off). Keep them off in the
-      # private chart until we have validated them on our clusters and design partners' CNIs.
+      # private chart until we have validated them on our clusters and design partners' CNIs
+      # (SUB-9845).
       enabled: false
   alertCRD:
     installDefault: false
