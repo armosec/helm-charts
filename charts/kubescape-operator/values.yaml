@@ -83,3 +83,9 @@ kubescape-operator:
     rulesUpdateConfig:
       enabled: true
       interval: 5m
+  storage:
+    # 1.42.0 ships storage v0.0.382, whose cleanup aborts with "database is locked" on
+    # clusters with steady writes (kubescape/storage#521). Drop this pin once the
+    # kubescape-operator dependency ships v0.0.415 or later.
+    image:
+      tag: v0.0.415
