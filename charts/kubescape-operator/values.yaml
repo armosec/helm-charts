@@ -23,15 +23,6 @@ kubescape-operator:
     server: quay.io
     username: armosec+armosec_ro
   imagePullSecrets: armosec-readonly
-  hostScannerCleanup:
-    image:
-      repository: quay.io/kubescape/kubectl
-      tag: 1.37.2
-      pullPolicy: IfNotPresent
-    nodeSelector: {}
-    affinity: {}
-    tolerations: []
-    priorityClassName: ""
   kubevuln:
     config:
       maxSBOMSize: 33554432
