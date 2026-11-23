@@ -2272,8 +2272,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: rapid7-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0-private.rc2
-        helm.sh/chart: rapid7-operator-1.42.0-private.rc2
+        app.kubernetes.io/version: 1.42.0-private.rc3
+        helm.sh/chart: rapid7-operator-1.42.0-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -2296,8 +2296,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: rapid7-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0-private.rc2
-        helm.sh/chart: rapid7-operator-1.42.0-private.rc2
+        app.kubernetes.io/version: 1.42.0-private.rc3
+        helm.sh/chart: rapid7-operator-1.42.0-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -5349,8 +5349,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: rapid7-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0-private.rc2
-        helm.sh/chart: rapid7-operator-1.42.0-private.rc2
+        app.kubernetes.io/version: 1.42.0-private.rc3
+        helm.sh/chart: rapid7-operator-1.42.0-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -5373,8 +5373,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: rapid7-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0-private.rc2
-        helm.sh/chart: rapid7-operator-1.42.0-private.rc2
+        app.kubernetes.io/version: 1.42.0-private.rc3
+        helm.sh/chart: rapid7-operator-1.42.0-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete

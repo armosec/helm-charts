@@ -27,7 +27,7 @@ kubescape-operator:
     config:
       maxSBOMSize: 33554432
     image:
-      tag: v0.3.580
+      tag: v0.3.605
     sbomScanner:
       enabled: true
   nodeAgent:

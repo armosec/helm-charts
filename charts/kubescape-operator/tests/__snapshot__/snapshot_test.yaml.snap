@@ -1118,7 +1118,7 @@ minimal capabilities:
                   value: 5Gi
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
-              image: quay.io/kubescape/kubevuln:v0.3.580
+              image: quay.io/kubescape/kubevuln:v0.3.605
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -1177,7 +1177,7 @@ minimal capabilities:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: sbom-scanner
-              image: quay.io/kubescape/kubevuln:v0.3.580
+              image: quay.io/kubescape/kubevuln:v0.3.605
               imagePullPolicy: IfNotPresent
               name: sbom-scanner
               resources:
@@ -3927,8 +3927,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc2
+        app.kubernetes.io/version: 1.42.0-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -3951,8 +3951,8 @@ minimal capabilities:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc2
+        app.kubernetes.io/version: 1.42.0-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -5084,7 +5084,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: 5Gi
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
-              image: quay.io/kubescape/kubevuln:v0.3.580
+              image: quay.io/kubescape/kubevuln:v0.3.605
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -5143,7 +5143,7 @@ sbom scanner sidecar uses armosec node-agent image:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: sbom-scanner
-              image: quay.io/kubescape/kubevuln:v0.3.580
+              image: quay.io/kubescape/kubevuln:v0.3.605
               imagePullPolicy: IfNotPresent
               name: sbom-scanner
               resources:
@@ -7893,8 +7893,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc2
+        app.kubernetes.io/version: 1.42.0-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -7917,8 +7917,8 @@ sbom scanner sidecar uses armosec node-agent image:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc2
+        app.kubernetes.io/version: 1.42.0-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -9050,7 +9050,7 @@ synchronizer enabled when server is configured:
                   value: https://api.armosec.io
                 - name: CA_MAX_VULN_SCAN_ROUTINES
                   value: "1"
-              image: quay.io/kubescape/kubevuln:v0.3.580
+              image: quay.io/kubescape/kubevuln:v0.3.605
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 httpGet:
@@ -9109,7 +9109,7 @@ synchronizer enabled when server is configured:
                   value: info
                 - name: KS_LOGGER_NAME
                   value: sbom-scanner
-              image: quay.io/kubescape/kubevuln:v0.3.580
+              image: quay.io/kubescape/kubevuln:v0.3.605
               imagePullPolicy: IfNotPresent
               name: sbom-scanner
               resources:
@@ -12653,8 +12653,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc2
+        app.kubernetes.io/version: 1.42.0-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
@@ -12677,8 +12677,8 @@ synchronizer enabled when server is configured:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: armosec-kubescape-operator
         app.kubernetes.io/part-of: kubescape
-        app.kubernetes.io/version: 1.42.0-private.rc2
-        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc2
+        app.kubernetes.io/version: 1.42.0-private.rc3
+        helm.sh/chart: armosec-kubescape-operator-1.42.0-private.rc3
         kubescape.io/ignore: "true"
         tier: ks-control-plane
       name: node-agent-pod-delete
